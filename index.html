@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VITRINA SERM — управление репутацией в Яндексе и картах</title>
+  <meta name="description" content="Управляем карточками бизнеса в Яндекс.Картах, 2ГИС и отзовиках. Аудит, SEO, отзывы, аналитика — рост переходов и заявок." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────── RESET & BASE ─────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #09090f;
+      --bg2:       #111119;
+      --bg3:       #17171f;
+      --border:    rgba(255,255,255,.07);
+      --accent:    #5b6cf7;
+      --accent2:   #7c8bff;
+      --accent-glow: rgba(91,108,247,.25);
+      --text:      #f0f0f8;
+      --muted:     #8b8ba8;
+      --card-bg:   #13131c;
+      --radius:    16px;
+      --radius-sm: 10px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ─────────────────────── UTILITY ─────────────────────── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--accent2); background: rgba(91,108,247,.12);
+      border: 1px solid rgba(91,108,247,.25); border-radius: 100px;
+      padding: 5px 14px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800; line-height: 1.2; letter-spacing: -.02em;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--muted); max-width: 560px; margin-top: 14px;
+    }
+    .section-head { margin-bottom: 56px; }
+    section { padding: 96px 0; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      border: none; transition: all .25s ease;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 0 32px var(--accent-glow);
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 40px var(--accent-glow); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* ─────────────────────── NAV ─────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: rgba(9,9,15,.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: padding .3s;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 32px;
+    }
+    .nav-logo {
+      font-size: 20px; font-weight: 800; letter-spacing: -.02em;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .burger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+    .mob-menu {
+      display: none; flex-direction: column; gap: 0;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 16px 24px 24px;
+    }
+    .mob-menu a {
+      padding: 13px 0; font-size: 16px; font-weight: 500;
+      border-bottom: 1px solid var(--border); color: var(--muted);
+      transition: color .2s;
+    }
+    .mob-menu a:last-child { border-bottom: none; }
+    .mob-menu a:hover { color: var(--text); }
+    .mob-menu .btn { margin-top: 16px; width: 100%; justify-content: center; }
+    .mob-menu.open { display: flex; }
+
+    /* ─────────────────────── HERO ─────────────────────── */
+    .hero {
+      min-height: 100vh; padding-top: 100px;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(91,108,247,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(91,108,247,.07) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 0%, transparent 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .hero-badge { margin-bottom: 24px; }
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 900; line-height: 1.08; letter-spacing: -.03em;
+    }
+    .hero-title .hl {
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--muted); margin: 24px 0 40px; max-width: 480px; line-height: 1.65;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px;
+      padding-top: 56px; border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 36px; font-weight: 800; letter-spacing: -.03em; color: var(--text);
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* визуальный блок справа */
+    .hero-visual {
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: border-color .3s;
+    }
+    .hero-card:hover { border-color: rgba(91,108,247,.35); }
+    .hcard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .hcard-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+    .hcard-badge {
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 100px;
+      background: rgba(52,211,153,.12); color: #34d399;
+    }
+    .hcard-badge.warn { background: rgba(251,191,36,.1); color: #fbbf24; }
+    .hcard-val { font-size: 22px; font-weight: 700; }
+    .hcard-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .hcard-bar { height: 4px; background: var(--bg3); border-radius: 2px; margin-top: 14px; overflow: hidden; }
+    .hcard-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .hcard-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .hcard-chip {
+      font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 6px;
+      background: var(--bg3); color: var(--muted); border: 1px solid var(--border);
+    }
+    .hcard-chip.on { background: rgba(91,108,247,.12); color: var(--accent2); border-color: rgba(91,108,247,.2); }
+
+    /* ─────────────────────── PROBLEMS ─────────────────────── */
+    .problems { background: var(--bg2); }
+    .problems-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .prob-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 28px;
+      transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .prob-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .prob-card:hover { border-color: rgba(91,108,247,.25); transform: translateY(-4px); }
+    .prob-card:hover::before { opacity: 1; }
+    .prob-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(91,108,247,.12); border: 1px solid rgba(91,108,247,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 20px;
+    }
+    .prob-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .prob-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ─────────────────────── SERVICES ─────────────────────── */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .srv-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 36px 32px;
+      display: flex; gap: 24px; align-items: flex-start;
+      transition: all .3s;
+    }
+    .srv-card:hover { border-color: rgba(91,108,247,.3); transform: translateY(-3px); }
+    .srv-icon {
+      width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px;
+      background: rgba(91,108,247,.12); border: 1px solid rgba(91,108,247,.2);
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .srv-body { flex: 1; }
+    .srv-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .srv-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .srv-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .srv-tag {
+      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px;
+      background: var(--bg3); color: var(--muted); border: 1px solid var(--border);
+    }
+    /* широкая карточка */
+    .srv-card.wide { grid-column: span 2; }
+
+    /* ─────────────────────── PROCESS ─────────────────────── */
+    .process { background: var(--bg2); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      opacity: .4;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 0 20px;
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--card-bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; color: var(--accent);
+      margin-bottom: 24px; position: relative; z-index: 1;
+      transition: all .3s;
+    }
+    .step:hover .step-num {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+    .step-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ─────────────────────── FOR WHOM ─────────────────────── */
+    .forwhom-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .fw-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 28px;
+      transition: all .3s;
+    }
+    .fw-card:hover { border-color: rgba(91,108,247,.3); transform: translateY(-4px); }
+    .fw-icon { font-size: 32px; margin-bottom: 16px; }
+    .fw-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+    .fw-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .fw-list { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .fw-list li {
+      font-size: 13px; color: var(--muted); padding-left: 16px; position: relative;
+    }
+    .fw-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ─────────────────────── RESULTS ─────────────────────── */
+    .results { background: var(--bg2); }
+    .results-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .res-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 32px 24px; text-align: center;
+      transition: all .3s;
+    }
+    .res-card:hover { border-color: rgba(91,108,247,.3); transform: translateY(-4px); }
+    .res-num {
+      font-size: 40px; font-weight: 900; letter-spacing: -.03em;
+      background: linear-gradient(135deg, #fff, var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .res-label { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+    /* ─────────────────────── CTA ─────────────────────── */
+    .cta-section {
+      position: relative; overflow: hidden;
+    }
+    .cta-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(91,108,247,.18) 0%, transparent 70%);
+    }
+    .cta-inner {
+      position: relative; z-index: 1; text-align: center; max-width: 720px; margin: 0 auto;
+    }
+    .cta-title {
+      font-size: clamp(30px, 4vw, 48px); font-weight: 900; letter-spacing: -.03em;
+      line-height: 1.15; margin: 20px 0 16px;
+    }
+    .cta-sub { font-size: 17px; color: var(--muted); margin-bottom: 40px; }
+    .cta-form {
+      display: flex; gap: 12px; max-width: 480px; margin: 0 auto;
+    }
+    .cta-input {
+      flex: 1; padding: 14px 20px; border-radius: 100px;
+      background: var(--bg2); border: 1px solid var(--border); color: var(--text);
+      font-size: 15px; font-family: inherit; outline: none;
+      transition: border-color .2s;
+    }
+    .cta-input::placeholder { color: var(--muted); }
+    .cta-input:focus { border-color: var(--accent); }
+    .cta-note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+    .cta-note a { color: var(--accent2); }
+    .cta-tg {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 24px; padding: 16px 36px; border-radius: 100px;
+      background: var(--accent); color: #fff; font-size: 16px; font-weight: 700;
+      box-shadow: 0 0 40px var(--accent-glow);
+      transition: all .25s;
+    }
+    .cta-tg:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 4px 48px var(--accent-glow); }
+
+    /* ─────────────────────── FOOTER ─────────────────────── */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { font-size: 14px; color: var(--muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 13px; color: var(--muted); margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--border); text-align: center; }
+
+    /* ─────────────────────── ANIMATIONS ─────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.d1 { transition-delay: .1s; }
+    .fade-up.d2 { transition-delay: .2s; }
+    .fade-up.d3 { transition-delay: .3s; }
+    .fade-up.d4 { transition-delay: .4s; }
+    .fade-up.d5 { transition-delay: .5s; }
+
+    /* ─────────────────────── RESPONSIVE ─────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { order: -1; max-width: 480px; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .srv-card.wide { grid-column: span 1; }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .nav-links, .nav-cta { display: none; }
+      .burger { display: flex; }
+      .problems-grid { grid-template-columns: 1fr; }
+      .forwhom-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .process-steps::before { display: none; }
+      .cta-form { flex-direction: column; }
+      .cta-input { border-radius: 14px; }
+      .btn.cta-send { border-radius: 14px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .results-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <span class="logo-dot"></span>
+          VITRINA<span> SERM</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#process">Как работаем</a></li>
+          <li><a href="#forwhom">Для кого</a></li>
+          <li><a href="#results">Результаты</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary">
+            Обсудить задачу →
+          </a>
+        </div>
+        <div class="burger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+    <div class="mob-menu" id="mobMenu">
+      <a href="#services" onclick="toggleMenu()">Услуги</a>
+      <a href="#process" onclick="toggleMenu()">Как работаем</a>
+      <a href="#forwhom" onclick="toggleMenu()">Для кого</a>
+      <a href="#results" onclick="toggleMenu()">Результаты</a>
+      <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary">Написать в Telegram →</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Left -->
+        <div class="hero-left">
+          <div class="hero-badge fade-up">
+            <span class="tag">● SERM · Яндекс.Карты · 2ГИС</span>
+          </div>
+          <h1 class="hero-title fade-up d1">
+            <span class="hl">Репутация</span><br/>
+            которая приводит<br/>клиентов
+          </h1>
+          <p class="hero-sub fade-up d2">
+            Управляем карточками бизнеса в Яндекс.Картах, 2ГИС и отзовиках.<br/>
+            Рост позиций, доверие, звонки и заявки — измеримо.
+          </p>
+          <div class="hero-actions fade-up d3">
+            <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary">
+              Получить аудит бесплатно →
+            </a>
+            <a href="#services" class="btn btn-outline">Подробнее</a>
+          </div>
+          <div class="hero-stats fade-up d4">
+            <div>
+              <div class="stat-num">+247%</div>
+              <div class="stat-label">рост переходов в профиль за 3 месяца</div>
+            </div>
+            <div>
+              <div class="stat-num">40+</div>
+              <div class="stat-label">клиентов с активными карточками</div>
+            </div>
+            <div>
+              <div class="stat-num">ТОП-3</div>
+              <div class="stat-label">позиция в выдаче для большинства клиентов</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right — fake dashboard -->
+        <div class="hero-visual fade-up d2">
+          <div class="hero-card">
+            <div class="hcard-top">
+              <div class="hcard-label">Позиция в выдаче</div>
+              <div class="hcard-badge">▲ +6 за месяц</div>
+            </div>
+            <div class="hcard-val">#3 Яндекс.Карты</div>
+            <div class="hcard-sub">Мебельный салон · Казань</div>
+            <div class="hcard-bar"><div class="hcard-bar-fill" style="width:78%"></div></div>
+            <div class="hcard-row">
+              <span class="hcard-chip on">Я.Карты</span>
+              <span class="hcard-chip on">2ГИС</span>
+              <span class="hcard-chip">Я.Поиск</span>
+              <span class="hcard-chip">Навигатор</span>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-top">
+              <div class="hcard-label">Переходы в профиль</div>
+              <div class="hcard-badge">▲ +183 за неделю</div>
+            </div>
+            <div class="hcard-val">1 247</div>
+            <div class="hcard-sub">за последние 30 дней</div>
+            <div class="hcard-bar"><div class="hcard-bar-fill" style="width:62%"></div></div>
+          </div>
+          <div class="hero-card">
+            <div class="hcard-top">
+              <div class="hcard-label">Отзывы</div>
+              <div class="hcard-badge warn">Требуют ответа: 3</div>
+            </div>
+            <div class="hcard-val">4.8 ★★★★★</div>
+            <div class="hcard-sub">38 отзывов · Идель</div>
+            <div class="hcard-bar"><div class="hcard-bar-fill" style="width:91%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROBLEMS ─── -->
+  <section class="problems" id="problems">
+    <div class="container">
+      <div class="section-head fade-up">
+        <span class="tag">Проблемы</span>
+        <h2 class="section-title" style="margin-top:16px">
+          Когда карточка тормозит<br/>бизнес, а не ведёт в заявку
+        </h2>
+        <p class="section-sub">Узнаёте хотя бы одно — значит, есть точки роста, которые мы умеем закрывать.</p>
+      </div>
+      <div class="problems-grid">
+        <div class="prob-card fade-up d1">
+          <div class="prob-icon">📉</div>
+          <div class="prob-title">Слабые позиции в выдаче</div>
+          <p class="prob-text">Конкуренты выше, ваш бизнес внизу листа. Клиенты просто не доходят до карточки.</p>
+        </div>
+        <div class="prob-card fade-up d2">
+          <div class="prob-icon">⭐</div>
+          <div class="prob-title">Негативные или мало отзывов</div>
+          <p class="prob-text">Один плохой отзыв без ответа — минус десятки клиентов. Отсутствие отзывов — недоверие.</p>
+        </div>
+        <div class="prob-card fade-up d3">
+          <div class="prob-icon">🗺️</div>
+          <div class="prob-title">Карточка заполнена кое-как</div>
+          <p class="prob-text">Нет фото, неправильные категории, кнопки не работают. Алгоритм занижает позицию.</p>
+        </div>
+        <div class="prob-card fade-up d1">
+          <div class="prob-icon">🔗</div>
+          <div class="prob-title">Воронка обрывается</div>
+          <p class="prob-text">Клиент открывает карточку и уходит: нет понятного следующего шага, сайт или мессенджер не подключены.</p>
+        </div>
+        <div class="prob-card fade-up d2">
+          <div class="prob-icon">👁️</div>
+          <div class="prob-title">Нет понимания, что происходит</div>
+          <p class="prob-text">Нет аналитики — непонятно, откуда приходят клиенты и какие действия дают результат.</p>
+        </div>
+        <div class="prob-card fade-up d3">
+          <div class="prob-icon">🤖</div>
+          <div class="prob-title">ИИ-поиск вас не видит</div>
+          <p class="prob-text">ChatGPT, Яндекс с Алисой, нейропоиск — они выдают тех, у кого правильно упакована карточка и репутация.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ─── -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head fade-up">
+        <span class="tag">Услуги</span>
+        <h2 class="section-title" style="margin-top:16px">Что именно делаем</h2>
+        <p class="section-sub">Полный цикл управления репутацией и карточкой — от аудита до аналитики результата.</p>
+      </div>
+      <div class="services-grid">
+        <div class="srv-card fade-up d1">
+          <div class="srv-icon">🔍</div>
+          <div class="srv-body">
+            <div class="srv-title">Аудит карточки</div>
+            <p class="srv-text">Разбираем текущее состояние карточки, категории, конкурентов, воронку, отзывы и источники трафика. Находим слабые точки — формулируем план.</p>
+            <div class="srv-tags">
+              <span class="srv-tag">Яндекс.Бизнес</span>
+              <span class="srv-tag">2ГИС</span>
+              <span class="srv-tag">Конкуренты</span>
+            </div>
+          </div>
+        </div>
+        <div class="srv-card fade-up d2">
+          <div class="srv-icon">🎯</div>
+          <div class="srv-body">
+            <div class="srv-title">SEO и семантика карточки</div>
+            <p class="srv-text">Подбираем ключевые запросы, правильные категории, заполняем товары и услуги, описания. Алгоритм начинает показывать вас чаще.</p>
+            <div class="srv-tags">
+              <span class="srv-tag">Ключевые запросы</span>
+              <span class="srv-tag">Категории</span>
+              <span class="srv-tag">Товары/услуги</span>
+            </div>
+          </div>
+        </div>
+        <div class="srv-card fade-up d1">
+          <div class="srv-icon">🖼️</div>
+          <div class="srv-body">
+            <div class="srv-title">Визуал и контент</div>
+            <p class="srv-text">Фото, логотип, сторис, баннеры, блок «как пройти», витрина. Визуал, который помогает выбрать и довериться, а не просто красиво выглядеть.</p>
+            <div class="srv-tags">
+              <span class="srv-tag">Фото</span>
+              <span class="srv-tag">Сторис</span>
+              <span class="srv-tag">Витрина</span>
+            </div>
+          </div>
+        </div>
+        <div class="srv-card fade-up d2">
+          <div class="srv-icon">⭐</div>
+          <div class="srv-body">
+            <div class="srv-title">Работа с отзывами (SERM)</div>
+            <p class="srv-text">Получаем качественные отзывы, отвечаем в стиле бренда, нейтрализуем негатив. Рейтинг растёт — доверие клиентов тоже.</p>
+            <div class="srv-tags">
+              <span class="srv-tag">Ответы на отзывы</span>
+              <span class="srv-tag">Получение отзывов</span>
+              <span class="srv-tag">Репутация</span>
+            </div>
+          </div>
+        </div>
+        <div class="srv-card wide fade-up">
+          <div class="srv-icon">📊</div>
+          <div class="srv-body">
+            <div class="srv-title">Аналитика и ежемесячные отчёты</div>
+            <p class="srv-text">
+              Не просто таблица с цифрами — понятный нарратив: что выросло, почему, что это значит для бизнеса. Переходы в профиль, источники, целевые действия, конкурентная позиция, доля трафика.
+              Вы всегда знаете, за что платите и что происходит с карточкой.
+            </p>
+            <div class="srv-tags">
+              <span class="srv-tag">Переходы</span>
+              <span class="srv-tag">Источники</span>
+              <span class="srv-tag">Целевые действия</span>
+              <span class="srv-tag">Конкуренты</span>
+              <span class="srv-tag">Доля трафика</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCESS ─── -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-head fade-up" style="text-align:center">
+        <span class="tag">Как работаем</span>
+        <h2 class="section-title" style="margin-top:16px">4 шага от аудита до роста</h2>
+        <p class="section-sub" style="margin:14px auto 0">Никаких «начнём работать через месяц». Первые правки — в первую неделю.</p>
+      </div>
+      <div class="process-steps">
+        <div class="step fade-up d1">
+          <div class="step-num">1</div>
+          <div class="step-title">Диагностика</div>
+          <p class="step-text">Аудит карточки, конкурентов, текущих позиций, отзывов и воронки. Находим точки роста и слабые места.</p>
+        </div>
+        <div class="step fade-up d2">
+          <div class="step-num">2</div>
+          <div class="step-title">Стратегия</div>
+          <p class="step-text">Собираем план: категории, семантика, контент, отзывы, воронка. Всё под ваш бизнес, без шаблонов.</p>
+        </div>
+        <div class="step fade-up d3">
+          <div class="step-num">3</div>
+          <div class="step-title">Внедрение</div>
+          <p class="step-text">Делаем, не рассказываем. Заполняем карточку, публикуем контент, работаем с отзывами, настраиваем воронку.</p>
+        </div>
+        <div class="step fade-up d4">
+          <div class="step-num">4</div>
+          <div class="step-title">Мониторинг</div>
+          <p class="step-text">Еженедельный контроль позиций и метрик. Ежемесячный отчёт с объяснением результата и следующими шагами.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOR WHOM ─── -->
+  <section id="forwhom">
+    <div class="container">
+      <div class="section-head fade-up">
+        <span class="tag">Для кого</span>
+        <h2 class="section-title" style="margin-top:16px">Подходит, если вам важны<br/>доверие и заявки</h2>
+        <p class="section-sub">Работаем с бизнесами, которые хотят управляемый рост, а не просто «красивую карточку».</p>
+      </div>
+      <div class="forwhom-grid">
+        <div class="fw-card fade-up d1">
+          <div class="fw-icon">🛋️</div>
+          <div class="fw-title">Розничный бизнес</div>
+          <p class="fw-text">Магазины, салоны, шоурумы — где клиент приходит после того, как нашёл вас в картах.</p>
+          <ul class="fw-list">
+            <li>Мебельные салоны</li>
+            <li>Автосервисы и дилеры</li>
+            <li>Клиники и стоматологии</li>
+            <li>Рестораны и кафе</li>
+          </ul>
+        </div>
+        <div class="fw-card fade-up d2">
+          <div class="fw-icon">🏢</div>
+          <div class="fw-title">Сервисные компании</div>
+          <p class="fw-text">Услуги, где доверие и репутация — главный фактор принятия решения клиентом.</p>
+          <ul class="fw-list">
+            <li>Юридические компании</li>
+            <li>Финансовые сервисы</li>
+            <li>IT и digital-агентства</li>
+            <li>Строительство и ремонт</li>
+          </ul>
+        </div>
+        <div class="fw-card fade-up d3">
+          <div class="fw-icon">🔁</div>
+          <div class="fw-title">Многофилиальный бизнес</div>
+          <p class="fw-text">Сети и франшизы, которым важно держать репутацию стабильной во всех городах присутствия.</p>
+          <ul class="fw-list">
+            <li>Несколько точек / городов</li>
+            <li>Единый стиль ответов</li>
+            <li>Контроль позиций по регионам</li>
+            <li>Масштабируемый процесс</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESULTS ─── -->
+  <section class="results" id="results">
+    <div class="container">
+      <div class="section-head fade-up" style="text-align:center">
+        <span class="tag">Результаты</span>
+        <h2 class="section-title" style="margin-top:16px">Цифры, а не слова</h2>
+        <p class="section-sub" style="margin:14px auto 0">Средние показатели по клиентам после 3 месяцев работы.</p>
+      </div>
+      <div class="results-grid">
+        <div class="res-card fade-up d1">
+          <div class="res-num">+247%</div>
+          <div class="res-label">рост переходов<br/>в профиль</div>
+        </div>
+        <div class="res-card fade-up d2">
+          <div class="res-num">ТОП-3</div>
+          <div class="res-label">позиция в локальной<br/>выдаче Яндекса</div>
+        </div>
+        <div class="res-card fade-up d3">
+          <div class="res-num">4.8★</div>
+          <div class="res-label">средний рейтинг<br/>клиентов</div>
+        </div>
+        <div class="res-card fade-up d4">
+          <div class="res-num">40+</div>
+          <div class="res-label">активных карточек<br/>под управлением</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg"></div>
+    <div class="container">
+      <div class="cta-inner fade-up">
+        <span class="tag">Старт</span>
+        <h2 class="cta-title">
+          Начните с бесплатного<br/>аудита карточки
+        </h2>
+        <p class="cta-sub">
+          Расскажем, что тормозит рост прямо сейчас — и что можно исправить уже на этой неделе.
+        </p>
+        <a href="https://t.me/dddsensation" target="_blank" class="cta-tg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+          </svg>
+          Написать в Telegram
+        </a>
+        <p class="cta-note">
+          Или напишите на <a href="mailto:hello@vitrina-serm.ru">hello@vitrina-serm.ru</a> — ответим в течение дня
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-dot" style="margin-right:8px"></span>
+          VITRINA<span> SERM</span>
+        </div>
+        <div class="footer-links">
+          <a href="#services">Услуги</a>
+          <a href="#process">Как работаем</a>
+          <a href="#forwhom">Для кого</a>
+          <a href="#results">Результаты</a>
+          <a href="https://t.me/dddsensation" target="_blank">Telegram</a>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 VITRINA SERM — управление репутацией в Яндекс.Картах и 2ГИС
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── JS ─── -->
+  <script>
+    /* Burger */
+    function toggleMenu() {
+      document.getElementById('mobMenu').classList.toggle('open');
+    }
+
+    /* Scroll animations */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    /* Nav shrink on scroll */
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('nav');
+      nav.style.padding = window.scrollY > 40 ? '10px 0' : '16px 0';
+    });
+  </script>
+</body>
+</html>

@@ -514,7 +514,9 @@ footer{
 
 /* ── Mobile ── */
 @media(max-width:768px){
-  section{padding:56px 0}
+  section{padding:48px 0}
+  .eyebrow{margin-bottom:10px}
+  .sub{font-size:13px;margin-top:8px}
 
   /* Nav */
   .nav-links,.nav-right{display:none}
@@ -547,30 +549,36 @@ footer{
   .strip-item{font-size:11px;padding:4px 11px}
 
   /* Services */
-  .srv-grid{grid-template-columns:1fr}
-  .srv.wide{grid-column:span 1}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .srv.wide{grid-column:span 2}
   .srv-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:32px}
-  .srv{padding:24px 20px}
-  .srv-t{font-size:15px}
+  .srv{padding:18px 16px}
+  .srv-n{font-size:10px;margin-bottom:10px}
+  .srv-t{font-size:13px;margin-bottom:6px}
+  .srv-d{font-size:12px;line-height:1.6}
+  .srv-tags{margin-top:10px;gap:4px}
+  .tag-sm{font-size:10px;padding:3px 8px}
 
   /* Process */
   .steps-grid{grid-template-columns:1fr 1fr}
-  .step{padding:24px 20px}
-  .step-n{font-size:32px;margin-bottom:14px}
-  .step-t{font-size:14px}
-  .step-d{font-size:12px}
+  .step{padding:18px 16px}
+  .step-n{font-size:28px;margin-bottom:10px}
+  .step-t{font-size:13px;margin-bottom:5px}
+  .step-d{font-size:12px;line-height:1.6}
 
   /* For whom */
-  .fw-grid{grid-template-columns:1fr}
-  .fw{padding:28px 24px}
-  .fw-t{font-size:15px}
-  .fw-list li{font-size:12px;padding:6px 10px}
+  .fw-grid{grid-template-columns:1fr 1fr}
+  .fw{padding:18px 16px}
+  .fw-t{font-size:13px;margin-bottom:6px}
+  .fw-d{font-size:12px;margin-bottom:10px}
+  .fw-list li{font-size:11px;padding:5px 8px}
+  .fw-list li::before{width:4px;height:4px}
 
   /* Numbers */
   .num-grid{grid-template-columns:1fr 1fr}
-  .num{padding:28px 20px}
-  .num-v{font-size:36px}
-  .num-l{font-size:12px}
+  .num{padding:20px 16px}
+  .num-v{font-size:32px;margin-bottom:6px}
+  .num-l{font-size:11px}
 
   /* CTA */
   .cta-box{

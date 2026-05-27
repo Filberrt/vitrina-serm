@@ -916,6 +916,10 @@ footer{
 </footer>
 
 <script>
+  // Всегда открывать с самого верха
+  if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
   function toggleMenu(){document.getElementById('mob').classList.toggle('open')}
   const io=new IntersectionObserver(
     es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),

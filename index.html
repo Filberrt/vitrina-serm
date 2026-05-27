@@ -7,441 +7,573 @@
   <meta name="description" content="Управляем карточками бизнеса в Яндекс.Картах и 2ГИС. Аудит, SEO, отзывы, аналитика — рост позиций и заявок." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── RESET ── */
+    /* ─── RESET ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ── TOKENS ── */
+    /* ─── TOKENS ─── */
     :root {
-      --white:   #ffffff;
-      --bg:      #f9f9f7;
-      --surface: #f2f2ef;
-      --border:  #e4e4e0;
-      --text:    #111111;
-      --secondary: #555555;
-      --muted:   #888888;
-      --accent:  #1a56db;
-      --accent-light: #eff4ff;
-      --radius:  12px;
-      --radius-sm: 8px;
+      --bg:          #000000;
+      --bg-2:        #080808;
+      --card:        #0f0f0f;
+      --card-hover:  #141414;
+      --border:      rgba(255,255,255,.07);
+      --border-h:    rgba(255,255,255,.13);
+
+      --accent:      #5b8aff;
+      --accent-h:    #7aa6ff;
+      --accent-dim:  rgba(91,138,255,.10);
+      --accent-glow: rgba(91,138,255,.22);
+      --accent-bord: rgba(91,138,255,.28);
+
+      --text-1:  #f0f0f0;
+      --text-2:  rgba(240,240,240,.62);
+      --text-3:  rgba(240,240,240,.36);
+      --text-4:  rgba(240,240,240,.18);
+
+      --green:   #22c55e;
+
+      --r-sm:  10px;
+      --r-md:  14px;
+      --r-lg:  20px;
+      --r-xl:  28px;
+      --max-w: 1200px;
+      --side:  clamp(16px, 4vw, 40px);
+      --ease:  cubic-bezier(.4,0,.2,1);
     }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: var(--white);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--text-1);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    ::selection { background: #bfdbfe; }
+    ::selection { background: rgba(91,138,255,.35); color: #fff; }
 
-    /* ── LAYOUT ── */
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
-    section { padding: 100px 0; }
-
-    /* ── TYPOGRAPHY HELPERS ── */
-    .eyebrow {
-      font-size: 12px; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--accent);
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--side);
     }
+
+    /* ─── TYPOGRAPHY ─── */
     .section-title {
-      font-size: clamp(30px, 4vw, 44px);
-      font-weight: 800; line-height: 1.15; letter-spacing: -.025em;
-      margin-top: 12px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -.03em;
     }
     .section-sub {
-      font-size: 17px; color: var(--secondary);
-      max-width: 520px; margin-top: 16px; line-height: 1.7;
+      font-size: clamp(14px, 1.6vw, 16px);
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-top: 12px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: block;
     }
 
-    /* ── BUTTONS ── */
+    /* ─── BUTTONS ─── */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 24px; border-radius: var(--radius-sm);
-      font-size: 14px; font-weight: 600;
-      cursor: pointer; border: none; transition: .2s ease;
-      font-family: inherit;
+      height: 44px; padding: 0 22px;
+      border-radius: var(--r-sm);
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px; font-weight: 700;
+      border: none; cursor: pointer;
+      transition: all .2s var(--ease);
+      white-space: nowrap;
     }
     .btn-primary {
-      background: var(--text); color: var(--white);
+      background: var(--accent); color: #fff;
     }
-    .btn-primary:hover { background: #333; }
+    .btn-primary:hover {
+      background: var(--accent-h);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    .btn-outline {
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-bord);
+      color: var(--accent);
+    }
+    .btn-outline:hover {
+      background: rgba(91,138,255,.18);
+      border-color: var(--accent);
+    }
     .btn-ghost {
-      background: transparent; color: var(--secondary);
-      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      color: var(--text-2);
     }
-    .btn-ghost:hover { border-color: #bbb; color: var(--text); }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.09);
+      color: var(--text-1);
+    }
+    .btn-tg {
+      background: var(--accent); color: #fff;
+      height: 52px; padding: 0 28px;
+      font-size: 15px;
+      border-radius: var(--r-sm);
+      box-shadow: 0 0 0 var(--accent-glow);
+      transition: all .2s var(--ease);
+    }
+    .btn-tg:hover {
+      background: var(--accent-h);
+      box-shadow: 0 4px 28px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 88px 0; }
 
     /* ─────────────────────── NAV ─────────────────────── */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,.9);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
       display: flex; align-items: center;
       justify-content: space-between;
-      height: 60px; gap: 40px;
+      height: 62px; gap: 32px;
     }
     .nav-logo {
-      font-size: 16px; font-weight: 700; letter-spacing: -.02em;
-      display: flex; align-items: center; gap: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 17px; font-weight: 800;
+      letter-spacing: -.02em;
+      display: flex; align-items: center; gap: 9px;
+      flex-shrink: 0;
     }
-    .nav-logo-dot {
+    .logo-dot {
       width: 7px; height: 7px; border-radius: 50%;
       background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
     }
     .nav-links {
-      display: flex; align-items: center; gap: 28px;
+      display: flex; align-items: center; gap: 4px;
       list-style: none; flex: 1;
     }
     .nav-links a {
-      font-size: 14px; color: var(--secondary); transition: color .15s;
+      font-size: 14px; font-weight: 500;
+      color: var(--text-2);
+      padding: 6px 14px; border-radius: var(--r-sm);
+      transition: all .15s;
     }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta { display: flex; align-items: center; gap: 10px; }
+    .nav-links a:hover {
+      color: var(--text-1);
+      background: rgba(255,255,255,.05);
+    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
 
-    /* mobile burger */
+    /* burger */
     .burger {
       display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; padding: 4px; background: none; border: none;
+      cursor: pointer; background: none; border: none; padding: 4px;
     }
     .burger span {
-      width: 20px; height: 1.5px; background: var(--text);
-      border-radius: 2px; transition: .3s;
+      width: 20px; height: 1.5px;
+      background: var(--text-2); border-radius: 2px; transition: .3s;
     }
     .mob-menu {
       display: none; flex-direction: column;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      padding: 12px 32px 24px;
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 12px var(--side) 24px;
+      gap: 2px;
     }
     .mob-menu.open { display: flex; }
     .mob-menu a {
-      padding: 12px 0; font-size: 15px; color: var(--secondary);
+      font-size: 15px; color: var(--text-2);
+      padding: 13px 0;
       border-bottom: 1px solid var(--border);
+      transition: color .15s;
     }
-    .mob-menu a:last-child { border-bottom: none; }
-    .mob-menu .btn { margin-top: 16px; justify-content: center; }
+    .mob-menu a:last-of-type { border-bottom: none; }
+    .mob-menu a:hover { color: var(--text-1); }
+    .mob-menu .btn-tg { margin-top: 16px; justify-content: center; }
 
     /* ─────────────────────── HERO ─────────────────────── */
     .hero {
-      padding-top: 140px; padding-bottom: 100px;
-      border-bottom: 1px solid var(--border);
+      padding-top: 130px; padding-bottom: 88px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 55% 35%, rgba(91,138,255,.12) 0%, transparent 65%);
+      pointer-events: none;
     }
     .hero-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px; align-items: center;
+      position: relative; z-index: 1;
     }
-    .hero-label {
-      display: inline-flex; align-items: center; gap: 8px;
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 13px 5px 8px;
+      border: 1px solid var(--accent-bord);
+      background: var(--accent-dim);
+      border-radius: 100px;
       font-size: 12px; font-weight: 600; color: var(--accent);
-      letter-spacing: .08em; text-transform: uppercase;
       margin-bottom: 24px;
     }
-    .hero-label::before {
-      content: '';
-      width: 20px; height: 1.5px; background: var(--accent);
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s infinite;
     }
     .hero-title {
-      font-size: clamp(38px, 5vw, 60px);
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(38px, 5.5vw, 62px);
       font-weight: 800; line-height: 1.08;
-      letter-spacing: -.035em;
+      letter-spacing: -.04em;
     }
-    .hero-title em { font-style: normal; color: var(--accent); }
+    .hero-title .grad {
+      background: linear-gradient(120deg, var(--text-1) 40%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
     .hero-sub {
-      font-size: 18px; color: var(--secondary);
-      line-height: 1.7; margin: 24px 0 36px;
-      max-width: 440px;
+      font-size: clamp(15px, 1.8vw, 17px);
+      color: var(--text-2); line-height: 1.7;
+      margin: 20px 0 32px; max-width: 460px;
     }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-    /* right side — clean stats */
-    .hero-right {
-      display: flex; flex-direction: column; gap: 1px;
-      border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; background: var(--border);
+    /* hero right — stat panel */
+    .hero-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
     }
-    .hstat {
-      background: var(--white);
-      padding: 28px 32px;
-      display: flex; flex-direction: column; gap: 6px;
+    .panel-head {
+      padding: 22px 24px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .hstat-num {
-      font-size: 36px; font-weight: 800;
-      letter-spacing: -.04em; line-height: 1;
+    .panel-head-label {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-3);
     }
-    .hstat-label {
-      font-size: 13px; color: var(--secondary); line-height: 1.5;
+    .status-dot {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--green); font-weight: 600;
     }
-    .hstat-row {
-      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-      background: var(--white); padding: 28px 32px;
+    .status-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); animation: pulse-dot 2s infinite;
     }
-    .hstat-item { display: flex; flex-direction: column; gap: 4px; }
-    .hstat-item-num {
-      font-size: 28px; font-weight: 800; letter-spacing: -.03em;
+    .panel-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
     }
-    .hstat-item-label { font-size: 12px; color: var(--muted); }
-
-    /* divider in hero right */
-    .hstat-divider {
-      height: 1px; background: var(--border);
+    .pstat {
+      background: var(--card); padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 5px;
     }
-
-    /* ─────────────────────── LOGOS / PLATFORMS ─────────────────────── */
-    .platforms {
-      padding: 40px 0; border-bottom: 1px solid var(--border);
+    .pstat-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 30px; font-weight: 800;
+      letter-spacing: -.03em; line-height: 1;
     }
-    .platforms-inner {
-      display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+    .pstat-val.accent { color: var(--accent); }
+    .pstat-label { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .panel-platforms {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; gap: 8px; flex-wrap: wrap;
     }
-    .platforms-label {
-      font-size: 12px; color: var(--muted); font-weight: 500;
-      text-transform: uppercase; letter-spacing: .08em;
-      white-space: nowrap;
+    .ppill {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 11px; border-radius: 100px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--text-3);
     }
-    .platforms-list {
-      display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+    .ppill.active {
+      background: var(--accent-dim);
+      border-color: var(--accent-bord);
+      color: var(--accent);
     }
-    .platform-badge {
-      font-size: 13px; font-weight: 600; color: var(--muted);
-      padding: 6px 14px; border: 1px solid var(--border);
-      border-radius: 100px; transition: .2s;
-    }
-    .platform-badge:hover { color: var(--text); border-color: #bbb; }
 
     /* ─────────────────────── PROBLEMS ─────────────────────── */
-    .problems { background: var(--bg); border-bottom: 1px solid var(--border); }
+    .problems { background: var(--bg-2); }
+    .sec-head { margin-bottom: 48px; }
     .problems-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; margin-top: 56px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      overflow: hidden;
     }
-    .prob {
-      background: var(--white); padding: 36px 32px;
-      transition: background .2s;
+    .prob-card {
+      background: var(--card); padding: 32px 28px;
+      transition: background .2s var(--ease);
+      cursor: default;
     }
-    .prob:hover { background: var(--accent-light); }
+    .prob-card:hover { background: var(--card-hover); }
     .prob-num {
-      font-size: 11px; font-weight: 700; color: var(--muted);
-      letter-spacing: .08em; margin-bottom: 20px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; color: var(--text-4);
+      margin-bottom: 18px;
     }
-    .prob-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-    .prob-text { font-size: 14px; color: var(--secondary); line-height: 1.7; }
+    .prob-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      margin-bottom: 9px; line-height: 1.3;
+    }
+    .prob-text { font-size: 13px; color: var(--text-2); line-height: 1.7; }
 
     /* ─────────────────────── SERVICES ─────────────────────── */
-    .services-head {
-      display: flex; align-items: flex-end;
-      justify-content: space-between; gap: 40px;
-      margin-bottom: 56px; flex-wrap: wrap;
+    .services-layout {
+      display: grid; grid-template-columns: 320px 1fr; gap: 64px;
+      align-items: start;
+    }
+    .services-sticky {
+      position: sticky; top: 88px;
     }
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden;
     }
-    .srv {
-      border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 32px 28px; background: var(--white);
-      display: flex; flex-direction: column; gap: 12px;
-      transition: border-color .2s, transform .2s;
+    .srv-card {
+      background: var(--card); padding: 28px 26px;
+      transition: background .2s var(--ease);
     }
-    .srv:hover { border-color: #bbb; transform: translateY(-2px); }
-    .srv.accent-card {
-      background: var(--text); color: var(--white);
-      border-color: var(--text);
+    .srv-card:hover { background: var(--card-hover); }
+    .srv-card.full { grid-column: span 2; }
+    .srv-idx {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; color: var(--text-4);
+      margin-bottom: 14px;
     }
-    .srv.accent-card .srv-text { color: #aaa; }
-    .srv.accent-card .srv-tag { background: #333; color: #ccc; border-color: #444; }
-    .srv-index {
-      font-size: 11px; font-weight: 700; color: var(--muted);
-      letter-spacing: .08em;
+    .srv-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      margin-bottom: 8px; line-height: 1.3;
     }
-    .srv.accent-card .srv-index { color: #666; }
-    .srv-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
-    .srv-text { font-size: 14px; color: var(--secondary); line-height: 1.7; flex: 1; }
-    .srv-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .srv-text { font-size: 13px; color: var(--text-2); line-height: 1.7; }
+    .srv-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
     .srv-tag {
-      font-size: 11px; font-weight: 500; padding: 3px 9px;
-      border-radius: 4px; background: var(--surface);
-      border: 1px solid var(--border); color: var(--secondary);
+      font-size: 11px; font-weight: 500;
+      padding: 3px 9px; border-radius: 5px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      color: var(--text-3);
     }
 
     /* ─────────────────────── PROCESS ─────────────────────── */
-    .process { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .process { background: var(--bg-2); }
     .process-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 48px; margin-top: 64px;
-    }
-    .step { position: relative; }
-    .step:not(:last-child)::after {
-      content: '';
-      position: absolute; top: 20px; right: -24px;
-      width: 48px; height: 1px;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
       background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      overflow: hidden; margin-top: 48px;
     }
-    .step-index {
-      font-size: 11px; font-weight: 700; color: var(--accent);
-      letter-spacing: .1em; margin-bottom: 20px;
-      display: flex; align-items: center; gap: 8px;
+    .step-card {
+      background: var(--card); padding: 32px 26px;
+      position: relative;
+      transition: background .2s var(--ease);
     }
-    .step-index::before {
-      content: '';
-      width: 24px; height: 1.5px; background: var(--accent);
+    .step-card:hover { background: var(--card-hover); }
+    .step-number {
+      font-family: 'Manrope', sans-serif;
+      font-size: 36px; font-weight: 800;
+      color: var(--text-4); line-height: 1;
+      margin-bottom: 20px; letter-spacing: -.04em;
     }
-    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-    .step-text { font-size: 14px; color: var(--secondary); line-height: 1.7; }
+    .step-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .step-text { font-size: 13px; color: var(--text-2); line-height: 1.7; }
 
     /* ─────────────────────── FOR WHOM ─────────────────────── */
     .forwhom-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      overflow: hidden; margin-top: 56px;
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      overflow: hidden; margin-top: 48px;
     }
-    .fw {
-      background: var(--white); padding: 40px 36px;
-      transition: background .2s;
+    .fw-card {
+      background: var(--card); padding: 36px 32px;
+      transition: background .2s var(--ease);
     }
-    .fw:hover { background: var(--bg); }
-    .fw-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
-    .fw-text { font-size: 14px; color: var(--secondary); line-height: 1.7; margin-bottom: 20px; }
-    .fw-list { display: flex; flex-direction: column; gap: 6px; list-style: none; }
+    .fw-card:hover { background: var(--card-hover); }
+    .fw-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .fw-text { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 18px; }
+    .fw-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
     .fw-list li {
-      font-size: 13px; color: var(--muted);
-      display: flex; gap: 8px; align-items: flex-start;
+      font-size: 13px; color: var(--text-3);
+      display: flex; align-items: flex-start; gap: 8px;
     }
-    .fw-list li::before { content: '—'; color: var(--border); flex-shrink: 0; }
+    .fw-list li::before { content: '—'; color: var(--text-4); flex-shrink: 0; }
 
     /* ─────────────────────── NUMBERS ─────────────────────── */
-    .numbers { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .numbers-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--border);
-      border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--r-lg);
+      overflow: hidden; margin-top: 48px;
     }
     .num-card {
-      background: var(--white); padding: 40px 32px;
+      background: var(--card); padding: 36px 28px;
+      transition: background .2s var(--ease);
     }
+    .num-card:hover { background: var(--card-hover); }
     .num-val {
-      font-size: 44px; font-weight: 800;
-      letter-spacing: -.04em; line-height: 1; margin-bottom: 10px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 42px; font-weight: 800;
+      letter-spacing: -.04em; line-height: 1;
+      color: var(--accent); margin-bottom: 10px;
     }
-    .num-label { font-size: 14px; color: var(--secondary); line-height: 1.5; }
+    .num-label { font-size: 13px; color: var(--text-2); line-height: 1.5; }
 
     /* ─────────────────────── CTA ─────────────────────── */
-    .cta {
-      background: var(--text); color: var(--white);
-      padding: 100px 0;
+    .cta-section {
+      position: relative; overflow: hidden;
     }
-    .cta-inner {
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(91,138,255,.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box {
+      background: var(--card);
+      border: 1px solid var(--accent-bord);
+      border-radius: var(--r-xl);
+      padding: 64px 56px;
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
+      gap: 64px; align-items: center;
+      position: relative; z-index: 1;
     }
     .cta-title {
-      font-size: clamp(30px, 4vw, 46px);
-      font-weight: 800; line-height: 1.12; letter-spacing: -.03em;
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -.03em;
     }
-    .cta-title em { font-style: normal; color: #6b9bff; }
-    .cta-sub { font-size: 16px; color: #aaa; margin-top: 16px; line-height: 1.7; }
-    .cta-right { display: flex; flex-direction: column; gap: 16px; }
-    .cta-tg {
-      display: flex; align-items: center; gap: 12px;
-      padding: 18px 28px; border-radius: var(--radius-sm);
-      background: var(--white); color: var(--text);
-      font-size: 15px; font-weight: 700; transition: .2s;
+    .cta-title .grad {
+      background: linear-gradient(120deg, var(--text-1) 30%, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .cta-tg:hover { background: #eee; }
-    .cta-tg svg { flex-shrink: 0; }
-    .cta-note {
-      font-size: 13px; color: #666;
-      padding-left: 4px;
-    }
-    .cta-note a { color: #6b9bff; }
-    .cta-list {
+    .cta-sub { font-size: 15px; color: var(--text-2); margin-top: 14px; line-height: 1.7; }
+    .cta-right { display: flex; flex-direction: column; gap: 14px; }
+    .cta-checklist {
       list-style: none; display: flex; flex-direction: column; gap: 10px;
-      margin-top: 8px;
+      margin-bottom: 6px;
     }
-    .cta-list li {
-      font-size: 14px; color: #888;
+    .cta-checklist li {
+      font-size: 14px; color: var(--text-2);
       display: flex; align-items: center; gap: 10px;
     }
-    .cta-list li::before {
-      content: '✓'; color: #6b9bff; font-weight: 700; flex-shrink: 0;
+    .cta-checklist li::before {
+      content: '✓'; color: var(--green);
+      font-weight: 700; font-size: 13px; flex-shrink: 0;
     }
+    .cta-note { font-size: 12px; color: var(--text-3); }
+    .cta-note a { color: var(--accent); }
 
     /* ─────────────────────── FOOTER ─────────────────────── */
     footer {
-      background: var(--white); border-top: 1px solid var(--border);
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
       padding: 40px 0 32px;
     }
-    .footer-inner {
+    .footer-top {
       display: flex; align-items: center;
       justify-content: space-between; gap: 32px; flex-wrap: wrap;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
     }
     .footer-logo {
-      font-size: 14px; font-weight: 700;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 800;
       display: flex; align-items: center; gap: 8px;
     }
-    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
-    .footer-links a { font-size: 13px; color: var(--muted); transition: color .15s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-copy {
-      margin-top: 32px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 12px; color: var(--muted);
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    .footer-links { display: flex; gap: 6px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: var(--text-3);
+      padding: 6px 12px; border-radius: var(--r-sm);
+      transition: all .15s;
+    }
+    .footer-links a:hover {
+      color: var(--text-1);
+      background: rgba(255,255,255,.05);
+    }
+    .footer-bottom {
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: 8px; padding-top: 24px;
+      font-size: 12px; color: var(--text-4);
     }
 
-    /* ─────────────────────── SCROLL ANIMATION ─────────────────────── */
+    /* ─── ANIMATIONS ─── */
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .5; transform: scale(.8); }
+    }
     .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .5s ease, transform .5s ease;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s var(--ease), transform .5s var(--ease);
     }
-    .reveal.d1 { transition-delay: .05s; }
-    .reveal.d2 { transition-delay: .12s; }
-    .reveal.d3 { transition-delay: .19s; }
-    .reveal.d4 { transition-delay: .26s; }
-    .reveal.d5 { transition-delay: .33s; }
-    .reveal.d6 { transition-delay: .40s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: .07s; }
+    .reveal.d2 { transition-delay: .14s; }
+    .reveal.d3 { transition-delay: .21s; }
+    .reveal.d4 { transition-delay: .28s; }
+    .reveal.d5 { transition-delay: .35s; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─────────────────────── RESPONSIVE ─────────────────────── */
-    @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-right { max-width: 500px; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .process-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .step::after { display: none; }
-      .numbers-grid { grid-template-columns: 1fr 1fr; }
-      .cta-inner { grid-template-columns: 1fr; gap: 48px; }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-panel { max-width: 480px; }
+      .services-layout { grid-template-columns: 1fr; gap: 40px; }
+      .services-sticky { position: static; }
+      .numbers-grid { grid-template-columns: repeat(2,1fr); }
+      .cta-box { grid-template-columns: 1fr; gap: 40px; padding: 44px 36px; }
     }
-    @media (max-width: 720px) {
-      section { padding: 72px 0; }
-      .container { padding: 0 20px; }
-      .nav-links, .nav-cta { display: none; }
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .nav-links, .nav-actions { display: none; }
       .burger { display: flex; }
       .problems-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; }
+      .srv-card.full { grid-column: span 1; }
+      .process-grid { grid-template-columns: repeat(2,1fr); }
       .forwhom-grid { grid-template-columns: 1fr; }
-      .numbers-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .footer-copy { flex-direction: column; }
-      .hero-title { font-size: 36px; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
     @media (max-width: 480px) {
       .numbers-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
-      .hstat-row { flex-direction: column; gap: 16px; }
+      .panel-stats { grid-template-columns: 1fr; }
+      .cta-box { padding: 32px 24px; }
     }
   </style>
 </head>
@@ -452,7 +584,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <span class="nav-logo-dot"></span>
+        <span class="logo-dot"></span>
         VITRINA SERM
       </a>
       <ul class="nav-links">
@@ -461,10 +593,9 @@
         <li><a href="#forwhom">Для кого</a></li>
         <li><a href="#numbers">Результаты</a></li>
       </ul>
-      <div class="nav-cta">
-        <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary">
-          Написать в Telegram
-        </a>
+      <div class="nav-actions">
+        <a href="https://t.me/dddsensation" target="_blank" class="btn btn-outline">Telegram</a>
+        <a href="#contact" class="btn btn-primary">Получить аудит</a>
       </div>
       <button class="burger" onclick="toggleMenu()" aria-label="Меню">
         <span></span><span></span><span></span>
@@ -476,7 +607,7 @@
     <a href="#process" onclick="toggleMenu()">Процесс</a>
     <a href="#forwhom" onclick="toggleMenu()">Для кого</a>
     <a href="#numbers" onclick="toggleMenu()">Результаты</a>
-    <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary" onclick="toggleMenu()">Написать в Telegram</a>
+    <a href="https://t.me/dddsensation" target="_blank" class="btn-tg btn" onclick="toggleMenu()">Написать в Telegram</a>
   </div>
 </nav>
 
@@ -485,51 +616,57 @@
   <div class="container">
     <div class="hero-inner">
 
-      <div class="hero-left">
-        <div class="hero-label reveal">Управление репутацией</div>
+      <div>
+        <div class="hero-badge reveal">
+          <span class="hero-badge-dot"></span>
+          Яндекс.Карты · 2ГИС · SERM
+        </div>
         <h1 class="hero-title reveal d1">
-          Карточка бизнеса,<br/>
-          которая<br/>
-          <em>приводит клиентов</em>
+          Управляем<br/>
+          репутацией —<br/>
+          <span class="grad">растут заявки</span>
         </h1>
         <p class="hero-sub reveal d2">
-          Ведём карточки в Яндекс.Картах и 2ГИС: позиции, отзывы, SEO, аналитика.
-          Не красота ради красоты — рост переходов и заявок.
+          Ведём карточки бизнеса в Яндекс.Картах и 2ГИС: позиции в выдаче, отзывы, SEO, аналитика. Не красота ради красоты — измеримый рост переходов.
         </p>
         <div class="hero-actions reveal d3">
-          <a href="https://t.me/dddsensation" target="_blank" class="btn btn-primary">
-            Получить бесплатный аудит →
+          <a href="#contact" class="btn btn-tg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069-2.025 9.539c-.148.658-.554.818-1.12.508l-3-2.21-1.449 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.618l-2.96-.924c-.643-.204-.657-.643.136-.953l11.574-4.462c.537-.193 1.005.131.492 1.79z"/></svg>
+            Получить бесплатный аудит
           </a>
           <a href="#services" class="btn btn-ghost">Как работаем</a>
         </div>
       </div>
 
-      <div class="hero-right reveal d2">
-        <div class="hstat-row">
-          <div class="hstat-item">
-            <div class="hstat-item-num">+247%</div>
-            <div class="hstat-item-label">рост переходов</div>
+      <div class="hero-panel reveal d2">
+        <div class="panel-head">
+          <span class="panel-head-label">Активные карточки</span>
+          <span class="status-dot">В работе</span>
+        </div>
+        <div class="panel-stats">
+          <div class="pstat">
+            <div class="pstat-val accent">+247%</div>
+            <div class="pstat-label">рост переходов<br/>в профиль</div>
           </div>
-          <div class="hstat-item">
-            <div class="hstat-item-num">ТОП-3</div>
-            <div class="hstat-item-label">позиция в выдаче</div>
+          <div class="pstat">
+            <div class="pstat-val accent">ТОП-3</div>
+            <div class="pstat-label">позиция<br/>в выдаче</div>
           </div>
-          <div class="hstat-item">
-            <div class="hstat-item-num">4.8★</div>
-            <div class="hstat-item-label">средний рейтинг</div>
+          <div class="pstat">
+            <div class="pstat-val">4.8★</div>
+            <div class="pstat-label">средний рейтинг<br/>клиентов</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-val">40+</div>
+            <div class="pstat-label">карточек под<br/>управлением</div>
           </div>
         </div>
-        <div class="hstat-divider"></div>
-        <div class="hstat">
-          <div class="hstat-num">40+</div>
-          <div class="hstat-label">активных карточек под управлением<br/>в разных нишах и городах</div>
-        </div>
-        <div class="hstat-divider"></div>
-        <div class="hstat" style="padding: 24px 32px;">
-          <div style="font-size:13px; color: var(--secondary); line-height:1.6;">
-            Клиенты: мебельные салоны, обменники, медцентры,
-            сервисные компании, многофилиальный бизнес.
-          </div>
+        <div class="panel-platforms">
+          <span class="ppill active">Яндекс.Карты</span>
+          <span class="ppill active">Яндекс.Бизнес</span>
+          <span class="ppill active">2ГИС</span>
+          <span class="ppill">Навигатор</span>
+          <span class="ppill">Поиск</span>
         </div>
       </div>
 
@@ -537,59 +674,42 @@
   </div>
 </section>
 
-<!-- ─── PLATFORMS ─── -->
-<div class="platforms">
-  <div class="container">
-    <div class="platforms-inner">
-      <span class="platforms-label">Работаем на</span>
-      <div class="platforms-list">
-        <span class="platform-badge">Яндекс.Карты</span>
-        <span class="platform-badge">Яндекс.Бизнес</span>
-        <span class="platform-badge">2ГИС</span>
-        <span class="platform-badge">Яндекс.Поиск</span>
-        <span class="platform-badge">Навигатор</span>
-        <span class="platform-badge">Отзовики</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- ─── PROBLEMS ─── -->
 <section class="problems" id="problems">
   <div class="container">
-    <div class="reveal">
-      <div class="eyebrow">Проблемы</div>
-      <h2 class="section-title">Когда карточка<br/>не работает на бизнес</h2>
+    <div class="sec-head reveal">
+      <span class="eyebrow">Проблемы</span>
+      <h2 class="section-title">Когда карточка тормозит,<br/>а не продаёт</h2>
     </div>
     <div class="problems-grid">
-      <div class="prob reveal d1">
+      <div class="prob-card reveal d1">
         <div class="prob-num">01</div>
         <div class="prob-title">Слабые позиции в выдаче</div>
-        <p class="prob-text">Конкуренты выше, ваш бизнес внизу списка. Клиенты до вас просто не доходят.</p>
+        <p class="prob-text">Конкуренты выше — ваш бизнес внизу списка. Клиенты до вас просто не доходят.</p>
       </div>
-      <div class="prob reveal d2">
+      <div class="prob-card reveal d2">
         <div class="prob-num">02</div>
-        <div class="prob-title">Плохие или мало отзывов</div>
+        <div class="prob-title">Плохие отзывы и низкий рейтинг</div>
         <p class="prob-text">Один негатив без ответа отпугивает десятки клиентов. Мало отзывов — нет доверия.</p>
       </div>
-      <div class="prob reveal d3">
+      <div class="prob-card reveal d3">
         <div class="prob-num">03</div>
         <div class="prob-title">Карточка заполнена кое-как</div>
         <p class="prob-text">Нет фото, ошибки в категориях, кнопки не работают. Алгоритм занижает позицию.</p>
       </div>
-      <div class="prob reveal d1">
+      <div class="prob-card reveal d1">
         <div class="prob-num">04</div>
         <div class="prob-title">Воронка обрывается</div>
-        <p class="prob-text">Клиент открывает карточку и закрывает: нет понятного следующего шага к заявке.</p>
+        <p class="prob-text">Клиент открывает карточку и уходит: нет понятного пути к заявке или звонку.</p>
       </div>
-      <div class="prob reveal d2">
+      <div class="prob-card reveal d2">
         <div class="prob-num">05</div>
-        <div class="prob-title">Нет аналитики и контроля</div>
-        <p class="prob-text">Непонятно, откуда приходят клиенты и что вообще происходит с карточкой.</p>
+        <div class="prob-title">Нет аналитики</div>
+        <p class="prob-text">Непонятно, откуда приходят клиенты, какие действия дают результат и где деньги.</p>
       </div>
-      <div class="prob reveal d3">
+      <div class="prob-card reveal d3">
         <div class="prob-num">06</div>
-        <div class="prob-title">ИИ-поиск вас не замечает</div>
+        <div class="prob-title">ИИ-поиск вас не видит</div>
         <p class="prob-text">Нейропоиск и Алиса показывают тех, у кого правильно упакована карточка и репутация.</p>
       </div>
     </div>
@@ -599,74 +719,55 @@
 <!-- ─── SERVICES ─── -->
 <section id="services">
   <div class="container">
-    <div class="services-head">
-      <div class="reveal">
-        <div class="eyebrow">Услуги</div>
-        <h2 class="section-title">Что именно делаем</h2>
-      </div>
-      <p class="section-sub reveal" style="margin-top:0">
-        Полный цикл — от аудита до ежемесячных отчётов с объяснением результата.
-      </p>
-    </div>
-    <div class="services-grid">
-      <div class="srv reveal d1">
-        <div class="srv-index">01</div>
-        <div class="srv-title">Аудит карточки</div>
-        <p class="srv-text">Разбираем текущее состояние: категории, конкуренты, фото, кнопки, воронка, отзывы, источники трафика. Находим слабые точки — строим план.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">Яндекс.Бизнес</span>
-          <span class="srv-tag">2ГИС</span>
-          <span class="srv-tag">Конкуренты</span>
+    <div class="services-layout">
+      <div class="services-sticky">
+        <div class="reveal">
+          <span class="eyebrow">Услуги</span>
+          <h2 class="section-title">Что именно<br/>делаем</h2>
+          <p class="section-sub">
+            Полный цикл от аудита до ежемесячных отчётов. Без шаблонов — под каждый бизнес.
+          </p>
+        </div>
+        <div style="margin-top:32px;" class="reveal d2">
+          <a href="#contact" class="btn btn-primary">Обсудить задачу →</a>
         </div>
       </div>
-      <div class="srv reveal d2">
-        <div class="srv-index">02</div>
-        <div class="srv-title">SEO и семантика</div>
-        <p class="srv-text">Собираем ключевые запросы, тестируем категории, заполняем товары и услуги. Алгоритм начинает показывать вас чаще по нужным запросам.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">Ключи</span>
-          <span class="srv-tag">Категории</span>
-          <span class="srv-tag">Товары</span>
+      <div class="services-grid reveal d1">
+        <div class="srv-card">
+          <div class="srv-idx">01</div>
+          <div class="srv-title">Аудит карточки</div>
+          <p class="srv-text">Разбираем текущее состояние: категории, конкуренты, фото, воронка, отзывы, источники трафика. Находим точки роста.</p>
+          <div class="srv-tags"><span class="srv-tag">Яндекс.Бизнес</span><span class="srv-tag">2ГИС</span><span class="srv-tag">Конкуренты</span></div>
         </div>
-      </div>
-      <div class="srv reveal d3">
-        <div class="srv-index">03</div>
-        <div class="srv-title">Визуал и контент</div>
-        <p class="srv-text">Фото, логотип, сторис, витрина, новости, блок «как пройти». Всё, что помогает клиенту выбрать и довериться.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">Фото</span>
-          <span class="srv-tag">Сторис</span>
-          <span class="srv-tag">Витрина</span>
+        <div class="srv-card">
+          <div class="srv-idx">02</div>
+          <div class="srv-title">SEO и семантика</div>
+          <p class="srv-text">Ключевые запросы, правильные категории, товары и услуги с нормальными описаниями. Алгоритм начинает показывать вас чаще.</p>
+          <div class="srv-tags"><span class="srv-tag">Ключи</span><span class="srv-tag">Категории</span><span class="srv-tag">Товары</span></div>
         </div>
-      </div>
-      <div class="srv reveal d1">
-        <div class="srv-index">04</div>
-        <div class="srv-title">Работа с отзывами</div>
-        <p class="srv-text">Выстраиваем процесс получения качественных отзывов, отвечаем в стиле бренда, нейтрализуем негатив. Рейтинг и доверие растут.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">SERM</span>
-          <span class="srv-tag">Ответы</span>
-          <span class="srv-tag">Рейтинг</span>
+        <div class="srv-card">
+          <div class="srv-idx">03</div>
+          <div class="srv-title">Визуал и контент</div>
+          <p class="srv-text">Фото, логотип, сторис, витрина, новости. Всё что помогает клиенту выбрать и довериться, а не просто красиво выглядеть.</p>
+          <div class="srv-tags"><span class="srv-tag">Фото</span><span class="srv-tag">Сторис</span><span class="srv-tag">Витрина</span></div>
         </div>
-      </div>
-      <div class="srv reveal d2">
-        <div class="srv-index">05</div>
-        <div class="srv-title">Воронка и кнопки</div>
-        <p class="srv-text">Проверяем все точки касания: карточка → сайт / мессенджер / звонок → заявка. Тестируем с мобильных, убираем разрывы.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">CTA</span>
-          <span class="srv-tag">Конверсия</span>
-          <span class="srv-tag">Мобайл</span>
+        <div class="srv-card">
+          <div class="srv-idx">04</div>
+          <div class="srv-title">Работа с отзывами</div>
+          <p class="srv-text">Выстраиваем процесс получения качественных отзывов, отвечаем в стиле бренда, нейтрализуем негатив.</p>
+          <div class="srv-tags"><span class="srv-tag">SERM</span><span class="srv-tag">Ответы</span><span class="srv-tag">Рейтинг</span></div>
         </div>
-      </div>
-      <div class="srv accent-card reveal d3">
-        <div class="srv-index" style="color:#555">06</div>
-        <div class="srv-title">Аналитика и отчёты</div>
-        <p class="srv-text">Не таблица, а понятный нарратив: что выросло, почему, что это значит. Переходы, источники, целевые действия, конкурентная позиция.</p>
-        <div class="srv-tags">
-          <span class="srv-tag">Переходы</span>
-          <span class="srv-tag">Источники</span>
-          <span class="srv-tag">Позиции</span>
+        <div class="srv-card">
+          <div class="srv-idx">05</div>
+          <div class="srv-title">Воронка и CTA</div>
+          <p class="srv-text">Проверяем всю цепочку: карточка → сайт / мессенджер / звонок → заявка. Тестируем с мобильных, убираем разрывы.</p>
+          <div class="srv-tags"><span class="srv-tag">CTA</span><span class="srv-tag">Конверсия</span><span class="srv-tag">Мобайл</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-idx">06</div>
+          <div class="srv-title">Аналитика и отчёты</div>
+          <p class="srv-text">Не таблица — понятный нарратив: что выросло, почему, что это значит. Переходы, источники, позиции, конкуренты.</p>
+          <div class="srv-tags"><span class="srv-tag">Переходы</span><span class="srv-tag">Источники</span><span class="srv-tag">Позиции</span></div>
         </div>
       </div>
     </div>
@@ -677,30 +778,30 @@
 <section class="process" id="process">
   <div class="container">
     <div class="reveal">
-      <div class="eyebrow">Как работаем</div>
+      <span class="eyebrow">Процесс</span>
       <h2 class="section-title">4 шага от аудита до роста</h2>
       <p class="section-sub">Никаких «начнём работать через месяц». Первые правки — в первую неделю.</p>
     </div>
     <div class="process-grid">
-      <div class="step reveal d1">
-        <div class="step-index">Шаг 01</div>
+      <div class="step-card reveal d1">
+        <div class="step-number">01</div>
         <div class="step-title">Диагностика</div>
-        <p class="step-text">Аудит карточки, конкурентов, текущих позиций, воронки и отзывов. Фиксируем точки роста и слабые места.</p>
+        <p class="step-text">Аудит карточки, конкурентов, текущих позиций, воронки и отзывов. Фиксируем слабые точки и возможности роста.</p>
       </div>
-      <div class="step reveal d2">
-        <div class="step-index">Шаг 02</div>
+      <div class="step-card reveal d2">
+        <div class="step-number">02</div>
         <div class="step-title">Стратегия</div>
-        <p class="step-text">Собираем план: категории, семантика, контент, отзывы, воронка. Под ваш бизнес и нишу — без шаблонов.</p>
+        <p class="step-text">Собираем план: семантика, категории, контент, отзывы, воронка. Под вашу нишу и конкурентную среду.</p>
       </div>
-      <div class="step reveal d3">
-        <div class="step-index">Шаг 03</div>
+      <div class="step-card reveal d3">
+        <div class="step-number">03</div>
         <div class="step-title">Внедрение</div>
         <p class="step-text">Делаем, не рассказываем. Заполняем карточку, публикуем контент, работаем с отзывами, настраиваем воронку.</p>
       </div>
-      <div class="step reveal d4">
-        <div class="step-index">Шаг 04</div>
+      <div class="step-card reveal d4">
+        <div class="step-number">04</div>
         <div class="step-title">Мониторинг</div>
-        <p class="step-text">Еженедельный контроль позиций и метрик. Ежемесячный отчёт с объяснением результата и планом на следующий период.</p>
+        <p class="step-text">Еженедельный контроль позиций. Ежемесячный отчёт с объяснением результата и планом на следующий период.</p>
       </div>
     </div>
   </div>
@@ -710,23 +811,23 @@
 <section id="forwhom">
   <div class="container">
     <div class="reveal">
-      <div class="eyebrow">Для кого</div>
-      <h2 class="section-title">Подходит, если вам важны<br/>доверие и заявки</h2>
+      <span class="eyebrow">Для кого</span>
+      <h2 class="section-title">Работаем с бизнесами,<br/>которым важны заявки</h2>
     </div>
     <div class="forwhom-grid">
-      <div class="fw reveal d1">
+      <div class="fw-card reveal d1">
         <div class="fw-title">Розничный бизнес</div>
         <p class="fw-text">Магазины, салоны, шоурумы — где клиент приходит после того, как нашёл вас в картах и прочитал отзывы.</p>
         <ul class="fw-list">
           <li>Мебельные салоны и шоурумы</li>
           <li>Автосервисы и дилеры</li>
-          <li>Клиники, стоматологии</li>
+          <li>Клиники и стоматологии</li>
           <li>Рестораны, кафе, магазины</li>
         </ul>
       </div>
-      <div class="fw reveal d2">
+      <div class="fw-card reveal d2">
         <div class="fw-title">Сервисные компании</div>
-        <p class="fw-text">Услуги, где доверие и репутация — главный фактор принятия решения. Клиент читает отзывы перед первым звонком.</p>
+        <p class="fw-text">Услуги, где доверие и репутация — главный фактор. Клиент читает отзывы перед первым звонком.</p>
         <ul class="fw-list">
           <li>Юридические и финансовые компании</li>
           <li>IT и digital-агентства</li>
@@ -734,22 +835,22 @@
           <li>Образование и консалтинг</li>
         </ul>
       </div>
-      <div class="fw reveal d1">
-        <div class="fw-title">Крипто и финтех</div>
-        <p class="fw-text">Обменники, p2p-сервисы и финансовые сервисы, которым критично держать высокий рейтинг и быстро реагировать на отзывы.</p>
+      <div class="fw-card reveal d1">
+        <div class="fw-title">Финтех и обменники</div>
+        <p class="fw-text">Обменники и финансовые сервисы, которым критично держать высокий рейтинг и быстро реагировать на отзывы.</p>
         <ul class="fw-list">
           <li>Крипто-обменники</li>
-          <li>Валютные и финансовые сервисы</li>
+          <li>Валютные сервисы</li>
           <li>Карточки в нескольких городах</li>
-          <li>Работа с репутацией 24/7</li>
+          <li>Репутационный контроль 24/7</li>
         </ul>
       </div>
-      <div class="fw reveal d2">
+      <div class="fw-card reveal d2">
         <div class="fw-title">Сети и франшизы</div>
-        <p class="fw-text">Несколько точек или городов — нужна единая репутация, единый стиль ответов и контроль позиций по регионам.</p>
+        <p class="fw-text">Несколько точек или городов — нужна единая репутация, единый стиль ответов и аналитика по всем регионам.</p>
         <ul class="fw-list">
           <li>Масштабируемый процесс</li>
-          <li>Единый стандарт ответов</li>
+          <li>Единый стандарт коммуникации</li>
           <li>Аналитика по всем точкам</li>
           <li>Централизованное управление</li>
         </ul>
@@ -759,12 +860,12 @@
 </section>
 
 <!-- ─── NUMBERS ─── -->
-<section class="numbers" id="numbers">
+<section id="numbers">
   <div class="container">
-    <div class="reveal" style="margin-bottom:48px">
-      <div class="eyebrow">Результаты</div>
+    <div class="reveal">
+      <span class="eyebrow">Результаты</span>
       <h2 class="section-title">Цифры по клиентам</h2>
-      <p class="section-sub">Средние показатели после 3 месяцев работы.</p>
+      <p class="section-sub">Средние показатели после трёх месяцев работы.</p>
     </div>
     <div class="numbers-grid">
       <div class="num-card reveal d1">
@@ -788,34 +889,28 @@
 </section>
 
 <!-- ─── CTA ─── -->
-<section class="cta" id="contact">
+<section class="cta-section" id="contact">
   <div class="container">
-    <div class="cta-inner">
-      <div class="reveal">
-        <div class="eyebrow" style="color:#6b9bff">Начать работу</div>
+    <div class="cta-box reveal">
+      <div>
+        <span class="eyebrow">Начать работу</span>
         <h2 class="cta-title">
-          Начните<br/>с бесплатного<br/>
-          <em>аудита карточки</em>
+          Начните с<br/>бесплатного<br/>
+          <span class="grad">аудита карточки</span>
         </h2>
-        <p class="cta-sub">
-          Расскажем, что тормозит рост прямо сейчас — и что можно исправить уже на этой неделе.
-        </p>
-        <ul class="cta-list">
+        <p class="cta-sub">Расскажем, что тормозит рост прямо сейчас — и что можно исправить уже на этой неделе.</p>
+      </div>
+      <div class="cta-right">
+        <ul class="cta-checklist">
           <li>Бесплатный аудит за 24 часа</li>
           <li>Конкретный план, а не общие слова</li>
           <li>Первые изменения — в первую неделю</li>
         </ul>
-      </div>
-      <div class="cta-right reveal d2">
-        <a href="https://t.me/dddsensation" target="_blank" class="cta-tg">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069-2.025 9.539c-.148.658-.554.818-1.12.508l-3-2.21-1.449 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.618l-2.96-.924c-.643-.204-.657-.643.136-.953l11.574-4.462c.537-.193 1.005.131.492 1.79z"/>
-          </svg>
+        <a href="https://t.me/dddsensation" target="_blank" class="btn btn-tg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069-2.025 9.539c-.148.658-.554.818-1.12.508l-3-2.21-1.449 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.618l-2.96-.924c-.643-.204-.657-.643.136-.953l11.574-4.462c.537-.193 1.005.131.492 1.79z"/></svg>
           Написать в Telegram
         </a>
-        <p class="cta-note">
-          Или на почту: <a href="mailto:hello@vitrina-serm.ru">hello@vitrina-serm.ru</a>
-        </p>
+        <p class="cta-note">Или на почту: <a href="mailto:hello@vitrina-serm.ru">hello@vitrina-serm.ru</a></p>
       </div>
     </div>
   </div>
@@ -824,9 +919,9 @@
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="container">
-    <div class="footer-inner">
+    <div class="footer-top">
       <div class="footer-logo">
-        <span class="nav-logo-dot"></span>
+        <span class="logo-dot"></span>
         VITRINA SERM
       </div>
       <div class="footer-links">
@@ -837,7 +932,7 @@
         <a href="https://t.me/dddsensation" target="_blank">Telegram</a>
       </div>
     </div>
-    <div class="footer-copy">
+    <div class="footer-bottom">
       <span>© 2026 VITRINA SERM</span>
       <span>Управление репутацией в Яндекс.Картах и 2ГИС</span>
     </div>
@@ -845,22 +940,14 @@
 </footer>
 
 <script>
-  // Burger menu
   function toggleMenu() {
     document.getElementById('mobMenu').classList.toggle('open');
   }
-
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }}),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>

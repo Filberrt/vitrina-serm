@@ -136,13 +136,11 @@ h2{
   padding-top:136px;padding-bottom:96px;
   position:relative;overflow:hidden;
 }
-/* subtle radial glow */
 .hero::before{
   content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse 70% 60% at 60% 30%,rgba(91,138,255,.10) 0%,transparent 65%);
   pointer-events:none;
 }
-/* dot grid */
 .hero::after{
   content:'';position:absolute;inset:0;
   background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
@@ -155,6 +153,29 @@ h2{
   display:grid;grid-template-columns:1fr 1fr;
   gap:72px;align-items:center;
 }
+
+/* ── HERO LEFT CARD ── */
+.hero-left{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border-h);
+  border-radius:var(--r-xl);
+  padding:44px 40px;
+  position:relative;
+  overflow:hidden;
+}
+/* top gradient line */
+.hero-left::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(91,138,255,.6),transparent);
+}
+/* subtle inner glow */
+.hero-left::after{
+  content:'';position:absolute;
+  top:-60px;left:-40px;width:240px;height:240px;
+  background:radial-gradient(circle,rgba(91,138,255,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+
 .hero-tag{
   display:inline-flex;align-items:center;gap:8px;
   padding:5px 14px 5px 9px;
@@ -162,6 +183,7 @@ h2{
   border-radius:100px;
   font-size:12px;font-weight:600;color:var(--a);
   margin-bottom:28px;
+  position:relative;z-index:1;
 }
 .hero-tag-dot{
   width:6px;height:6px;border-radius:50%;background:var(--a);
@@ -171,6 +193,7 @@ h2{
   font-family:'Manrope',sans-serif;
   font-size:clamp(40px,5.5vw,66px);
   font-weight:800;line-height:1.06;letter-spacing:-.04em;
+  position:relative;z-index:1;
 }
 .hero-title .hi{
   background:linear-gradient(130deg,var(--t1) 20%,var(--a) 100%);
@@ -179,8 +202,9 @@ h2{
 .hero-sub{
   font-size:16px;color:var(--t2);line-height:1.75;
   margin:20px 0 34px;max-width:430px;
+  position:relative;z-index:1;
 }
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
 
 /* hero right — stat card */
 .stat-card{
@@ -249,9 +273,16 @@ h2{
   display:flex;align-items:center;gap:36px;flex-wrap:wrap;
 }
 .strip-label{font-size:11px;font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--t4)}
-.strip-items{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
-.strip-item{font-size:13px;font-weight:500;color:var(--t3)}
+  text-transform:uppercase;color:var(--t3)}
+.strip-items{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.strip-item{
+  font-size:12px;font-weight:600;color:var(--t2);
+  padding:5px 13px;border-radius:100px;
+  border:1px solid var(--border-h);
+  background:rgba(255,255,255,.04);
+  transition:all .15s;
+}
+.strip-item:hover{color:var(--t1);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
 
 /* ── SERVICES ── */
 .services{background:var(--s1)}
@@ -278,11 +309,19 @@ h2{
   font-size:15px;font-weight:700;margin-bottom:8px;
 }
 .srv-d{font-size:13px;color:var(--t2);line-height:1.7}
-.srv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.srv-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
 .tag-sm{
-  font-size:11px;padding:3px 9px;border-radius:5px;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--border);color:var(--t3);
+  font-size:11px;font-weight:600;
+  padding:5px 12px;border-radius:6px;
+  background:var(--a-dim);
+  border:1px solid var(--a-bord);
+  color:var(--a);
+  letter-spacing:.02em;
+  transition:all .15s var(--ease);
+}
+.tag-sm:hover{
+  background:rgba(91,138,255,.18);
+  border-color:var(--a);
 }
 
 /* ── PROCESS ── */
@@ -508,18 +547,18 @@ footer{
   <div class="wrap">
     <div class="hero-in">
 
-      <div>
-        <div class="hero-tag rev">
+      <div class="hero-left rev">
+        <div class="hero-tag">
           <span class="hero-tag-dot"></span>
           Репутация · Яндекс.Карты · 2ГИС
         </div>
-        <h1 class="hero-title rev d1">
+        <h1 class="hero-title">
           Карточка<br/>в ТОП —<br/><span class="hi">заявки растут</span>
         </h1>
-        <p class="hero-sub rev d2">
+        <p class="hero-sub">
           Управляем присутствием бизнеса в Яндекс.Картах и 2ГИС: позиции, отзывы, SEO. Измеримый результат с первой недели.
         </p>
-        <div class="hero-btns rev d3">
+        <div class="hero-btns">
           <a href="#contact" class="btn btn-p btn-lg">
             Бесплатный аудит →
           </a>

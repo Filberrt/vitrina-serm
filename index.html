@@ -256,14 +256,14 @@ h2{
 .pill{
   font-size:11px;font-weight:600;
   padding:5px 13px;border-radius:100px;
-  border:1px solid rgba(91,138,255,.15);
-  color:rgba(91,138,255,.55);
-  background:rgba(91,138,255,.06);
+  border:1px solid var(--a-bord);
+  color:var(--a);
+  background:var(--a-dim);
   transition:all .15s var(--ease);
 }
-.pill:hover{color:var(--a);border-color:var(--a-bord);background:var(--a-dim)}
+.pill:hover{background:rgba(91,138,255,.18);border-color:var(--a)}
 .pill.on{
-  background:var(--a-dim);border-color:var(--a-bord);color:var(--a);
+  background:rgba(91,138,255,.18);border-color:var(--a);
 }
 
 /* ── STRIP ── */

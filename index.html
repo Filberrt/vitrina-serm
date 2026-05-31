@@ -3,1509 +3,1040 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VITRINA SERM - продвижение в Яндекс Картах, 2ГИС и Google Maps</title>
-  <meta name="description" content="За 30 дней превращаем карточку компании в картах в канал заявок. SERM, отзывы, визуал, услуги, позиции и путь клиента до звонка или маршрута.">
+  <title>VITRINA SERM — продвижение в Яндекс.Картах и 2ГИС</title>
+  <meta name="description" content="Управляем карточками бизнеса в Яндекс.Картах и 2ГИС. Позиции, отзывы, SEO, воронка — измеримый рост переходов и заявок.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #111827;
-      --muted: #5d667a;
-      --line: #dfe6f3;
-      --soft: #f5f8fe;
-      --blue: #1457d9;
-      --blue-2: #0d3fa6;
-      --lime: #b8f24d;
-      --mint: #31c48d;
-      --yellow: #ffd86b;
-      --danger: #ef4444;
-      --white: #ffffff;
-      --shadow: 0 18px 50px rgba(24, 62, 125, 0.14);
+      --ink:        #0f1723;
+      --muted:      #64748b;
+      --muted-2:    #94a3b8;
+      --line:       #e2e8f0;
+      --soft:       #f8fafc;
+      --soft-2:     #f1f5f9;
+      --blue:       #2563eb;
+      --blue-2:     #1d4ed8;
+      --blue-light: #eff6ff;
+      --blue-mid:   #dbeafe;
+      --green:      #16a34a;
+      --green-light:#f0fdf4;
+      --white:      #ffffff;
+      --shadow-sm:  0 1px 3px rgba(15,23,35,.08), 0 1px 2px rgba(15,23,35,.06);
+      --shadow-md:  0 4px 16px rgba(15,23,35,.08), 0 2px 6px rgba(15,23,35,.05);
+      --shadow-lg:  0 12px 40px rgba(15,23,35,.10), 0 4px 12px rgba(15,23,35,.06);
+      --r:          10px;
+      --r-lg:       16px;
+      --ease:       cubic-bezier(.4,0,.2,1);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
       color: var(--ink);
       background: var(--white);
-      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
+    p { margin-top: 0; }
 
     .wrap {
-      width: min(1180px, calc(100% - 48px));
+      width: min(1160px, calc(100% - 48px));
       margin: 0 auto;
     }
 
+    /* ── NAV ── */
     .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(223, 230, 243, 0.9);
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
     }
-
     .nav {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
+      height: 68px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
     }
-
     .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 900;
-      font-size: 17px;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800; font-size: 17px;
       white-space: nowrap;
     }
-
     .brand-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      color: var(--white);
+      width: 38px; height: 38px;
+      display: grid; place-items: center;
+      border-radius: 9px;
       background: var(--ink);
-      box-shadow: 0 10px 24px rgba(17, 24, 39, 0.18);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .btn {
-      min-height: 46px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      font-weight: 900;
-      font-size: 14px;
-      line-height: 1.2;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-      white-space: normal;
-      text-align: center;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn.primary {
-      color: var(--ink);
-      background: var(--lime);
-      box-shadow: 0 14px 30px rgba(143, 216, 41, 0.28);
-    }
-
-    .btn.blue {
       color: var(--white);
-      background: var(--blue);
-      box-shadow: 0 14px 30px rgba(20, 87, 217, 0.22);
+      font-size: 15px; font-weight: 800;
     }
+    .nav-links {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 14px; font-weight: 500;
+    }
+    .nav-links a {
+      padding: 7px 14px; border-radius: 8px;
+      color: var(--muted); transition: all .15s;
+    }
+    .nav-links a:hover { color: var(--ink); background: var(--soft); }
+    .nav-cta { display: flex; gap: 8px; }
 
-    .btn.ghost {
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 44px; padding: 0 20px; border-radius: var(--r);
+      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+      border: 1.5px solid transparent; cursor: pointer;
+      transition: all .18s var(--ease); white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--blue); color: var(--white);
+      box-shadow: 0 2px 12px rgba(37,99,235,.30);
+    }
+    .btn-primary:hover { background: var(--blue-2); box-shadow: 0 4px 20px rgba(37,99,235,.35); }
+    .btn-ghost {
+      background: var(--white); color: var(--ink);
+      border-color: var(--line); box-shadow: var(--shadow-sm);
+    }
+    .btn-ghost:hover { border-color: #c7d2e0; background: var(--soft); }
+    .btn-lg { height: 52px; padding: 0 28px; font-size: 15px; font-weight: 700; }
+
+    /* ── EYEBROW ── */
+    .eyebrow, .kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
       color: var(--blue);
-      background: var(--white);
-      border-color: var(--line);
+    }
+    .eyebrow::before, .kicker::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0;
     }
 
-    .hero {
-      min-height: 720px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 42%, rgba(232,241,255,0.72) 100%),
-        linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 54px;
-      align-items: center;
-      padding: 62px 0 76px;
-    }
-
-    .eyebrow,
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 16px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before,
-    .kicker::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--lime);
-      box-shadow: 0 0 0 5px rgba(184, 242, 77, 0.28);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
-    }
-
+    h1, h2, h3 { margin-top: 0; font-family: 'Manrope', sans-serif; }
     h1 {
-      margin-bottom: 22px;
-      font-size: 64px;
-      line-height: 0.98;
-      font-weight: 900;
+      margin-bottom: 20px;
+      font-size: clamp(40px, 5.5vw, 62px);
+      line-height: 1.06; font-weight: 800; letter-spacing: -.03em;
     }
-
-    h1 span {
-      color: var(--blue);
-    }
-
+    h1 span { color: var(--blue); }
     h2 {
       margin-bottom: 0;
-      font-size: 42px;
-      line-height: 1.06;
-      font-weight: 900;
+      font-size: clamp(28px, 3.8vw, 42px);
+      line-height: 1.12; font-weight: 800; letter-spacing: -.025em;
     }
-
     h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-      line-height: 1.18;
-      font-weight: 900;
+      margin-bottom: 8px;
+      font-size: 17px; line-height: 1.3; font-weight: 700;
     }
-
     .lead {
       margin-bottom: 28px;
-      color: var(--muted);
-      font-size: 21px;
-      line-height: 1.45;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted); line-height: 1.65;
     }
+
+    section { padding: 88px 0; }
+    .section-alt { background: var(--soft); }
+    .section-dark { background: var(--ink); color: var(--white); }
+
+    .section-head {
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: 40px; align-items: end; margin-bottom: 48px;
+    }
+    .section-head p {
+      margin: 0; color: var(--muted); font-size: 16px; line-height: 1.6;
+    }
+    .section-dark .section-head p { color: var(--muted-2); }
 
     .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
     }
 
-    .metric-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 30px;
-    }
-
-    .metric {
-      min-height: 92px;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.78);
-      backdrop-filter: blur(12px);
-    }
-
-    .metric b {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    .map-board {
-      position: relative;
-      min-height: 560px;
-      border: 1px solid rgba(188, 204, 231, 0.9);
-      border-radius: 8px;
-      background:
-        linear-gradient(90deg, rgba(20, 87, 217, 0.06) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(20, 87, 217, 0.06) 1px, transparent 1px),
-        #eef5ff;
-      background-size: 64px 64px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
-      transform-origin: center;
-    }
-
-    .map-board::before,
-    .map-board::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: rgba(20, 87, 217, 0.18);
-      transform: rotate(-28deg);
-    }
-
-    .map-board::before {
-      width: 650px;
-      height: 58px;
-      left: -96px;
-      top: 226px;
-    }
-
-    .map-board::after {
-      width: 560px;
-      height: 42px;
-      right: -160px;
-      bottom: 126px;
-      background: rgba(49, 196, 141, 0.15);
-      transform: rotate(34deg);
-    }
-
-    .search-window {
-      position: absolute;
-      left: 24px;
-      top: 24px;
-      width: min(390px, calc(100% - 48px));
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 20px 46px rgba(31, 72, 125, 0.18);
-      overflow: hidden;
-    }
-
-    .window-top {
-      height: 44px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 0 14px;
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 0 72px;
+      background: linear-gradient(160deg, var(--white) 50%, var(--blue-light) 100%);
       border-bottom: 1px solid var(--line);
-      background: #fbfdff;
     }
-
-    .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #d5deee;
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
     }
-
-    .dot.red {
-      background: #ff726f;
+    .hero-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin-top: 32px;
     }
-
-    .dot.yellow {
-      background: #ffc857;
+    .metric {
+      padding: 16px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
     }
+    .metric b { display: block; margin-bottom: 5px; font-size: 22px; font-weight: 800; font-family: 'Manrope',sans-serif; color: var(--blue); }
+    .metric span { font-size: 12px; color: var(--muted); line-height: 1.4; display: block; }
 
-    .dot.green {
-      background: #39d98a;
+    /* hero right — map mockup */
+    .map-board {
+      position: relative; min-height: 520px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background:
+        linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px),
+        linear-gradient(180deg,rgba(37,99,235,.04) 1px,transparent 1px),
+        var(--blue-light);
+      background-size: 48px 48px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
     }
-
+    .search-window {
+      position: absolute; left: 18px; top: 18px;
+      width: min(320px, calc(100% - 36px));
+      border: 1px solid var(--line); border-radius: var(--r);
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow-md); overflow: hidden;
+    }
+    .window-top {
+      height: 38px; display: flex; align-items: center;
+      gap: 6px; padding: 0 12px;
+      border-bottom: 1px solid var(--line); background: var(--soft);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+    .dot.r { background: #ff726f; }
+    .dot.y { background: #ffc857; }
+    .dot.g { background: #39d98a; }
     .search-line {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 16px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--blue);
+      display: flex; align-items: center; gap: 8px;
+      margin: 12px; padding: 10px 12px;
+      border: 1px solid var(--line); border-radius: 8px;
+      color: var(--blue); font-weight: 600; font-size: 13px;
       background: var(--white);
-      font-weight: 800;
     }
-
-    .magnifier {
-      width: 18px;
-      height: 18px;
-      border: 2px solid currentColor;
-      border-radius: 50%;
-      position: relative;
-      flex: 0 0 auto;
+    .mag {
+      width: 15px; height: 15px;
+      border: 2px solid currentColor; border-radius: 50%; position: relative; flex-shrink: 0;
     }
-
-    .magnifier::after {
-      content: "";
-      position: absolute;
-      width: 8px;
-      height: 2px;
-      right: -7px;
-      bottom: -4px;
-      background: currentColor;
-      transform: rotate(45deg);
-      border-radius: 2px;
+    .mag::after {
+      content: ''; position: absolute;
+      width: 6px; height: 2px;
+      right: -6px; bottom: -3px;
+      background: currentColor; transform: rotate(45deg); border-radius: 2px;
     }
-
-    .result-list {
-      display: grid;
-      gap: 10px;
-      padding: 0 16px 16px;
-    }
-
+    .result-list { display: grid; gap: 8px; padding: 0 12px 12px; }
     .result {
-      display: grid;
-      grid-template-columns: 34px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
+      display: grid; grid-template-columns: 30px 1fr auto;
+      gap: 8px; align-items: center; padding: 10px;
+      border: 1px solid var(--line); border-radius: 8px;
+      background: var(--white); font-size: 12px;
     }
-
-    .result.main {
-      border-color: rgba(20, 87, 217, 0.38);
-      box-shadow: 0 12px 26px rgba(20, 87, 217, 0.11);
-    }
-
+    .result.top { border-color: rgba(37,99,235,.3); box-shadow: 0 2px 8px rgba(37,99,235,.10); }
     .place {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      color: var(--white);
-      background: var(--blue);
-      font-weight: 900;
+      width: 30px; height: 30px; border-radius: 7px;
+      display: grid; place-items: center;
+      background: var(--blue); color: var(--white);
+      font-weight: 700; font-size: 13px;
     }
+    .result h4 { margin: 0 0 2px; font-size: 12px; font-weight: 600; }
+    .result p { margin: 0; color: var(--muted); font-size: 11px; }
+    .score { font-weight: 700; color: var(--green); white-space: nowrap; font-size: 12px; }
+    .score.dim { color: var(--muted-2); }
 
-    .result h4 {
-      margin: 0 0 4px;
-      font-size: 14px;
+    .company-panel {
+      position: absolute; right: 18px; bottom: 18px; width: 280px;
+      border: 1px solid var(--line); border-radius: var(--r);
+      background: rgba(255,255,255,.97);
+      box-shadow: var(--shadow-md); overflow: hidden;
     }
-
-    .result p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.25;
+    .photo-strip {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3px; height: 72px; padding: 4px; background: var(--blue-mid);
     }
-
-    .score {
-      color: var(--mint);
-      font-weight: 900;
-      white-space: nowrap;
+    .photo { border-radius: 6px; background: rgba(37,99,235,.15); }
+    .panel-body { padding: 12px 14px; }
+    .panel-title { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .panel-title b { font-size: 13px; }
+    .badge {
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 5px;
+      background: var(--blue-light); color: var(--blue);
+    }
+    .stars { font-size: 13px; font-weight: 600; color: #f59e0b; margin-bottom: 10px; }
+    .panel-actions {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 6px;
+    }
+    .panel-actions span {
+      height: 32px; display: grid; place-items: center;
+      border-radius: 7px; font-size: 11px; font-weight: 600;
+      background: var(--blue-light); color: var(--blue);
     }
 
     .pin {
-      position: absolute;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50% 50% 50% 8px;
-      color: var(--ink);
-      background: var(--lime);
-      border: 6px solid var(--white);
-      font-size: 26px;
-      font-weight: 900;
-      box-shadow: 0 18px 34px rgba(66, 112, 20, 0.28);
-      transform: rotate(-45deg);
-      animation: pinFloat 4.2s ease-in-out infinite;
+      position: absolute; width: 44px; height: 44px;
+      display: grid; place-items: center; border-radius: 50% 50% 50% 6px;
+      color: var(--white); background: var(--blue);
+      border: 4px solid var(--white); font-size: 15px; font-weight: 800;
+      box-shadow: var(--shadow-md); transform: rotate(-45deg);
+      animation: pinFloat 4s ease-in-out infinite;
     }
-
-    .pin span {
-      transform: rotate(45deg);
-    }
-
-    .pin.p1 {
-      right: 112px;
-      top: 98px;
-    }
-
-    .pin.p2,
-    .pin.p3 {
-      width: 34px;
-      height: 34px;
-      color: var(--white);
-      background: var(--blue);
-      font-size: 14px;
-      border-width: 4px;
-      opacity: .88;
-      animation-delay: .6s;
-    }
-
-    .pin.p2 {
-      right: 56px;
-      top: 292px;
-    }
-
-    .pin.p3 {
-      right: 246px;
-      bottom: 96px;
-      animation-delay: 1.2s;
-    }
-
+    .pin span { transform: rotate(45deg); }
+    .pin.p1 { right: 100px; top: 80px; }
+    .pin.p2 { width: 28px; height: 28px; border-width: 3px; font-size: 11px;
+      right: 48px; top: 230px; animation-delay: .7s; opacity: .7; }
+    .pin.p3 { width: 28px; height: 28px; border-width: 3px; font-size: 11px;
+      right: 210px; bottom: 90px; animation-delay: 1.4s; opacity: .7; }
     @keyframes pinFloat {
-      0%, 100% { translate: 0 0; }
-      50% { translate: 0 -12px; }
+      0%,100% { translate: 0 0; } 50% { translate: 0 -10px; }
     }
 
-    .company-panel {
-      position: absolute;
-      right: 28px;
-      bottom: 24px;
-      width: 370px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255,255,255,0.95);
-      box-shadow: 0 24px 54px rgba(31, 72, 125, 0.22);
-      overflow: hidden;
+    /* ── LOGO STRIP ── */
+    .logo-strip {
+      padding: 20px 0;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      overflow: hidden; background: var(--white);
     }
-
-    .photo-strip {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr;
-      gap: 4px;
-      height: 96px;
-      padding: 6px;
-      background: #eef3fb;
-    }
-
-    .photo {
-      border-radius: 6px;
-      background:
-        linear-gradient(135deg, rgba(17,24,39,.1), rgba(20,87,217,.08)),
-        url("assets/case-images/klinika-moskva-466k-vyruchki/01.png") center / cover;
-      filter: saturate(.9);
-    }
-
-    .photo:nth-child(2) {
-      background-image:
-        linear-gradient(135deg, rgba(17,24,39,.08), rgba(184,242,77,.12)),
-        url("assets/case-images/restoran-taganrog-top-1/01.png");
-    }
-
-    .photo:nth-child(3) {
-      background-image:
-        linear-gradient(135deg, rgba(17,24,39,.08), rgba(20,87,217,.12)),
-        url("assets/case-images/avtoservis-moskva-top-3/01.png");
-    }
-
-    .panel-body {
-      padding: 16px;
-    }
-
-    .panel-title {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .panel-title b {
-      font-size: 18px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 5px 9px;
-      border-radius: 8px;
-      color: var(--blue);
-      background: #eef5ff;
-      font-size: 12px;
-      font-weight: 900;
+    .marquee { display: flex; width: max-content; animation: marquee 30s linear infinite; }
+    .logo-track { display: flex; gap: 12px; padding-right: 12px; }
+    .logo-item {
+      height: 52px; padding: 0 20px;
+      display: grid; place-items: center;
+      border: 1px solid var(--line); border-radius: 9px;
+      font-size: 13px; font-weight: 700;
+      color: var(--muted); background: var(--white);
       white-space: nowrap;
     }
-
-    .stars {
-      margin-bottom: 14px;
-      color: #f5a400;
-      font-weight: 900;
+    .logo-item.b { background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .logo-item.d { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .logo-item.s { background: var(--soft); color: var(--ink); }
+    @keyframes marquee {
+      from { transform: translateX(0); } to { transform: translateX(-50%); }
     }
 
-    .panel-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+    /* ── PAIN GRID ── */
+    .pain-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 14px;
+      margin-bottom: 24px;
+    }
+    .pain-card {
+      padding: 24px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .pain-card:hover { border-color: var(--blue-mid); box-shadow: var(--shadow-md); }
+    .pain-mark {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: grid; place-items: center;
+      background: var(--blue-light); color: var(--blue);
+      font-weight: 700; font-size: 13px; margin-bottom: 14px;
+    }
+    .pain-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .compare-box {
+      padding: 28px; border-radius: var(--r-lg);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .compare-box strong { display: block; margin-bottom: 16px; font-size: 18px; line-height: 1.3; font-weight: 700; }
+    .compare-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .compare-box li {
+      position: relative; padding-left: 20px;
+      color: var(--muted); font-size: 14px; line-height: 1.5;
+    }
+    .compare-box li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--line);
+    }
+    .compare-box.pro { border-color: rgba(37,99,235,.25); background: var(--blue-light); }
+    .compare-box.pro li::before { background: var(--blue); }
+    .compare-box.pro strong { color: var(--blue-2); }
+
+    /* ── FEATURES ── */
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
+    }
+    .feature {
+      padding: 24px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: border-color .2s, transform .2s;
+    }
+    .feature:hover { border-color: var(--blue-mid); transform: translateY(-2px); }
+    .feature-num {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: grid; place-items: center;
+      background: var(--blue); color: var(--white);
+      font-weight: 700; font-size: 13px; margin-bottom: 16px;
+    }
+    .feature p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    /* ── PROCESS ── */
+    .work-layout {
+      display: grid; grid-template-columns: 340px 1fr;
+      gap: 28px; align-items: start;
+    }
+    .work-sticky {
+      position: sticky; top: 88px;
+      padding: 28px; border-radius: var(--r-lg);
+      background: var(--ink); color: var(--white);
+      box-shadow: var(--shadow-lg);
+    }
+    .work-sticky h3 { font-size: 22px; color: var(--white); }
+    .work-sticky p { color: var(--muted-2); font-size: 14px; line-height: 1.65; margin-bottom: 0; }
+    .work-metrics { display: grid; gap: 8px; margin-top: 20px; }
+    .work-metric {
+      padding: 14px; border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    .work-metric b { display: block; font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .work-metric span { font-size: 12px; color: var(--muted-2); }
+
+    .timeline { display: grid; gap: 10px; }
+    .work-card {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 16px; padding: 20px;
+      border: 1px solid var(--line); border-radius: var(--r);
+      background: var(--white); box-shadow: var(--shadow-sm);
+      transition: border-color .2s;
+    }
+    .work-card:hover { border-color: var(--blue-mid); }
+    .day {
+      width: 52px; height: 52px;
+      display: grid; place-items: center;
+      border-radius: 9px; background: var(--blue-light);
+      color: var(--blue); font-weight: 700; font-size: 13px;
+      text-align: center; line-height: 1.2;
+    }
+    .work-card h3 { font-size: 15px; margin-bottom: 5px; }
+    .work-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+    /* ── CASES ── */
+    .proof-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+    }
+    .case-card {
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(255,255,255,.10); border-radius: var(--r-lg);
+      background: rgba(255,255,255,.04); overflow: hidden;
+      transition: background .2s, border-color .2s;
+    }
+    .case-card:hover { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18); }
+    .case-shot {
+      aspect-ratio: 16/9; background: rgba(255,255,255,.06); overflow: hidden;
+    }
+    .case-shot img { height: 100%; object-fit: cover; }
+    .case-body { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 20px; }
+    .case-body h3 { font-size: 16px; color: var(--white); margin-bottom: 0; }
+    .case-result {
+      display: inline-flex; align-self: flex-start;
+      padding: 5px 12px; border-radius: 6px;
+      background: rgba(37,99,235,.25); color: #93c5fd;
+      font-size: 13px; font-weight: 700;
+    }
+    .case-body p { margin: 0; color: var(--muted-2); font-size: 13px; line-height: 1.6; }
+    .case-link { margin-top: auto; color: #93c5fd; font-weight: 600; font-size: 13px; }
+
+    /* ── PRICING ── */
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .price-card {
+      padding: 32px; border-radius: var(--r-lg);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .price-card.main {
+      border-color: rgba(37,99,235,.30);
+      background: var(--blue-light);
+      box-shadow: 0 4px 24px rgba(37,99,235,.12);
+    }
+    .price-card h3 { font-size: 18px; margin-bottom: 6px; }
+    .price {
+      font-family: 'Manrope', sans-serif;
+      font-size: 36px; font-weight: 800;
+      color: var(--blue); letter-spacing: -.03em;
+      margin: 16px 0 20px; line-height: 1;
+    }
+    .price span { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-top: 5px; letter-spacing: 0; }
+    .price-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .price-card li {
+      position: relative; padding-left: 22px;
+      color: var(--muted); font-size: 14px; line-height: 1.5;
+    }
+    .price-card li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
     }
 
-    .panel-actions span {
-      min-height: 36px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      color: var(--blue);
-      background: #eef5ff;
-      font-size: 12px;
-      font-weight: 900;
+    /* ── MATERIALS ── */
+    .materials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .material-card {
+      padding: 28px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: border-color .2s, transform .2s;
     }
-
-    .section {
-      padding: 88px 0;
+    .material-card:hover { border-color: var(--blue-mid); transform: translateY(-2px); }
+    .material-tag {
+      display: inline-block; padding: 3px 10px; border-radius: 5px;
+      background: var(--blue-light); color: var(--blue);
+      font-size: 12px; font-weight: 600; margin-bottom: 12px;
     }
+    .material-card h3 { font-size: 16px; margin-bottom: 8px; }
+    .material-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
 
-    .section.alt {
+    /* ── FAQ ── */
+    .faq-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .faq-card {
+      padding: 24px; border-radius: var(--r);
+      border: 1px solid var(--line); background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-card h3 { font-size: 15px; margin-bottom: 10px; }
+    .faq-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    /* ── CTA ── */
+    .cta { background: var(--blue); padding: 72px 0; }
+    .cta-box {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .cta h2 { color: var(--white); }
+    .cta .kicker { color: rgba(255,255,255,.6); }
+    .cta .kicker::before { background: rgba(255,255,255,.6); }
+    .cta .lead { color: rgba(255,255,255,.75); margin-bottom: 0; }
+    .form { display: grid; gap: 10px; }
+    .form input {
+      height: 48px; padding: 0 16px;
+      border: 1.5px solid rgba(255,255,255,.2); border-radius: var(--r);
+      background: rgba(255,255,255,.10); color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 15px; outline: none;
+      transition: border-color .15s;
+    }
+    .form input::placeholder { color: rgba(255,255,255,.45); }
+    .form input:focus { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.15); }
+    .form .btn-primary {
+      height: 52px; font-size: 15px; font-weight: 700;
+      background: var(--white); color: var(--blue);
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    .form .btn-primary:hover { background: var(--soft); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 0; border-top: 1px solid var(--line);
       background: var(--soft);
     }
-
-    .section.dark {
-      color: var(--white);
-      background: #0d1526;
+    .footer-in {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 16px;
     }
-
-    .section-head {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 34px;
-      align-items: end;
-      margin-bottom: 38px;
+    .footer-logo {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800; font-size: 15px;
     }
-
-    .section-head p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.45;
+    .footer-links { display: flex; gap: 4px; }
+    .footer-links a {
+      font-size: 13px; color: var(--muted); padding: 6px 11px;
+      border-radius: 7px; transition: all .15s;
     }
+    .footer-links a:hover { color: var(--ink); background: var(--line); }
+    .footer-copy { font-size: 12px; color: var(--muted-2); }
 
-    .dark .section-head p {
-      color: #c6d2e6;
-    }
-
-    .logo-strip {
-      padding: 22px 0;
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      overflow: hidden;
-      background: var(--white);
-    }
-
-    .marquee {
-      display: flex;
-      width: max-content;
-      animation: marquee 34s linear infinite;
-    }
-
-    .logo-track {
-      display: flex;
-      gap: 14px;
-      padding-right: 14px;
-    }
-
-    .logo {
-      width: 136px;
-      height: 62px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      color: var(--ink);
-      background: #fbfdff;
-      font-size: 14px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .logo.blue {
-      color: var(--white);
-      background: var(--blue);
-      border-color: var(--blue);
-    }
-
-    .logo.dark {
-      color: var(--white);
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .logo.green {
-      color: #17310f;
-      background: var(--lime);
-      border-color: var(--lime);
-    }
-
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    .pain-card,
-    .feature,
-    .work-card,
-    .case-card,
-    .price-card,
-    .material-card,
-    .faq-card {
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-      box-shadow: 0 12px 30px rgba(31, 72, 125, 0.07);
-    }
-
-    .pain-card {
-      min-height: 202px;
-      padding: 22px;
-    }
-
-    .pain-mark {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 18px;
-      border-radius: 8px;
-      color: var(--blue);
-      background: #edf4ff;
-      font-weight: 900;
-    }
-
-    .pain-card p,
-    .feature p,
-    .work-card p,
-    .case-card p,
-    .material-card p,
-    .faq-card p,
-    .price-card p {
-      margin-bottom: 0;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-top: 26px;
-    }
-
-    .compare-box {
-      min-height: 280px;
-      padding: 28px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: var(--white);
-      box-shadow: 0 12px 30px rgba(31, 72, 125, 0.07);
-    }
-
-    .compare-box strong {
-      display: block;
-      margin-bottom: 16px;
-      font-size: 24px;
-      line-height: 1.15;
-    }
-
-    .compare-box ul,
-    .price-card ul {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .compare-box li,
-    .price-card li {
-      position: relative;
-      padding-left: 24px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .compare-box li::before,
-    .price-card li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 6px;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--lime);
-    }
-
-    .compare-box.weak li::before {
-      background: #c9d3e6;
-    }
-
-    .compare-box.strong {
-      border-color: rgba(20, 87, 217, 0.35);
-      background: linear-gradient(180deg, #ffffff, #eef5ff);
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      min-height: 210px;
-      padding: 24px;
-    }
-
-    .feature-num {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 22px;
-      border-radius: 8px;
-      color: var(--white);
-      background: var(--blue);
-      font-weight: 900;
-    }
-
-    .work-layout {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .work-sticky {
-      position: sticky;
-      top: 104px;
-      min-height: 420px;
-      padding: 24px;
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(184,242,77,.12), rgba(20,87,217,.08)),
-        #101827;
-      color: var(--white);
-      overflow: hidden;
-    }
-
-    .work-sticky::after {
-      content: "";
-      position: absolute;
-      inset: auto -80px -80px auto;
-      width: 260px;
-      height: 260px;
-      border: 1px solid rgba(255,255,255,.18);
-      transform: rotate(18deg);
-    }
-
-    .work-sticky h3 {
-      font-size: 30px;
-    }
-
-    .work-sticky p {
-      color: #c6d2e6;
-      line-height: 1.5;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 12px;
-    }
-
-    .work-card {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 16px;
-      padding: 22px;
-      box-shadow: none;
-    }
-
-    .day {
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      background: #eef5ff;
-      color: var(--blue);
-      font-weight: 900;
-    }
-
-    .proof-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .case-card {
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .case-shot {
-      aspect-ratio: 16 / 9;
-      background: #eef3fb;
-      overflow: hidden;
-    }
-
-    .case-shot img {
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .case-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 20px;
-    }
-
-    .case-result {
-      display: inline-flex;
-      align-self: flex-start;
-      min-height: 36px;
-      align-items: center;
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--blue);
-      background: #eef5ff;
-      font-weight: 900;
-    }
-
-    .case-link {
-      margin-top: auto;
-      color: var(--blue);
-      font-weight: 900;
-    }
-
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .price-card {
-      position: relative;
-      padding: 28px;
-      overflow: hidden;
-    }
-
-    .price-card.main {
-      border-color: rgba(20, 87, 217, 0.38);
-      background: linear-gradient(180deg, #ffffff, #eef5ff);
-    }
-
-    .price {
-      margin: 16px 0 20px;
-      font-size: 40px;
-      line-height: 1;
-      font-weight: 900;
-    }
-
-    .price span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.3;
-    }
-
-    .materials {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .material-card {
-      min-height: 224px;
-      padding: 22px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.96)),
-        linear-gradient(135deg, rgba(20,87,217,.14), rgba(184,242,77,.22));
-    }
-
-    .material-tag {
-      display: inline-flex;
-      min-height: 28px;
-      align-items: center;
-      margin-bottom: 22px;
-      padding: 5px 8px;
-      border-radius: 8px;
-      color: var(--blue);
-      background: #eef5ff;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .faq-card {
-      padding: 22px;
-      box-shadow: none;
-    }
-
-    .cta {
-      padding: 90px 0;
-      color: var(--white);
-      background:
-        linear-gradient(135deg, rgba(20,87,217,.9), rgba(17,24,39,.94)),
-        #111827;
-    }
-
-    .cta-box {
-      display: grid;
-      grid-template-columns: 1fr 430px;
-      gap: 34px;
-      align-items: center;
-    }
-
-    .cta h2 {
-      font-size: 48px;
-    }
-
-    .cta p {
-      color: #d9e5f6;
-    }
-
-    .form {
-      display: grid;
-      gap: 10px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 8px;
-      background: rgba(255,255,255,.09);
-      backdrop-filter: blur(16px);
-    }
-
-    .form input {
-      width: 100%;
-      min-height: 50px;
-      padding: 0 14px;
-      border: 1px solid rgba(255,255,255,.24);
-      border-radius: 8px;
-      color: var(--white);
-      background: rgba(255,255,255,.1);
-      font: inherit;
-      outline: none;
-    }
-
-    .form input::placeholder {
-      color: rgba(255,255,255,.72);
-    }
-
-    .footer {
-      padding: 28px 0;
-      color: var(--muted);
-      background: #f8fbff;
-      border-top: 1px solid var(--line);
-      font-size: 14px;
-    }
-
+    /* ── REVEAL ── */
     .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .6s ease, transform .6s ease;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
     }
+    .reveal.is-visible { opacity: 1; transform: none; }
 
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* ── BURGER / MOB ── */
+    .burger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
     }
-
-    @media (max-width: 1040px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero-grid,
-      .section-head,
-      .work-layout,
-      .cta-box {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: auto;
-      }
-
-      h1 {
-        font-size: 52px;
-      }
-
-      h2,
-      .cta h2 {
-        font-size: 36px;
-      }
-
-      .map-board {
-        transform: none;
-      }
-
-      .work-sticky {
-        position: relative;
-        top: auto;
-      }
+    .burger span { width: 20px; height: 1.5px; background: var(--ink); border-radius: 2px; }
+    .mob-menu {
+      display: none; flex-direction: column;
+      background: var(--white); border-bottom: 1px solid var(--line);
+      padding: 12px 24px 20px; gap: 2px;
     }
+    .mob-menu.open { display: flex; }
+    .mob-menu a {
+      padding: 12px 0; font-size: 15px; color: var(--muted);
+      border-bottom: 1px solid var(--line); font-weight: 500;
+    }
+    .mob-menu a:last-of-type { border: none; }
+    .mob-menu .btn { margin-top: 14px; width: 100%; justify-content: center; }
 
-    @media (max-width: 780px) {
-      .wrap {
-        width: min(100% - 28px, 1180px);
-      }
-
-      .topbar .btn {
-        display: none;
-      }
-
-      .hero-grid {
-        padding-top: 34px;
-        gap: 32px;
-      }
-
-      h1 {
-        font-size: 38px;
-        line-height: 1.03;
-      }
-
-      h2,
-      .cta h2 {
-        font-size: 30px;
-      }
-
-      .lead {
-        font-size: 18px;
-      }
-
-      .metric-row,
-      .pain-grid,
-      .feature-grid,
-      .proof-grid,
-      .price-grid,
-      .materials,
-      .faq-grid,
-      .compare {
-        grid-template-columns: 1fr;
-      }
-
-      .map-board {
-        min-height: 640px;
-      }
-
-      .company-panel {
-        left: 18px;
-        right: 18px;
-        width: auto;
-      }
-
-      .pin.p1 {
-        right: 54px;
-        top: 264px;
-      }
-
-      .pin.p2 {
-        right: 36px;
-        top: 414px;
-      }
-
-      .pin.p3 {
-        right: 206px;
-        bottom: 188px;
-      }
-
-      .section {
-        padding: 62px 0;
-      }
-
-      .logo {
-        width: 112px;
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .map-board { min-height: 420px; max-width: 560px; }
+      .section-head { grid-template-columns: 1fr; gap: 16px; }
+      .work-layout { grid-template-columns: 1fr; }
+      .work-sticky { position: static; }
+      .cta-box { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .wrap { width: calc(100% - 32px); }
+      .nav-links, .nav-cta { display: none; }
+      .burger { display: flex; }
+      h1 { font-size: 36px; }
+      .hero { padding: 60px 0; }
+      .hero-metrics { grid-template-columns: 1fr 1fr; }
+      .pain-grid { grid-template-columns: 1fr 1fr; }
+      .compare { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .price-grid { grid-template-columns: 1fr; }
+      .materials-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .footer-links { flex-wrap: wrap; }
+    }
+    @media (max-width: 480px) {
+      .hero-metrics { grid-template-columns: 1fr; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="VITRINA SERM">
-        <span class="brand-mark">V</span>
-        <span>VITRINA SERM</span>
-      </a>
-      <nav class="nav-links" aria-label="Основная навигация">
-        <a href="#why">Почему карты</a>
-        <a href="#value">За что выбирают</a>
-        <a href="#work">30 дней</a>
-        <a href="#cases">Кейсы</a>
-        <a href="#price">Стоимость</a>
-      </nav>
-      <a class="btn blue" href="#contact">Получить аудит</a>
+
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">V</span>
+      VITRINA SERM
+    </a>
+    <nav class="nav-links">
+      <a href="#why">Почему карты</a>
+      <a href="#value">Что делаем</a>
+      <a href="#work">Процесс</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#price">Стоимость</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#price">Стоимость</a>
+      <a class="btn btn-primary" href="#contact">Получить аудит</a>
     </div>
-  </header>
+    <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mob">
+    <a href="#why" onclick="this.closest('.mob-menu').classList.remove('open')">Почему карты</a>
+    <a href="#value" onclick="this.closest('.mob-menu').classList.remove('open')">Что делаем</a>
+    <a href="#work" onclick="this.closest('.mob-menu').classList.remove('open')">Процесс</a>
+    <a href="#cases" onclick="this.closest('.mob-menu').classList.remove('open')">Кейсы</a>
+    <a href="#price" onclick="this.closest('.mob-menu').classList.remove('open')">Стоимость</a>
+    <a class="btn btn-primary" href="#contact" onclick="this.closest('.mob-menu').classList.remove('open')">Получить аудит</a>
+  </div>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="reveal">
-          <div class="eyebrow">Геомаркетинг и SERM под ключ</div>
-          <h1>Клиенты найдут многих. <span>Выберут вас.</span></h1>
-          <p class="lead">За 30 дней превращаем карточку в картах в канал заявок: усиливаем позиции, отзывы, визуал, услуги и путь до звонка, маршрута или заявки.</p>
-          <div class="actions">
-            <a class="btn primary" href="#contact">Хочу обойти конкурентов</a>
-            <a class="btn ghost" href="#materials">Хочу сделать сам</a>
-            <a class="btn ghost" href="#price">Посмотреть стоимость</a>
-          </div>
-          <div class="metric-row" aria-label="Основные акценты">
-            <div class="metric"><b>30 дней</b><span>карточка начинает работать как канал заявок</span></div>
-            <div class="metric"><b>90 дней</b><span>делаем заметный отрыв от конкурентов</span></div>
-            <div class="metric"><b>3 карты</b><span>Яндекс Карты, 2ГИС и Google Maps</span></div>
-          </div>
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Геомаркетинг и SERM</div>
+        <h1>Клиенты найдут многих.<br/><span>Выберут вас.</span></h1>
+        <p class="lead">Управляем карточками в Яндекс.Картах и 2ГИС: позиции в выдаче, SEO, отзывы, визуал и путь до звонка или заявки.</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#contact">Получить бесплатный аудит</a>
+          <a class="btn btn-ghost btn-lg" href="#work">Как работаем</a>
         </div>
+        <div class="hero-metrics">
+          <div class="metric"><b>+247%</b><span>рост переходов в профиль за 3 месяца</span></div>
+          <div class="metric"><b>ТОП-3</b><span>позиция в локальной выдаче</span></div>
+          <div class="metric"><b>4.8 ★</b><span>средний рейтинг клиентов</span></div>
+        </div>
+      </div>
 
-        <div class="map-board reveal" aria-label="Интерфейс поиска компании на картах">
-          <div class="search-window">
-            <div class="window-top">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
+      <div class="map-board reveal">
+        <div class="search-window">
+          <div class="window-top">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          </div>
+          <div class="search-line"><span class="mag"></span>обменник валюты Казань</div>
+          <div class="result-list">
+            <div class="result top">
+              <div class="place">1</div>
+              <div><h4>Ваша компания</h4><p>4.9 · 84 отзыва · фото · услуги · ответы</p></div>
+              <div class="score">+38%</div>
             </div>
-            <div class="search-line"><span class="magnifier"></span><span>клиника рядом отзывы</span></div>
-            <div class="result-list">
-              <div class="result main">
-                <div class="place">1</div>
-                <div><h4>Ваша компания</h4><p>4.9 · 126 оценок · фото · услуги · ответы</p></div>
-                <div class="score">+38%</div>
-              </div>
-              <div class="result">
-                <div class="place" style="background:#8aa0c4">2</div>
-                <div><h4>Конкурент</h4><p>4.6 · 64 оценки · мало фото</p></div>
-                <div class="score" style="color:#8aa0c4">ниже</div>
-              </div>
-              <div class="result">
-                <div class="place" style="background:#8aa0c4">3</div>
-                <div><h4>Конкурент</h4><p>4.4 · нет новостей · слабые услуги</p></div>
-                <div class="score" style="color:#8aa0c4">ниже</div>
-              </div>
+            <div class="result">
+              <div class="place" style="background:var(--muted-2)">2</div>
+              <div><h4>Конкурент</h4><p>4.5 · 31 отзыв · мало фото</p></div>
+              <div class="score dim">ниже</div>
+            </div>
+            <div class="result">
+              <div class="place" style="background:var(--muted-2)">3</div>
+              <div><h4>Конкурент</h4><p>4.3 · нет новостей · слабые услуги</p></div>
+              <div class="score dim">ниже</div>
             </div>
           </div>
-          <div class="pin p1"><span>1</span></div>
-          <div class="pin p2"><span>2</span></div>
-          <div class="pin p3"><span>3</span></div>
-          <article class="company-panel">
-            <div class="photo-strip">
-              <span class="photo"></span>
-              <span class="photo"></span>
-              <span class="photo"></span>
-            </div>
-            <div class="panel-body">
-              <div class="panel-title"><b>Карточка, которую выбирают</b><span class="badge">в зоне выбора</span></div>
-              <div class="stars">4.9 ★★★★★ · 84 отзыва</div>
-              <div class="panel-actions"><span>Позвонить</span><span>Маршрут</span><span>Заявка</span></div>
-            </div>
-          </article>
+        </div>
+        <div class="pin p1"><span>1</span></div>
+        <div class="pin p2"><span>2</span></div>
+        <div class="pin p3"><span>3</span></div>
+        <article class="company-panel">
+          <div class="photo-strip">
+            <span class="photo"></span><span class="photo"></span><span class="photo"></span>
+          </div>
+          <div class="panel-body">
+            <div class="panel-title"><b>Карточка, которую выбирают</b><span class="badge">ТОП</span></div>
+            <div class="stars">4.9 ★★★★★ · 84 отзыва</div>
+            <div class="panel-actions"><span>Позвонить</span><span>Маршрут</span><span>Сайт</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO STRIP -->
+  <div class="logo-strip">
+    <div class="marquee">
+      <div class="logo-track">
+        <span class="logo-item b">1EX</span>
+        <span class="logo-item">GAUDI</span>
+        <span class="logo-item d">ИДЕЛЬ</span>
+        <span class="logo-item s">ГРАНТ</span>
+        <span class="logo-item">КЛИНИКА</span>
+        <span class="logo-item">АВТО</span>
+        <span class="logo-item">РЕСТОРАН</span>
+        <span class="logo-item b">1EX</span>
+        <span class="logo-item">GAUDI</span>
+        <span class="logo-item d">ИДЕЛЬ</span>
+      </div>
+      <div class="logo-track" aria-hidden="true">
+        <span class="logo-item b">1EX</span>
+        <span class="logo-item">GAUDI</span>
+        <span class="logo-item d">ИДЕЛЬ</span>
+        <span class="logo-item s">ГРАНТ</span>
+        <span class="logo-item">КЛИНИКА</span>
+        <span class="logo-item">АВТО</span>
+        <span class="logo-item">РЕСТОРАН</span>
+        <span class="logo-item b">1EX</span>
+        <span class="logo-item">GAUDI</span>
+        <span class="logo-item d">ИДЕЛЬ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Почему карты</div>
+          <h2>Клиент уже ищет. Осталось стать лучшим выбором</h2>
+        </div>
+        <p>В Яндекс.Картах клиент сравнивает вас с конкурентами здесь и сейчас — рейтинг, отзывы, фото, кнопка звонка.</p>
+      </div>
+      <div class="pain-grid">
+        <article class="pain-card reveal">
+          <div class="pain-mark">01</div>
+          <h3>Вас не видно</h3>
+          <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
+        </article>
+        <article class="pain-card reveal">
+          <div class="pain-mark">02</div>
+          <h3>Вам не доверяют</h3>
+          <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
+        </article>
+        <article class="pain-card reveal">
+          <div class="pain-mark">03</div>
+          <h3>Карточка не продаёт</h3>
+          <p>Фото, категории и описание не объясняют, почему выбрать именно вас.</p>
+        </article>
+        <article class="pain-card reveal">
+          <div class="pain-mark">04</div>
+          <h3>Нет аналитики</h3>
+          <p>Непонятно, откуда приходят клиенты и какие правки дают результат.</p>
+        </article>
+      </div>
+      <div class="compare reveal">
+        <div class="compare-box">
+          <strong>Обычная реклама догоняет холодных</strong>
+          <ul>
+            <li>Человек может не искать услугу прямо сейчас.</li>
+            <li>Бюджет тратится до того, как возникло намерение.</li>
+            <li>Без сильной карточки трафик уходит конкурентам.</li>
+          </ul>
+        </div>
+        <div class="compare-box pro">
+          <strong>Карты забирают горячий спрос</strong>
+          <ul>
+            <li>Клиент уже выбирает — сравнивает варианты рядом.</li>
+            <li>Карточка ведёт к звонку, маршруту или заявке.</li>
+            <li>Хорошая упаковка работает каждый день без рекламного бюджета.</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="logo-strip" aria-label="Логотипы проектов">
-      <div class="marquee">
-        <div class="logo-track">
-          <span class="logo blue">ATOM</span>
-          <span class="logo green">GAUDI</span>
-          <span class="logo dark">WIWO</span>
-          <span class="logo">KLINIKA</span>
-          <span class="logo">RESTO</span>
-          <span class="logo">AUTO</span>
-          <span class="logo">OPTIKA</span>
-          <span class="logo">FITNESS</span>
-          <span class="logo">SUSHI</span>
-          <span class="logo">COFFEE</span>
+  <!-- VALUE -->
+  <section class="section-alt" id="value">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Что делаем</div>
+          <h2>Управляемый рост карточки как канала спроса</h2>
         </div>
-        <div class="logo-track" aria-hidden="true">
-          <span class="logo blue">ATOM</span>
-          <span class="logo green">GAUDI</span>
-          <span class="logo dark">WIWO</span>
-          <span class="logo">KLINIKA</span>
-          <span class="logo">RESTO</span>
-          <span class="logo">AUTO</span>
-          <span class="logo">OPTIKA</span>
-          <span class="logo">FITNESS</span>
-          <span class="logo">SUSHI</span>
-          <span class="logo">COFFEE</span>
+        <p>Не «покрасили в карточке» — а измеримые переходы, звонки и заявки. Работаем с факторами, которые реально влияют на выбор.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature reveal">
+          <div class="feature-num">01</div>
+          <h3>Аудит и конкуренты</h3>
+          <p>Стартовый разбор карточки: позиции, категории, фото, воронка, отзывы, источники трафика.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-num">02</div>
+          <h3>SEO и семантика</h3>
+          <p>Ключевые запросы, правильные категории, товары и услуги с нормальными описаниями.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-num">03</div>
+          <h3>Визуал и контент</h3>
+          <p>Фото, логотип, сторис, витрина, новости. Всё что помогает выбрать и довериться.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-num">04</div>
+          <h3>Работа с отзывами</h3>
+          <p>Получаем качественные отзывы, отвечаем в стиле бренда, нейтрализуем негатив.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-num">05</div>
+          <h3>Воронка до заявки</h3>
+          <p>Карточка → сайт / мессенджер / звонок → заявка. Убираем разрывы, тестируем с мобильных.</p>
+        </article>
+        <article class="feature reveal">
+          <div class="feature-num">06</div>
+          <h3>Аналитика и отчёты</h3>
+          <p>Не таблица — нарратив: что выросло, почему, что это значит. Переходы, источники, позиции.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Первые 30 дней</div>
+          <h2>Сначала фундамент, потом отрыв от конкурентов</h2>
+        </div>
+        <p>Собственник управляет бизнесом — мы ведём канал. Первые правки в карточке появляются в первую неделю.</p>
+      </div>
+      <div class="work-layout">
+        <aside class="work-sticky reveal">
+          <h3>Что происходит в первый месяц</h3>
+          <p>Приводим карточку в состояние, где она может конкурировать: данные, SEO, визуал, отзывы, услуги и точки действия.</p>
+          <div class="work-metrics">
+            <div class="work-metric"><b>Аудит</b><span>где проигрываем конкурентам</span></div>
+            <div class="work-metric"><b>Упаковка</b><span>что видит клиент до звонка</span></div>
+            <div class="work-metric"><b>Рост</b><span>что делаем после запуска</span></div>
+          </div>
+        </aside>
+        <div class="timeline">
+          <article class="work-card reveal"><div class="day">1–3</div><div><h3>Разбор рынка</h3><p>Запросы, позиции, конкуренты, отзывы, визуал и текущие точки потери клиентов.</p></div></article>
+          <article class="work-card reveal"><div class="day">4–10</div><div><h3>SEO-структура</h3><p>Категории, товары, услуги, описания, ключевые запросы и логика карточки под спрос.</p></div></article>
+          <article class="work-card reveal"><div class="day">11–18</div><div><h3>Визуальная упаковка</h3><p>Фото, обложки, сторис, витрина услуг и понятный путь до действия клиента.</p></div></article>
+          <article class="work-card reveal"><div class="day">19–24</div><div><h3>Репутация</h3><p>Ответы на отзывы, регламент их сбора, работа с негативом и доверие в карточке.</p></div></article>
+          <article class="work-card reveal"><div class="day">25–30</div><div><h3>Отчёт и рост</h3><p>Итоги первого месяца, план гипотез, контроль позиций и старт ежемесячного сопровождения.</p></div></article>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="why">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Почему карты</div>
-            <h2>Человек уже ищет услугу. Осталось стать лучшим выбором</h2>
-          </div>
-          <p>В картах клиент сравнивает вас с конкурентами здесь и сейчас: рейтинг, отзывы, фото, цены, маршрут и кнопка звонка.</p>
+  <!-- CASES -->
+  <section class="section-dark" id="cases">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker" style="color:rgba(255,255,255,.5)">Кейсы</div>
+          <h2>Показываем изменения, а не обещания</h2>
         </div>
-        <div class="pain-grid">
-          <article class="pain-card reveal">
-            <div class="pain-mark">01</div>
-            <h3>Вас не видно</h3>
-            <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
-          </article>
-          <article class="pain-card reveal">
-            <div class="pain-mark">02</div>
-            <h3>Вам не доверяют</h3>
-            <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
-          </article>
-          <article class="pain-card reveal">
-            <div class="pain-mark">03</div>
-            <h3>Карточка не продаёт</h3>
-            <p>Фото, услуги и описание не объясняют, почему выбрать именно вас.</p>
-          </article>
-          <article class="pain-card reveal">
-            <div class="pain-mark">04</div>
-            <h3>Нет контроля</h3>
-            <p>Неясно, кто растёт, кто забирает заявки и какие правки делать первыми.</p>
-          </article>
+        <p style="color:var(--muted-2)">Ниша, проблема, действия и результат. Без лишних слов — только практика.</p>
+      </div>
+      <div class="proof-grid">
+        <article class="case-card reveal">
+          <div class="case-shot"><img src="assets/case-images/klinika-moskva-466k-vyruchki/01.png" alt="Рост звонков и маршрутов клиники"></div>
+          <div class="case-body">
+            <h3>Мебельный салон · Мелеуз</h3>
+            <span class="case-result">+247% переходов</span>
+            <p>Аудит, SEO-семантика, новые категории, сторис и работа с отзывами. Карточка вышла в ТОП-3 по ключевым запросам.</p>
+          </div>
+        </article>
+        <article class="case-card reveal">
+          <div class="case-shot"><img src="assets/case-images/restoran-taganrog-top-1/01.png" alt="Результат продвижения обменника"></div>
+          <div class="case-body">
+            <h3>Крипто-обменник · Казань</h3>
+            <span class="case-result">ТОП-3 в выдаче</span>
+            <p>Карточка в нескольких городах. Работа с рейтингом, ответами на отзывы и правильными категориями под спрос.</p>
+          </div>
+        </article>
+        <article class="case-card reveal">
+          <div class="case-shot"><img src="assets/case-images/avtoservis-moskva-top-3/01.png" alt="Кейс дизайн-студии"></div>
+          <div class="case-body">
+            <h3>Дизайн-студия · Регион</h3>
+            <span class="case-result">+4.8 рейтинг</span>
+            <p>Упаковка карточки, визуал, воронка до заявки. Клиент начал получать запросы напрямую из 2ГИС.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE -->
+  <section id="price">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Стоимость</div>
+          <h2>Понятная цена за канал, который окупается</h2>
         </div>
-        <div class="compare reveal">
-          <div class="compare-box weak">
-            <strong>Обычная реклама догоняет холодных людей</strong>
-            <ul>
-              <li>Человек может не искать услугу прямо сейчас.</li>
-              <li>Бюджет тратится до того, как возникло намерение.</li>
-              <li>Без сильной карточки часть трафика всё равно уходит конкурентам.</li>
-            </ul>
-          </div>
-          <div class="compare-box strong">
-            <strong>Карты забирают горячий спрос</strong>
-            <ul>
-              <li>Клиент уже выбрал категорию и сравнивает варианты рядом.</li>
-              <li>Карточка ведёт к звонку, маршруту, сайту или заявке.</li>
-              <li>Хорошая упаковка работает каждый день, даже без менеджера в чате.</li>
-            </ul>
-          </div>
+        <p>Первый месяц — запуск и упаковка. Дальше — сопровождение, контроль и рост позиций.</p>
+      </div>
+      <div class="price-grid reveal">
+        <article class="price-card main">
+          <h3>Запуск и упаковка</h3>
+          <div class="price">от 30 000 ₽<span>первый месяц работы</span></div>
+          <ul>
+            <li>Аудит карточки и конкурентов.</li>
+            <li>SEO-структура: категории, запросы, описания.</li>
+            <li>Визуальная упаковка карточки.</li>
+            <li>Работа с отзывами и репутацией.</li>
+            <li>План роста на следующие месяцы.</li>
+          </ul>
+        </article>
+        <article class="price-card">
+          <h3>Ежемесячное сопровождение</h3>
+          <div class="price">от 15 000 ₽<span>после запуска</span></div>
+          <ul>
+            <li>Контроль позиций и конкурентов.</li>
+            <li>Регулярные обновления карточки.</li>
+            <li>Ответы на отзывы и работа с репутацией.</li>
+            <li>Отчёт с объяснением результата.</li>
+            <li>Новые гипотезы для роста.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="section-alt" id="materials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Польза сразу</div>
+          <h2>Можно разобраться самому. Можно отдать нам.</h2>
+        </div>
+        <p>Делимся экспертизой открыто. Эти материалы помогут проверить карточку без обращения к агентству.</p>
+      </div>
+      <div class="materials-grid">
+        <article class="material-card reveal">
+          <span class="material-tag">Чеклист</span>
+          <h3>15 ошибок карточки</h3>
+          <p>Что мешает получать звонки и маршруты из Яндекс.Карт и 2ГИС прямо сейчас.</p>
+        </article>
+        <article class="material-card reveal">
+          <span class="material-tag">Разбор</span>
+          <h3>Почему конкурент выше</h3>
+          <p>Как сравнить отзывы, фото, категории, активность и доверие — и что с этим делать.</p>
+        </article>
+        <article class="material-card reveal">
+          <span class="material-tag">План</span>
+          <h3>30 дней роста</h3>
+          <p>Какие правки делать первыми, чтобы карточка начала работать как канал заявок.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">FAQ</div>
+          <h2>Что спрашивают перед стартом</h2>
         </div>
       </div>
-    </section>
-
-    <section class="section alt" id="value">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">За что нас выбирают</div>
-            <h2>Делаем карты каналом продаж, а не красивой карточкой для галочки</h2>
-          </div>
-          <p>Без обещаний топ-1. Работаем с факторами, которые реально влияют на выбор клиента.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature reveal"><div class="feature-num">01</div><h3>Без рискованных схем</h3><p>Не гоним карточку методами, которые могут ударить по развитию в будущем.</p></article>
-          <article class="feature reveal"><div class="feature-num">02</div><h3>Кейсы в разных нишах</h3><p>Карты для авто, медицины, мебели, ресторанов, доставки, услуг и локального ритейла.</p></article>
-          <article class="feature reveal"><div class="feature-num">03</div><h3>Под ключ</h3><p>Берём карточки, отзывы, визуал, услуги, новости, отчёты и коммуникацию с площадками.</p></article>
-          <article class="feature reveal"><div class="feature-num">04</div><h3>Постоянный SEO-контроль</h3><p>Смотрим запросы, позиции и конкурентов. Правим то, что влияет на выбор.</p></article>
-          <article class="feature reveal"><div class="feature-num">05</div><h3>Три площадки</h3><p>Ведём Яндекс Карты, 2ГИС и Google Maps в одной логике.</p></article>
-          <article class="feature reveal"><div class="feature-num">06</div><h3>Воронка внутри карточки</h3><p>Доводим пользователя до звонка, маршрута, сайта или заявки.</p></article>
-        </div>
+      <div class="faq-grid">
+        <article class="faq-card reveal">
+          <h3>Почему не гарантируете топ-1?</h3>
+          <p>Место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку и дают измеримый рост.</p>
+        </article>
+        <article class="faq-card reveal">
+          <h3>Что нужно от собственника?</h3>
+          <p>На старте — доступы, вводная по бизнесу и согласование ключевых решений. Дальше смотрите отчёты и задаёте вопросы.</p>
+        </article>
+        <article class="faq-card reveal">
+          <h3>Когда ждать результат?</h3>
+          <p>Первые изменения видны в первую неделю. Заметный рост позиций и переходов — на горизонте 60–90 дней.</p>
+        </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Первые 30 дней</div>
-            <h2>Сначала делаем фундамент. Потом наращиваем отрыв</h2>
-          </div>
-          <p>Собственник не должен заниматься микроменеджментом карт. Его задача - управлять компанией, наша - вести канал.</p>
-        </div>
-        <div class="work-layout">
-          <aside class="work-sticky reveal">
-            <h3>Что происходит в первый месяц</h3>
-            <p>Мы приводим карточку в состояние, где она может конкурировать: данные, SEO, визуал, отзывы, услуги, ответы и точки действия.</p>
-            <div class="metric-row" style="grid-template-columns:1fr; margin-top:26px">
-              <div class="metric"><b>Аудит</b><span>где вы проигрываете конкурентам</span></div>
-              <div class="metric"><b>Упаковка</b><span>что видит клиент до звонка</span></div>
-              <div class="metric"><b>Рост</b><span>что делаем после запуска</span></div>
-            </div>
-          </aside>
-          <div class="timeline">
-            <article class="work-card reveal"><div class="day">1-3</div><div><h3>Разбор рынка</h3><p>Запросы, позиции, конкуренты, отзывы, визуал, услуги и текущие точки потери клиентов.</p></div></article>
-            <article class="work-card reveal"><div class="day">4-10</div><div><h3>SEO-структура</h3><p>Категории, услуги, описания, товары, ключевые запросы и логика карточки.</p></div></article>
-            <article class="work-card reveal"><div class="day">11-18</div><div><h3>Визуальная упаковка</h3><p>Фото, обложки, истории, витрина услуг и понятный путь до действия.</p></div></article>
-            <article class="work-card reveal"><div class="day">19-24</div><div><h3>Репутация</h3><p>Ответы, регламент сбора отзывов, работа с негативом и доверие в карточке.</p></div></article>
-            <article class="work-card reveal"><div class="day">25-30</div><div><h3>Запуск роста</h3><p>Отчёт, план гипотез, контроль позиций и ежемесячное сопровождение.</p></div></article>
-          </div>
-        </div>
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="wrap cta-box">
+      <div class="reveal">
+        <div class="kicker">Следующий шаг</div>
+        <h2>Покажем, где карточка проигрывает конкурентам</h2>
+        <p class="lead">Разберём выдачу, отзывы, визуал, категории и воронку. После аудита будет понятно, что исправить первым.</p>
       </div>
-    </section>
+      <form class="form reveal" onsubmit="event.preventDefault(); alert('Заявка принята! Свяжемся в течение дня.');">
+        <input placeholder="Компания и город" aria-label="Компания и город">
+        <input placeholder="Ссылка на карточку в картах" aria-label="Ссылка на карточку">
+        <input placeholder="Telegram или телефон" aria-label="Контакт">
+        <button class="btn btn-primary" type="submit">Получить бесплатный аудит →</button>
+      </form>
+    </div>
+  </section>
 
-    <section class="section dark" id="cases">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Кейсы</div>
-            <h2>Показываем не обещания, а изменения в картах</h2>
-          </div>
-          <p>Внутри кейсов - ниша, проблема, действия и результат. Без разделения на категории происхождения, только практика.</p>
-        </div>
-        <div class="proof-grid">
-          <article class="case-card reveal">
-            <div class="case-shot"><img src="assets/case-images/klinika-moskva-466k-vyruchki/01.png" alt="Статистика роста звонков и маршрутов в Яндекс Картах"></div>
-            <div class="case-body">
-              <h3>Клиника в Москве</h3>
-              <span class="case-result">+466 537 ₽</span>
-              <p>Рост выручки через видимость, доверие и работу с действиями в карточке.</p>
-              <a class="case-link" href="cases/klinika-moskva-466k-vyruchki.html">Открыть кейс</a>
-            </div>
-          </article>
-          <article class="case-card reveal">
-            <div class="case-shot"><img src="assets/case-images/restoran-taganrog-top-1/01.png" alt="Скриншот результата ресторана в картах"></div>
-            <div class="case-body">
-              <h3>Ресторан в Таганроге</h3>
-              <span class="case-result">топ-1</span>
-              <p>Карточка стала заметнее конкурентов и начала забирать горячий спрос.</p>
-              <a class="case-link" href="cases/restoran-taganrog-top-1.html">Открыть кейс</a>
-            </div>
-          </article>
-          <article class="case-card reveal">
-            <div class="case-shot"><img src="assets/case-images/avtoservis-moskva-top-3/01.png" alt="Скриншот продвижения автосервиса в картах"></div>
-            <div class="case-body">
-              <h3>Автосервис в Москве</h3>
-              <span class="case-result">топ-3</span>
-              <p>Упаковка карточки, работа с запросами и рост действий от клиентов.</p>
-              <a class="case-link" href="cases/avtoservis-moskva-top-3.html">Открыть кейс</a>
-            </div>
-          </article>
-        </div>
-        <div class="actions" style="justify-content:center; margin-top:26px">
-          <a class="btn primary" href="cases/index.html">Смотреть все кейсы</a>
-        </div>
-      </div>
-    </section>
+</main>
 
-    <section class="section" id="price">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Стоимость</div>
-            <h2>Понятная цена за канал, который должен окупаться</h2>
-          </div>
-          <p>Первый месяц - запуск и упаковка. Дальше - сопровождение, контроль и рост.</p>
-        </div>
-        <div class="price-grid">
-          <article class="price-card main reveal">
-            <h3>Запуск SERM в картах</h3>
-            <div class="price">150 000 ₽ <span>первый месяц работы</span></div>
-            <ul>
-              <li>Аудит карточек и конкурентов.</li>
-              <li>SEO-структура услуг, категорий и описаний.</li>
-              <li>Визуальная упаковка карточки.</li>
-              <li>Работа с отзывами и репутацией.</li>
-              <li>План роста на 90 дней.</li>
-            </ul>
-          </article>
-          <article class="price-card reveal">
-            <h3>Ежемесячное сопровождение</h3>
-            <div class="price">49 990 ₽ <span>после запуска</span></div>
-            <ul>
-              <li>Контроль позиций и конкурентов.</li>
-              <li>Регулярные обновления карточек.</li>
-              <li>Ответы и работа с отзывами.</li>
-              <li>Отчёт по действиям и динамике.</li>
-              <li>Новые гипотезы для роста.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+<footer>
+  <div class="wrap footer-in">
+    <div class="footer-logo">VITRINA SERM</div>
+    <div class="footer-links">
+      <a href="#why">Почему карты</a>
+      <a href="#value">Что делаем</a>
+      <a href="#work">Процесс</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#price">Стоимость</a>
+    </div>
+    <div class="footer-copy">© 2026 VITRINA SERM · Яндекс.Карты · 2ГИС</div>
+  </div>
+</footer>
 
-    <section class="section alt" id="materials">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Польза сразу</div>
-            <h2>Можно разобраться самому. Можно отдать нам под ключ</h2>
-          </div>
-          <p>Мы открыто делимся экспертизой. Материалы помогут проверить карточку без оплаты агентству.</p>
-        </div>
-        <div class="materials">
-          <article class="material-card reveal"><span class="material-tag">Чеклист</span><h3>15 ошибок карточки</h3><p>Что мешает получать звонки и маршруты из Яндекс Карт, 2ГИС и Google Maps.</p></article>
-          <article class="material-card reveal"><span class="material-tag">Разбор</span><h3>Почему конкурент выше</h3><p>Как сравнить отзывы, фото, услуги, категории, активность и доверие.</p></article>
-          <article class="material-card reveal"><span class="material-tag">План</span><h3>30 дней роста</h3><p>Какие правки делать сначала, чтобы карточка начала работать как канал заявок.</p></article>
-        </div>
-      </div>
-    </section>
+<script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
 
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div>
-            <div class="kicker">Коротко о важном</div>
-            <h2>Что обычно спрашивают перед стартом</h2>
-          </div>
-        </div>
-        <div class="faq-grid">
-          <article class="faq-card reveal"><h3>Почему не обещаете топ-1?</h3><p>Потому что место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку.</p></article>
-          <article class="faq-card reveal"><h3>Что нужно от собственника?</h3><p>На старте - доступы, вводная по бизнесу и согласование ключевых вещей. Дальше смотрите отчёты.</p></article>
-          <article class="faq-card reveal"><h3>Когда ждать результат?</h3><p>Первые изменения видны в первый месяц. Отрыв от конкурентов строится на горизонте 90 дней.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta" id="contact">
-      <div class="wrap cta-box">
-        <div class="reveal">
-          <div class="kicker">Следующий шаг</div>
-          <h2>Покажем, где ваша карточка проигрывает конкурентам</h2>
-          <p class="lead">Разберём выдачу, отзывы, визуал, услуги и точки действия. После аудита будет понятно, что исправить первым.</p>
-        </div>
-        <form class="form reveal" onsubmit="event.preventDefault(); alert('Черновик: здесь подключим Telegram, CRM или форму заявки');">
-          <input aria-label="Компания и город" placeholder="Компания / город">
-          <input aria-label="Ссылка на карточку" placeholder="Ссылка на карточку в картах">
-          <input aria-label="Контакт" placeholder="Telegram / телефон">
-          <button class="btn primary" type="submit">Получить аудит</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">VITRINA SERM · Геомаркетинг · SERM · Яндекс Карты · 2ГИС · Google Maps</div>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-  </script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

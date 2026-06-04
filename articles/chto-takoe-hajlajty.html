@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Что такое хайлайты в Яндекс Картах и как их правильно заполнить — VITRINA SERM</title>
+  <meta name="description" content="Хайлайты — главный визуальный элемент карточки. Они работают как буллиты выгод на сайте: клиент за секунду понимает, почему стоит выбрать именно вас.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#09090b;--ink-2:#18181b;--muted:#71717a;
+      --line:#e4e4e7;--soft:#fafafa;--paper:#f7f6f3;
+      --blue:#1d4ed8;--blue-lt:#eff6ff;
+      --lime:#84cc16;--lime-glow:rgba(132,204,22,.2);
+      --dark:#040b18;--dark-2:#071022;
+      --r:4px;--ease:cubic-bezier(.16,1,.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',sans-serif;font-size:17px;line-height:1.75;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none;cursor:pointer}
+    img{display:block;max-width:100%}
+    h1,h2,h3,h4{margin-top:0;font-family:'Newsreader',serif;font-weight:600}
+    button{cursor:pointer}
+
+    /* PROGRESS BAR */
+    #prog{
+      position:fixed;top:0;left:0;height:3px;width:0%;
+      background:var(--lime);z-index:1000;
+      transition:width .1s linear;
+      box-shadow:0 0 8px var(--lime-glow);
+    }
+
+    /* TOPBAR */
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      background:rgba(4,11,24,.9);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav{height:64px;width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;color:#fff;white-space:nowrap}
+    .brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(135deg,#1d4ed8,#040b18);color:#fff;font-family:'Newsreader',serif;font-size:16px;box-shadow:0 4px 14px rgba(29,78,216,.36)}
+    .nav-links{display:flex;gap:24px;font-size:13px;font-weight:500;color:rgba(255,255,255,.5)}
+    .nav-links a:hover{color:#fff;transition:color .15s}
+    .nav-btn{display:inline-flex;align-items:center;min-height:36px;padding:8px 16px;border-radius:6px;background:var(--lime);color:var(--ink);font:700 13px/1 'Inter',sans-serif;border:none;white-space:nowrap;transition:filter .18s}
+    .nav-btn:hover{filter:brightness(1.06)}
+
+    /* HERO */
+    .art-hero{
+      border-bottom:1px solid var(--line);
+      padding:72px 0 56px;
+      background:var(--paper);
+    }
+    .hero-wrap{width:min(800px,calc(100% - 48px));margin:0 auto}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:12px;color:var(--muted)}
+    .breadcrumb a{color:var(--blue);transition:opacity .15s}.breadcrumb a:hover{opacity:.7}
+    .art-num{font-family:'Newsreader',serif;font-style:italic;font-size:12px;color:var(--muted);margin-bottom:12px;letter-spacing:.3px}
+    .art-cat-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-bottom:20px;padding:5px 12px;
+      border:1px solid var(--line);border-radius:2px;
+      background:#fff;color:var(--ink);
+      font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+    }
+    .art-hero h1{
+      font-size:clamp(32px,5vw,54px);line-height:1.08;
+      letter-spacing:-.5px;color:var(--ink);
+      margin-bottom:22px;font-weight:700;
+    }
+    .art-lead{
+      font-size:20px;line-height:1.6;color:#3f3f46;
+      font-family:'Newsreader',serif;font-weight:400;font-style:italic;
+      margin-bottom:24px;
+    }
+    .art-meta{display:flex;align-items:center;gap:20px;font-size:13px;color:var(--muted);font-weight:500}
+    .art-meta span{display:flex;align-items:center;gap:6px}
+    .art-meta svg{flex:0 0 auto}
+    .meta-dot{width:4px;height:4px;border-radius:50%;background:var(--line)}
+
+    /* CONTENT LAYOUT */
+    .art-layout{
+      width:min(1200px,calc(100% - 48px));margin:0 auto;
+      display:grid;grid-template-columns:1fr min(680px,100%) 1fr;
+      padding:56px 0 80px;gap:0;
+    }
+    .art-body{grid-column:2}
+
+    /* TYPOGRAPHY */
+    .art-body p{margin:0 0 22px;color:#27272a;line-height:1.8;font-size:17px}
+    .art-body > p:first-of-type::first-letter{
+      font-family:'Newsreader',serif;font-size:72px;font-weight:700;
+      line-height:.8;float:left;margin:8px 12px 0 0;
+      color:var(--ink);
+    }
+    .art-body h2{
+      font-size:32px;line-height:1.12;letter-spacing:-.3px;
+      margin:52px 0 20px;padding-top:0;color:var(--ink);
+      border-top:2px solid var(--ink);padding-top:20px;
+    }
+    .art-body h3{font-size:22px;margin:36px 0 14px;color:var(--ink);line-height:1.25}
+    .art-body h4{font-size:17px;font-family:'Inter',sans-serif;font-weight:700;margin:28px 0 10px}
+    .art-body ul,.art-body ol{margin:0 0 22px;padding-left:24px}
+    .art-body li{margin-bottom:10px;color:#27272a;line-height:1.7}
+    .art-body strong{color:var(--ink);font-weight:700}
+    .art-body hr{border:none;border-top:1px solid var(--line);margin:44px 0}
+
+    /* PULL QUOTE */
+    .pullquote{
+      margin:40px -20px;padding:28px 32px;
+      border-left:3px solid var(--lime);
+      background:#fff;
+    }
+    .pullquote p{
+      font-family:'Newsreader',serif;font-size:24px;
+      line-height:1.4;font-style:italic;color:var(--ink);
+      margin:0;font-weight:400;
+    }
+    .pullquote p::first-letter{float:none;font-size:inherit;line-height:inherit;margin:0}
+
+    /* CALLOUT */
+    .callout{
+      margin:32px 0;padding:22px 24px;
+      border-radius:var(--r);border:1px solid var(--line);
+      background:#fff;
+      display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+    }
+    .callout-icon{
+      width:36px;height:36px;display:grid;place-items:center;
+      border-radius:6px;background:var(--blue-lt);color:var(--blue);flex:0 0 auto;
+    }
+    .callout p{margin:0;font-size:15px;color:#3f3f46;line-height:1.65}
+    .callout strong{color:var(--ink)}
+
+    /* TABLE */
+    .art-body table{width:100%;border-collapse:collapse;margin:24px 0 32px;font-size:15px;background:#fff;border:1px solid var(--line)}
+    .art-body th{padding:12px 16px;text-align:left;font-weight:700;font-size:12px;letter-spacing:.5px;text-transform:uppercase;border-bottom:2px solid var(--ink);background:#fff}
+    .art-body td{padding:12px 16px;border-bottom:1px solid var(--line);color:#3f3f46;vertical-align:top}
+    .art-body tr:last-child td{border-bottom:none}
+
+    /* CODE */
+    .art-body code{background:#f4f4f5;padding:2px 6px;border-radius:3px;font-size:14px;font-family:monospace;color:#dc2626}
+    .art-body pre{background:var(--ink);color:#e2e8f0;padding:22px 24px;border-radius:var(--r);overflow-x:auto;margin:22px 0;font-size:14px;line-height:1.7}
+    .art-body pre code{background:none;padding:0;color:inherit;font-size:inherit}
+
+    /* MID-ARTICLE CTA */
+    .mid-cta{
+      margin:48px 0;padding:36px 40px;
+      background:var(--ink);border-radius:var(--r);
+      display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+    }
+    .mid-cta h4{font-family:'Newsreader',serif;font-size:22px;font-weight:600;color:#fff;margin:0 0 6px}
+    .mid-cta p{font-size:14px;color:rgba(255,255,255,.55);margin:0;line-height:1.5}
+    .mid-cta a{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:13px 22px;border-radius:6px;
+      background:var(--lime);color:var(--ink);
+      font:700 14px/1 'Inter',sans-serif;white-space:nowrap;
+      transition:filter .18s;
+    }
+    .mid-cta a:hover{filter:brightness(1.06)}
+
+    /* BOTTOM CTA */
+    .art-cta{
+      width:min(1200px,calc(100% - 48px));margin:0 auto;
+      padding:60px 0 80px;
+      border-top:1px solid var(--line);
+    }
+    .cta-inner{
+      display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+    }
+    .cta-inner h2{font-size:36px;margin-bottom:8px;line-height:1.1}
+    .cta-inner p{color:var(--muted);font-size:16px;margin:0;line-height:1.6}
+    .cta-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:16px 28px;border-radius:6px;
+      background:var(--ink);color:#fff;
+      font:700 15px/1 'Inter',sans-serif;white-space:nowrap;
+      transition:background .18s,transform .18s;
+    }
+    .cta-btn:hover{background:var(--blue);transform:translateY(-2px)}
+
+    /* PREV/NEXT */
+    .pn-nav{
+      width:min(1200px,calc(100% - 48px));margin:0 auto;
+      padding:24px 0 48px;
+      display:flex;justify-content:space-between;gap:16px;
+      border-top:1px solid var(--line);
+    }
+    .pn-link{
+      display:flex;align-items:center;gap:8px;
+      padding:12px 18px;border:1px solid var(--line);border-radius:var(--r);
+      font-size:14px;font-weight:600;color:var(--ink);background:#fff;
+      transition:border-color .18s,background .18s;max-width:340px;
+    }
+    .pn-link:hover{border-color:var(--ink);background:var(--soft)}
+    .pn-link svg{width:16px;height:16px;flex:0 0 auto}
+
+    /* FOOTER */
+    .footer{padding:28px 0;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.05)}
+    .footer-in{width:min(1200px,calc(100% - 48px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#3d5272}
+
+    @media(max-width:900px){
+      .art-layout{grid-template-columns:1fr;padding:40px 24px 64px}
+      .art-body{grid-column:1}
+      .mid-cta{grid-template-columns:1fr;gap:16px}
+      .cta-inner{grid-template-columns:1fr;gap:20px}
+      .pullquote{margin:32px 0}
+    }
+    @media(max-width:640px){
+      .nav-links{display:none}
+      .art-hero{padding:48px 0 40px}
+      .art-hero h1{font-size:28px}
+      .art-lead{font-size:17px}
+      .art-body > p:first-of-type::first-letter{font-size:52px}
+    }
+  </style>
+</head>
+<body>
+<div id="prog" role="progressbar" aria-label="Прогресс чтения"></div>
+
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="../index.html">
+      <img src="../logo.jpg" alt="" aria-hidden="true" style="width:34px;height:34px;flex:0 0 auto;border-radius:8px;box-shadow:0 4px 14px rgba(27,58,106,.5);object-fit:cover;display:block">
+      <span>VITRINA SERM</span>
+    </a>
+    <nav class="nav-links" aria-label="Навигация">
+      <a href="../index.html#why">Почему карты</a>
+      <a href="../index.html#cases">Кейсы</a>
+      <a href="../index.html#blog">Материалы</a>
+      <a href="../index.html#price">Стоимость</a>
+    </nav>
+    <a class="nav-btn" href="../index.html#contact">Получить готовый прототип</a>
+  </div>
+</header>
+
+<main>
+  <div class="art-hero">
+    <div class="hero-wrap">
+      <nav class="breadcrumb" aria-label="Хлебные крошки">
+        <a href="../index.html">Главная</a>
+        <span>›</span>
+        <a href="../index.html#blog">База знаний</a>
+        <span>›</span>
+        <span>Оформление</span>
+      </nav>
+      <div class="art-num">03 из 08</div>
+      <div class="art-cat-badge">Оформление</div>
+      <h1>Что такое хайлайты в Яндекс Картах и как их правильно заполнить</h1>
+      <p class="art-lead">Хайлайты — главный визуальный элемент карточки. Они работают как буллиты выгод на сайте: клиент за секунду понимает, почему стоит выбрать именно вас.</p>
+      <div class="art-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          5 мин чтения
+        </span>
+        <span class="meta-dot"></span>
+        <span>VITRINA SERM</span>
+        <span class="meta-dot"></span>
+        <span>Бесплатно</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="art-layout">
+    <article class="art-body">
+
+      <p>Когда человек открывает карточку компании, он не читает длинные описания. Он смотрит на картинки. Хайлайты (в интерфейсе Яндекс.Бизнеса они называются «Истории») — это набор небольших баннеров под названием компании, которые сразу отвечают на главный вопрос клиента.</p>
+
+      <div class="pullquote">
+        <p>«Компании без хайлайтов теряют клиентов в пользу конкурентов даже при одинаковых позициях в выдаче.»</p>
+      </div>
+
+      <h2>Где добавить истории</h2>
+      <p>В Яндекс.Бизнесе путь следующий:</p>
+      <p><strong>О компании → Данные → «Добавить историю»</strong></p>
+      <p>Нажмите кнопку, загрузите изображение-баннер, повторите для каждой истории. Технически — всё просто. Сложность в том, что именно там разместить.</p>
+
+      <h2>Пошаговый алгоритм: что писать</h2>
+      <h3>Шаг 1. Проанализируйте отзывы конкурентов</h3>
+      <p>Откройте 3–5 карточек конкурентов в Яндекс Картах. Читайте отзывы и выписывайте:</p>
+      <ul>
+        <li><strong>Что хвалят</strong> → это важно вашей аудитории → берём в хайлайты</li>
+        <li><strong>На что жалуются</strong> → у конкурентов есть проблема → делаем её нашим преимуществом</li>
+      </ul>
+
+      <h3>Шаг 2. Сформулируйте 5–7 конкретных тезисов</h3>
+      <table>
+        <tr><th>Ниша</th><th>Примеры хайлайтов</th></tr>
+        <tr><td>Юридические услуги</td><td>Сопровождение на каждом этапе · Рассрочка без процентов · 94% выигранных дел</td></tr>
+        <tr><td>Автосервис</td><td>Диагностика за 30 минут · Гарантия на все работы · Оригинальные запчасти</td></tr>
+        <tr><td>Ресторан</td><td>Свежие продукты ежедневно · Меню для вегетарианцев · Живая музыка по пятницам</td></tr>
+        <tr><td>Медицина</td><td>Приём без очереди · Врачи с опытом от 10 лет · Результаты онлайн</td></tr>
+      </table>
+
+      <h3>Шаг 3. Добавьте стандартные истории</h3>
+      <ul>
+        <li>«Как найти» / схема проезда — люди ищут это перед первым визитом</li>
+        <li>Парковка</li>
+        <li>Актуальные акции (не более 5, только действующие)</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 13l7-9 3 4 2-2 4 7H2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <p><strong>Требования к баннерам:</strong> единый стиль всех баннеров, крупный текст читается с маленького экрана, 1 баннер = 1 идея. Самодельные баннеры в Paint снижают доверие — закажите у дизайнера.</p>
+      </div>
+
+      <h2>Частые ошибки</h2>
+      <ul>
+        <li>Пустой блок историй — упущенный шанс</li>
+        <li>Общие фразы без конкретики («высокое качество», «лучшие специалисты»)</li>
+        <li>Устаревшие акции которые уже закончились</li>
+        <li>Разный стиль баннеров — выглядит непрофессионально</li>
+        <li>Слишком много текста на одном баннере</li>
+      </ul>
+
+      <div class="mid-cta">
+        <div>
+          <h4>Нужен аудит вашей карточки?</h4>
+          <p>Покажем конкретно что мешает получать больше звонков прямо сейчас.</p>
+        </div>
+        <a href="../index.html#contact">
+          Получить готовый прототип
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <div class="art-cta">
+    <div class="cta-inner">
+      <div>
+        <h2>Хотите такой же результат?</h2>
+        <p>Разберём вашу карточку бесплатно и покажем где теряете клиентов прямо сейчас.</p>
+      </div>
+      <a class="cta-btn" href="../index.html#contact">
+        Получить бесплатный аудит
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <nav class="pn-nav" aria-label="Соседние статьи">
+    <a class="pn-link" href="kak-kartochka-rabotaet-kak-sajt.html"><svg viewBox="0 0 16 16" fill="none"><path d="M11 8H5M8 5l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Карточка — это мини-сайт</a>
+    <a class="pn-link" href="mozhno-li-udalit-otzyv.html">Можно ли удалить отзыв<svg viewBox="0 0 16 16" fill="none"><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </nav>
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <span>VITRINA SERM · Геомаркетинг · SERM · Яндекс Карты · 2ГИС · Google Maps</span>
+    <span>© 2025</span>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  const prog = document.getElementById('prog');
+  function updateProg() {
+    const body = document.body, html = document.documentElement;
+    const h = Math.max(body.scrollHeight, html.scrollHeight) - window.innerHeight;
+    prog.style.width = (window.scrollY / h * 100) + '%';
+  }
+  window.addEventListener('scroll', updateProg, {passive: true});
+</script>
+</body>
+</html>

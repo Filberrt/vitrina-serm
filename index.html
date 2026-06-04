@@ -1,976 +1,1606 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VITRINA SERM — продвижение в Яндекс.Картах и 2ГИС</title>
-  <meta name="description" content="Управляем карточками бизнеса в Яндекс.Картах и 2ГИС. Позиции, отзывы, SEO, воронка — измеримый рост переходов и заявок.">
+  <title>VITRINA SERM — продвижение в Яндекс Картах, 2ГИС и Google Maps</title>
+  <meta name="description" content="За 30 дней превращаем карточку компании в картах в канал заявок. SERM, отзывы, визуал, услуги, позиции.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <style>
+    /* ─── TOKENS ─── */
     :root {
-      --bg:         #07070d;
-      --s1:         #0e0e17;
-      --s2:         #13131e;
-      --s3:         #181825;
-      --ink:        #eeeef4;
-      --muted:      rgba(238,238,244,.55);
-      --muted-2:    rgba(238,238,244,.32);
-      --line:       rgba(255,255,255,.07);
-      --line-h:     rgba(255,255,255,.12);
-      --blue:       #5b8aff;
-      --blue-2:     #7aa6ff;
-      --blue-dim:   rgba(91,138,255,.12);
-      --blue-bord:  rgba(91,138,255,.25);
-      --blue-glow:  rgba(91,138,255,.22);
-      --green:      #22c55e;
+      --ink:        #060d1c;
+      --ink-2:      #1e293b;
+      --muted:      #64748b;
+      --line:       #e2e8f0;
+      --soft:       #f8fafc;
+      --blue:       #1d4ed8;
+      --blue-2:     #1e40af;
+      --blue-lt:    #eff6ff;
+      --lime:       #84cc16;
+      --lime-glow:  rgba(132,204,22,.28);
+      --mint:       #10b981;
       --white:      #ffffff;
-      --shadow-sm:  0 1px 3px rgba(0,0,0,.3);
-      --shadow-md:  0 4px 16px rgba(0,0,0,.35);
-      --shadow-lg:  0 12px 40px rgba(0,0,0,.45);
-      --r:          10px;
-      --r-lg:       16px;
-      --ease:       cubic-bezier(.4,0,.2,1);
+      --dark:       #040b18;
+      --dark-2:     #071022;
+      --dark-3:     #0c1a35;
+      --d-card:     rgba(255,255,255,.055);
+      --d-border:   rgba(255,255,255,.09);
+      --d-text:     #e2e8f0;
+      --d-muted:    #8896ac;
+      --sh-sm:  0 1px 3px rgba(6,13,28,.07),0 1px 2px rgba(6,13,28,.05);
+      --sh-md:  0 4px 20px rgba(6,13,28,.10),0 2px 6px rgba(6,13,28,.06);
+      --sh-lg:  0 24px 60px rgba(6,13,28,.15),0 8px 22px rgba(6,13,28,.09);
+      --r:  14px;
+      --rl: 22px;
+      --ease: cubic-bezier(.16,1,.3,1);
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    /* ─── RESET ─── */
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      font-size:16px;line-height:1.6;
+      color:var(--ink);background:var(--white);
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;width:100%}
+    h1,h2,h3,h4,p{margin-top:0}
+    h1,h2,h3{font-family:'Calistoga',serif;font-weight:400}
+    button,a{cursor:pointer}
 
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 16px;
-      color: var(--ink);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-    }
+    /* ─── LAYOUT ─── */
+    .wrap{width:min(1200px,calc(100% - 48px));margin:0 auto}
 
-    a { color: inherit; text-decoration: none; }
-    img { display: block; width: 100%; }
-    p { margin-top: 0; }
+    /* ─── TOPBAR ─── */
+    .topbar{
+      position:sticky;top:0;z-index:200;
+      background:rgba(4,11,24,.78);
+      backdrop-filter:blur(28px) saturate(1.6);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav{
+      height:68px;
+      display:flex;align-items:center;justify-content:space-between;gap:24px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:10px;
+      font-weight:700;font-size:15px;letter-spacing:-.2px;
+      white-space:nowrap;color:#fff;
+    }
+    .brand-mark{
+      width:36px;height:36px;
+      display:grid;place-items:center;border-radius:10px;
+      background:linear-gradient(135deg,#1d4ed8,#060d1c);
+      color:#fff;font-family:'Calistoga',serif;font-size:17px;
+      box-shadow:0 4px 14px rgba(29,78,216,.36);
+    }
+    .nav-links{
+      display:flex;align-items:center;gap:26px;
+      font-size:13px;font-weight:500;color:rgba(255,255,255,.55);
+    }
+    .nav-links a{transition:color .15s}
+    .nav-links a:hover{color:#fff}
 
-    .wrap {
-      width: min(1160px, calc(100% - 48px));
-      margin: 0 auto;
+    /* ─── BUTTONS ─── */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      min-height:46px;padding:11px 22px;
+      border-radius:10px;border:none;cursor:pointer;
+      font:600 14px/1.2 'Inter',sans-serif;
+      transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .18s;
+      white-space:nowrap;text-align:center;
     }
+    .btn:hover{transform:translateY(-2px)}
+    .btn.primary{
+      background:var(--lime);color:var(--ink);
+      box-shadow:0 6px 24px var(--lime-glow);
+    }
+    .btn.primary:hover{box-shadow:0 10px 32px var(--lime-glow);filter:brightness(1.06)}
+    .btn.blue{
+      background:var(--blue);color:#fff;
+      box-shadow:0 4px 16px rgba(29,78,216,.30);
+    }
+    .btn.blue:hover{box-shadow:0 8px 28px rgba(29,78,216,.44)}
+    .btn.ghost{
+      background:rgba(255,255,255,.08);color:#fff;
+      border:1.5px solid rgba(255,255,255,.16);
+    }
+    .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28)}
+    .btn-lg{min-height:58px;padding:16px 30px;font-size:16px;border-radius:12px}
 
-    /* ── NAV ── */
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(7,7,13,.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
+    /* ─── HERO ─── */
+    .hero{
+      position:relative;min-height:100vh;
+      display:flex;align-items:center;overflow:hidden;
+      background:var(--dark);color:#fff;
     }
-    .nav {
-      height: 64px;
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 24px;
+    /* animated gradient blobs */
+    .blob{
+      position:absolute;border-radius:50%;
+      filter:blur(90px);pointer-events:none;
+      animation:blobFloat 10s ease-in-out infinite;
     }
-    .brand {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800; font-size: 17px;
-      white-space: nowrap;
+    .blob-1{width:600px;height:600px;top:-150px;right:-100px;background:rgba(29,78,216,.18);animation-duration:11s}
+    .blob-2{width:500px;height:500px;bottom:-80px;left:-80px;background:rgba(16,185,129,.11);animation-duration:14s;animation-delay:-4s}
+    .blob-3{width:380px;height:380px;top:30%;right:30%;background:rgba(132,204,22,.07);animation-duration:9s;animation-delay:-7s}
+    @keyframes blobFloat{
+      0%,100%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(24px,-18px) scale(1.04)}
+      66%{transform:translate(-18px,12px) scale(.97)}
     }
-    .brand-mark {
-      width: 36px; height: 36px;
-      display: grid; place-items: center;
-      border-radius: 9px;
-      background: var(--blue);
-      color: var(--white);
-      font-size: 15px; font-weight: 800;
-      box-shadow: 0 0 16px var(--blue-glow);
-    }
-    .nav-links {
-      display: flex; align-items: center; gap: 2px;
-      font-size: 14px; font-weight: 500;
-    }
-    .nav-links a {
-      padding: 7px 14px; border-radius: 8px;
-      color: var(--muted); transition: all .15s;
-    }
-    .nav-links a:hover { color: var(--ink); background: rgba(255,255,255,.05); }
-    .nav-cta { display: flex; gap: 8px; }
+    @media(prefers-reduced-motion:reduce){.blob{animation:none}}
 
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      height: 44px; padding: 0 20px; border-radius: var(--r);
-      font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
-      border: 1.5px solid transparent; cursor: pointer;
-      transition: all .18s var(--ease); white-space: nowrap;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary {
-      background: var(--blue); color: var(--white);
-      box-shadow: 0 2px 16px var(--blue-glow);
-    }
-    .btn-primary:hover { background: var(--blue-2); box-shadow: 0 4px 24px var(--blue-glow); }
-    .btn-ghost {
-      background: rgba(255,255,255,.05); color: var(--muted);
-      border-color: var(--line);
-    }
-    .btn-ghost:hover { border-color: var(--line-h); color: var(--ink); background: rgba(255,255,255,.09); }
-    .btn-lg { height: 52px; padding: 0 28px; font-size: 15px; font-weight: 700; }
-
-    /* ── EYEBROW ── */
-    .eyebrow, .kicker {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-bottom: 14px;
-      font-size: 12px; font-weight: 600;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: var(--blue);
-    }
-    .eyebrow::before, .kicker::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--blue); flex-shrink: 0;
-    }
-
-    h1, h2, h3 { margin-top: 0; font-family: 'Manrope', sans-serif; color: var(--ink); }
-    h1 {
-      margin-bottom: 20px;
-      font-size: clamp(38px, 5.5vw, 60px);
-      line-height: 1.06; font-weight: 800; letter-spacing: -.03em;
-    }
-    h1 span { color: var(--blue); }
-    h2 {
-      margin-bottom: 0;
-      font-size: clamp(26px, 3.8vw, 40px);
-      line-height: 1.12; font-weight: 800; letter-spacing: -.025em;
-    }
-    h3 { margin-bottom: 8px; font-size: 16px; line-height: 1.3; font-weight: 700; }
-    .lead {
-      margin-bottom: 28px;
-      font-size: clamp(15px, 2vw, 18px);
-      color: var(--muted); line-height: 1.7;
+    .hero-grid{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:1fr 1.08fr;
+      gap:64px;align-items:center;
+      padding:100px 0 110px;
     }
 
-    section { padding: 88px 0; }
-    .section-alt { background: var(--s1); }
-    .section-dark { background: var(--s2); }
+    /* eyebrow / kicker */
+    .eyebrow,.kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-bottom:18px;
+      font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;
+    }
+    .eyebrow{color:var(--lime)}
+    .kicker{color:var(--blue)}
+    .eyebrow::before,.kicker::before{
+      content:"";width:8px;height:8px;border-radius:50%;background:currentColor;
+      box-shadow:0 0 0 4px rgba(132,204,22,.2);
+      flex:0 0 auto;
+    }
+    .kicker::before{box-shadow:0 0 0 4px rgba(29,78,216,.2)}
 
-    .section-head {
-      display: grid; grid-template-columns: 1fr 360px;
-      gap: 40px; align-items: end; margin-bottom: 48px;
+    h1{
+      margin-bottom:24px;
+      font-size:68px;line-height:.95;
+      letter-spacing:-.5px;
+      color:#fff;
     }
-    .section-head p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.65; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .h1-accent{color:var(--lime)}
+    h2{font-size:46px;line-height:1.04;letter-spacing:-.3px;margin-bottom:0}
+    h3{font-size:20px;line-height:1.28;margin-bottom:10px}
 
-    /* ── HERO ── */
-    .hero {
-      padding: 88px 0 80px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse 65% 55% at 65% 35%, rgba(91,138,255,.09) 0%, transparent 65%);
-    }
-    .hero-grid {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center;
-    }
-    .hero-metrics {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 10px; margin-top: 32px;
-    }
-    .metric {
-      padding: 16px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s1);
-    }
-    .metric b { display: block; margin-bottom: 4px; font-size: 21px; font-weight: 800; font-family: 'Manrope',sans-serif; color: var(--blue); }
-    .metric span { font-size: 12px; color: var(--muted-2); line-height: 1.4; display: block; }
+    .lead{font-size:19px;line-height:1.65;color:var(--d-muted);margin-bottom:32px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 
-    /* hero right — map mockup */
-    .map-board {
-      position: relative; min-height: 500px;
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
+    /* metrics row */
+    .metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px}
+    .metric{
+      padding:16px 18px;border-radius:var(--r);
+      border:1px solid var(--d-border);
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(8px);
+    }
+    .metric b{display:block;font-size:22px;font-weight:800;margin-bottom:4px;color:#fff}
+    .metric span{font-size:12px;color:var(--d-muted);font-weight:500;line-height:1.35}
+
+    /* ─── MAP BOARD ─── */
+    .map-board{
+      position:relative;min-height:580px;
+      border-radius:var(--rl);
+      border:1px solid rgba(255,255,255,.1);
       background:
-        linear-gradient(90deg, rgba(91,138,255,.04) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(91,138,255,.04) 1px, transparent 1px),
-        var(--s2);
-      background-size: 48px 48px;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
+        linear-gradient(135deg,rgba(29,78,216,.05) 1px,transparent 1px),
+        linear-gradient(225deg,rgba(29,78,216,.05) 1px,transparent 1px),
+        #0d1625;
+      background-size:56px 56px;
+      box-shadow:0 30px 80px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06);
+      overflow:hidden;
+      transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);
     }
-    .search-window {
-      position: absolute; left: 16px; top: 16px;
-      width: min(310px, calc(100% - 32px));
-      border: 1px solid var(--line-h); border-radius: var(--r);
-      background: var(--s1); box-shadow: var(--shadow-md); overflow: hidden;
+    .map-board::before{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(215deg,rgba(132,204,22,.04),rgba(29,78,216,.08));
     }
-    .window-top {
-      height: 36px; display: flex; align-items: center;
-      gap: 6px; padding: 0 12px;
-      border-bottom: 1px solid var(--line); background: var(--s2);
+    .search-window{
+      position:absolute;left:20px;top:20px;
+      width:min(360px,calc(100% - 40px));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--r);
+      background:rgba(13,22,37,.92);
+      box-shadow:var(--sh-lg);overflow:hidden;
+      backdrop-filter:blur(20px);
     }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-h); }
-    .dot.r { background: #ff726f; } .dot.y { background: #ffc857; } .dot.g { background: #39d98a; }
-    .search-line {
-      display: flex; align-items: center; gap: 8px;
-      margin: 10px; padding: 9px 12px;
-      border: 1px solid var(--line); border-radius: 8px;
-      color: var(--blue); font-weight: 600; font-size: 13px;
-      background: var(--s2);
+    .window-top{
+      height:38px;display:flex;align-items:center;gap:6px;
+      padding:0 14px;background:rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
-    .mag { width: 14px; height: 14px; border: 2px solid currentColor; border-radius: 50%; position: relative; flex-shrink: 0; }
-    .mag::after { content: ''; position: absolute; width: 5px; height: 2px; right: -5px; bottom: -3px; background: currentColor; transform: rotate(45deg); border-radius: 2px; }
-    .result-list { display: grid; gap: 7px; padding: 0 10px 10px; }
-    .result {
-      display: grid; grid-template-columns: 28px 1fr auto;
-      gap: 8px; align-items: center; padding: 9px;
-      border: 1px solid var(--line); border-radius: 8px;
-      background: var(--s2); font-size: 12px;
+    .dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
+    .dot.red{background:#ff5f57}.dot.yellow{background:#febc2e}.dot.green{background:#28c840}
+    .search-line{
+      display:flex;align-items:center;gap:10px;
+      margin:12px;padding:10px 12px;
+      border:1.5px solid rgba(29,78,216,.5);border-radius:9px;
+      color:rgba(147,197,253,1);font-weight:600;font-size:14px;
+      background:rgba(29,78,216,.08);
     }
-    .result.top { border-color: var(--blue-bord); }
-    .place {
-      width: 28px; height: 28px; border-radius: 7px;
-      display: grid; place-items: center;
-      background: var(--blue); color: var(--white);
-      font-weight: 700; font-size: 12px;
+    .magnifier{
+      width:16px;height:16px;border:2px solid currentColor;
+      border-radius:50%;position:relative;flex:0 0 auto;
     }
-    .result h4 { margin: 0 0 2px; font-size: 12px; font-weight: 600; color: var(--ink); }
-    .result p { margin: 0; color: var(--muted-2); font-size: 11px; }
-    .score { font-weight: 700; color: var(--green); white-space: nowrap; font-size: 12px; }
-    .score.dim { color: var(--muted-2); }
+    .magnifier::after{
+      content:"";position:absolute;width:6px;height:2px;
+      right:-6px;bottom:-3px;background:currentColor;
+      transform:rotate(45deg);border-radius:2px;
+    }
+    .result-list{display:grid;gap:8px;padding:0 12px 12px}
+    .result{
+      display:grid;grid-template-columns:32px 1fr auto;
+      gap:10px;align-items:center;
+      padding:10px 12px;border-radius:9px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.04);
+    }
+    .result.main{
+      border-color:rgba(29,78,216,.4);
+      background:rgba(29,78,216,.12);
+      box-shadow:0 4px 16px rgba(29,78,216,.15);
+    }
+    .place{
+      width:32px;height:32px;display:grid;place-items:center;
+      border-radius:8px;background:var(--blue);
+      color:#fff;font-weight:800;font-size:13px;
+    }
+    .result h4{margin:0 0 3px;font-size:13px;font-weight:700;color:#e2e8f0}
+    .result p{margin:0;font-size:11px;color:var(--d-muted)}
+    .score{color:#34d399;font-weight:800;font-size:13px}
 
-    .company-panel {
-      position: absolute; right: 16px; bottom: 16px; width: 260px;
-      border: 1px solid var(--line-h); border-radius: var(--r);
-      background: var(--s1); box-shadow: var(--shadow-md); overflow: hidden;
+    /* map pins */
+    .pin{
+      position:absolute;
+      width:50px;height:50px;display:grid;place-items:center;
+      border-radius:50% 50% 50% 8px;border:5px solid rgba(255,255,255,.12);
+      background:var(--lime);color:var(--ink);
+      font-size:20px;font-weight:800;
+      box-shadow:0 8px 24px rgba(0,0,0,.3);
+      transform:rotate(-45deg);
+      animation:pinFloat 4s ease-in-out infinite;
     }
-    .photo-strip { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3px; height: 68px; padding: 4px; background: var(--s2); }
-    .photo { border-radius: 6px; background: var(--blue-dim); }
-    .panel-body { padding: 12px 14px; }
-    .panel-title { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .panel-title b { font-size: 13px; color: var(--ink); }
-    .badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 5px; background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-bord); }
-    .stars { font-size: 13px; font-weight: 600; color: #f59e0b; margin-bottom: 10px; }
-    .panel-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
-    .panel-actions span { height: 30px; display: grid; place-items: center; border-radius: 7px; font-size: 11px; font-weight: 600; background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-bord); }
+    .pin span{transform:rotate(45deg);display:block}
+    .pin.p2,.pin.p3{
+      width:30px;height:30px;font-size:12px;
+      background:var(--blue);color:#fff;border-width:3px;
+    }
+    .pin.p1{right:100px;top:88px}
+    .pin.p2{right:50px;top:270px;animation-delay:.9s}
+    .pin.p3{right:218px;bottom:96px;animation-delay:1.8s}
+    @keyframes pinFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+    @media(prefers-reduced-motion:reduce){.pin{animation:none}}
 
-    .pin {
-      position: absolute; width: 42px; height: 42px;
-      display: grid; place-items: center; border-radius: 50% 50% 50% 6px;
-      color: var(--white); background: var(--blue);
-      border: 3px solid var(--s1); font-size: 14px; font-weight: 800;
-      box-shadow: 0 0 20px var(--blue-glow); transform: rotate(-45deg);
-      animation: pinFloat 4s ease-in-out infinite;
+    /* company panel */
+    .company-panel{
+      position:absolute;right:18px;bottom:18px;
+      width:min(340px,calc(100% - 36px));
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(10,18,34,.9);
+      box-shadow:var(--sh-lg);overflow:hidden;
+      backdrop-filter:blur(20px);
     }
-    .pin span { transform: rotate(45deg); }
-    .pin.p1 { right: 90px; top: 70px; }
-    .pin.p2 { width: 26px; height: 26px; border-width: 2px; font-size: 10px; right: 42px; top: 220px; animation-delay: .7s; opacity: .6; }
-    .pin.p3 { width: 26px; height: 26px; border-width: 2px; font-size: 10px; right: 200px; bottom: 82px; animation-delay: 1.4s; opacity: .6; }
-    @keyframes pinFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+    .photo-strip{
+      display:grid;grid-template-columns:1.4fr 1fr 1fr;
+      gap:3px;height:84px;padding:4px;background:rgba(29,78,216,.2);
+    }
+    .photo{border-radius:6px;background:center/cover;filter:saturate(.9) brightness(.9)}
+    .photo:nth-child(1){background-image:url("case-images/06-clinic.png")}
+    .photo:nth-child(2){background-image:url("case-images/05-restaurant.png")}
+    .photo:nth-child(3){background-image:url("case-images/02-auto-service-moscow.png")}
+    .panel-body{padding:14px 16px}
+    .panel-title{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+    .panel-title b{font-size:14px;font-weight:700;color:#e2e8f0}
+    .badge{
+      display:inline-flex;align-items:center;padding:4px 8px;
+      border-radius:6px;background:rgba(29,78,216,.2);color:#93c5fd;
+      font-size:11px;font-weight:700;white-space:nowrap;
+      border:1px solid rgba(29,78,216,.3);
+    }
+    .stars{color:#fbbf24;font-size:13px;font-weight:700;margin-bottom:10px}
+    .panel-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+    .panel-actions span{
+      display:grid;place-items:center;height:30px;border-radius:8px;
+      background:rgba(255,255,255,.07);color:rgba(147,197,253,.9);
+      font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.07);
+    }
 
-    /* ── LOGO STRIP ── */
-    .logo-strip {
-      padding: 18px 0;
-      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-      overflow: hidden; background: var(--s1);
+    /* ─── LOGO STRIP ─── */
+    .logo-strip{
+      padding:20px 0;
+      background:var(--dark-2,#071022);
+      border-top:1px solid rgba(255,255,255,.05);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      overflow:hidden;
     }
-    .marquee { display: flex; width: max-content; animation: marquee 28s linear infinite; }
-    .logo-track { display: flex; gap: 10px; padding-right: 10px; }
-    .logo-item {
-      height: 48px; padding: 0 18px;
-      display: grid; place-items: center;
-      border: 1px solid var(--line); border-radius: 9px;
-      font-size: 13px; font-weight: 700; letter-spacing: .04em;
-      color: var(--muted-2); background: var(--s2); white-space: nowrap;
+    .marquee{display:flex;width:max-content;animation:marquee 30s linear infinite}
+    @media(prefers-reduced-motion:reduce){.marquee{animation:none}}
+    .logo-track{display:flex;gap:12px;padding-right:12px}
+    .logo{
+      width:128px;height:52px;display:grid;place-items:center;
+      border:1px solid rgba(255,255,255,.07);border-radius:10px;
+      background:rgba(255,255,255,.04);
+      font-size:12px;font-weight:700;color:rgba(255,255,255,.45);
+      text-transform:uppercase;letter-spacing:.8px;
     }
-    .logo-item.b { background: var(--blue-dim); color: var(--blue); border-color: var(--blue-bord); }
-    .logo-item.d { background: var(--s3); color: var(--muted); border-color: var(--line-h); }
-    .logo-item.s { background: var(--s1); color: var(--muted); }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .logo.hl{background:rgba(29,78,216,.18);color:rgba(147,197,253,.7);border-color:rgba(29,78,216,.3)}
+    .logo.gr{background:rgba(132,204,22,.12);color:rgba(163,230,53,.7);border-color:rgba(132,204,22,.25)}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* ── PAIN GRID ── */
-    .pain-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
-    .pain-card {
-      padding: 22px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s1);
-      transition: border-color .2s, background .2s;
+    /* ─── SECTIONS ─── */
+    .section{padding:100px 0}
+    .section.alt{background:var(--soft)}
+    .section.dk{background:var(--dark);color:#fff}
+    .section-head{max-width:700px;margin-bottom:56px}
+    .section-head h2{margin-top:10px}
+    .section-head .sub{
+      color:var(--muted);font-size:17px;line-height:1.6;margin-top:16px;margin-bottom:0;
     }
-    .pain-card:hover { border-color: var(--blue-bord); background: var(--s2); }
-    .pain-mark {
-      width: 36px; height: 36px; border-radius: 8px;
-      display: grid; place-items: center;
-      background: var(--blue-dim); color: var(--blue);
-      border: 1px solid var(--blue-bord);
-      font-weight: 700; font-size: 12px; margin-bottom: 14px;
-    }
-    .pain-card h3 { font-size: 15px; }
-    .pain-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .section.dk .section-head .sub{color:var(--d-muted)}
+    .section.dk h2{color:#fff}
 
-    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .compare-box {
-      padding: 26px; border-radius: var(--r-lg);
-      border: 1px solid var(--line); background: var(--s1);
+    /* ─── PAIN ─── */
+    .pain-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .pain-card{
+      padding:28px 24px;border:1px solid var(--line);
+      border-radius:var(--r);background:#fff;box-shadow:var(--sh-sm);
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease);
     }
-    .compare-box strong { display: block; margin-bottom: 14px; font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--ink); }
-    .compare-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
-    .compare-box li { position: relative; padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.55; }
-    .compare-box li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--line-h); }
-    .compare-box.pro { border-color: var(--blue-bord); background: var(--blue-dim); }
-    .compare-box.pro li::before { background: var(--blue); }
-    .compare-box.pro strong { color: var(--blue-2); }
+    .pain-card:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+    .pain-mark{
+      width:42px;height:42px;display:grid;place-items:center;
+      margin-bottom:18px;border-radius:10px;
+      background:var(--blue-lt);color:var(--blue);
+      font-weight:700;font-size:12px;
+    }
+    .pain-card h3{font-size:17px;margin-bottom:8px}
+    .pain-card p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
 
-    /* ── FEATURES ── */
-    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-    .feature {
-      padding: 22px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s2);
-      transition: border-color .2s, transform .2s;
+    /* ─── COMPARE ─── */
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+    .compare-box{
+      padding:32px;border:1px solid var(--line);
+      border-radius:var(--rl);background:#fff;box-shadow:var(--sh-sm);
     }
-    .feature:hover { border-color: var(--blue-bord); transform: translateY(-2px); }
-    .feature-num {
-      width: 36px; height: 36px; border-radius: 8px;
-      display: grid; place-items: center;
-      background: var(--blue); color: var(--white);
-      font-weight: 700; font-size: 12px; margin-bottom: 14px;
+    .compare-box strong{display:block;margin-bottom:22px;font-size:20px;line-height:1.2;font-weight:700}
+    .compare-box ul{margin:0;padding:0;list-style:none;display:grid;gap:13px}
+    .compare-box li{
+      position:relative;padding-left:20px;
+      color:var(--muted);line-height:1.55;font-size:15px;
     }
-    .feature h3 { font-size: 15px; }
-    .feature p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .compare-box li::before{
+      content:"";position:absolute;left:0;top:8px;
+      width:7px;height:7px;border-radius:50%;background:var(--lime);
+    }
+    .compare-box.weak li::before{background:#cbd5e1}
+    .compare-box.strong{
+      border-color:rgba(29,78,216,.22);
+      background:linear-gradient(180deg,#fff,#eef6ff);
+      box-shadow:var(--sh-md);
+    }
 
-    /* ── PROCESS ── */
-    .work-layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start; }
-    .work-sticky {
-      position: sticky; top: 80px;
-      padding: 26px; border-radius: var(--r-lg);
-      background: var(--s2); border: 1px solid var(--line);
-      box-shadow: var(--shadow-md);
+    /* ─── FEATURES ─── */
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .feature{
+      padding:30px 26px;border:1px solid var(--line);
+      border-radius:var(--r);background:#fff;box-shadow:var(--sh-sm);
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease);
     }
-    .work-sticky h3 { font-size: 20px; color: var(--ink); }
-    .work-sticky p { color: var(--muted); font-size: 14px; line-height: 1.65; margin-bottom: 0; }
-    .work-metrics { display: grid; gap: 8px; margin-top: 18px; }
-    .work-metric {
-      padding: 12px 14px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s3);
+    .feature:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+    .feature-num{
+      width:48px;height:48px;display:grid;place-items:center;
+      margin-bottom:22px;border-radius:12px;
+      background:linear-gradient(135deg,var(--blue),#060d1c);
+      color:#fff;font-weight:700;font-size:14px;
+      box-shadow:0 4px 16px rgba(29,78,216,.26);
     }
-    .work-metric b { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
-    .work-metric span { font-size: 12px; color: var(--muted-2); }
+    .feature h3{font-size:17px}
+    .feature p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
 
-    .timeline { display: grid; gap: 8px; }
-    .work-card {
-      display: grid; grid-template-columns: 56px 1fr;
-      gap: 16px; padding: 18px;
-      border: 1px solid var(--line); border-radius: var(--r);
-      background: var(--s1); transition: border-color .2s, background .2s;
+    /* ─── WORK ─── */
+    .work-layout{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:start}
+    .work-sticky{
+      position:sticky;top:84px;padding:32px;border-radius:var(--rl);
+      background:linear-gradient(145deg,var(--dark),#0e2565);
+      color:#fff;
+      border:1px solid rgba(29,78,216,.25);
+      box-shadow:0 24px 64px rgba(29,78,216,.22);
     }
-    .work-card:hover { border-color: var(--blue-bord); background: var(--s2); }
-    .day {
-      width: 50px; height: 50px;
-      display: grid; place-items: center;
-      border-radius: 9px; background: var(--blue-dim);
-      border: 1px solid var(--blue-bord);
-      color: var(--blue); font-weight: 700; font-size: 12px;
-      text-align: center; line-height: 1.2;
-    }
-    .work-card h3 { font-size: 15px; margin-bottom: 4px; }
-    .work-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .work-sticky h3{font-size:26px;color:#fff;margin-bottom:12px}
+    .work-sticky p{color:#94a3b8;line-height:1.65;font-size:14px}
+    .work-sticky .metric{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.09)}
+    .work-sticky .metric b{color:var(--lime)}
+    .work-sticky .metric span{color:#94a3b8}
 
-    /* ── CASES ── */
-    .proof-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-    .case-card {
-      display: flex; flex-direction: column;
-      border: 1px solid var(--line); border-radius: var(--r-lg);
-      background: var(--s2); overflow: hidden;
-      transition: background .2s, border-color .2s;
+    .timeline{display:grid;gap:14px}
+    .work-card{
+      display:grid;grid-template-columns:70px 1fr;
+      gap:18px;padding:22px 24px;
+      border:1px solid var(--line);border-radius:var(--r);
+      background:#fff;box-shadow:var(--sh-sm);
+      transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s;
     }
-    .case-card:hover { background: var(--s3); border-color: var(--line-h); }
-    .case-shot { aspect-ratio: 16/9; background: var(--s3); overflow: hidden; }
-    .case-shot img { height: 100%; object-fit: cover; }
-    .case-body { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 20px; }
-    .case-body h3 { font-size: 16px; color: var(--ink); margin-bottom: 0; }
-    .case-result {
-      display: inline-flex; align-self: flex-start;
-      padding: 4px 12px; border-radius: 6px;
-      background: var(--blue-dim); color: var(--blue);
-      border: 1px solid var(--blue-bord);
-      font-size: 13px; font-weight: 700;
+    .work-card:hover{transform:translateX(6px);box-shadow:var(--sh-md);border-color:rgba(29,78,216,.25)}
+    .day{
+      width:54px;height:54px;display:grid;place-items:center;
+      border-radius:10px;background:var(--blue-lt);color:var(--blue);
+      font-weight:700;font-size:12px;text-align:center;line-height:1.25;
     }
-    .case-body p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .case-link { margin-top: auto; color: var(--blue-2); font-weight: 600; font-size: 13px; }
+    .work-card h3{margin-bottom:5px;font-size:16px}
+    .work-card p{color:var(--muted);margin-bottom:0;font-size:14px;line-height:1.55}
 
-    /* ── PRICING ── */
-    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .price-card {
-      padding: 30px; border-radius: var(--r-lg);
-      border: 1px solid var(--line); background: var(--s1);
+    /* ─── CASES GRID ─── */
+    .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .case-card{
+      display:flex;flex-direction:column;
+      border:1px solid var(--d-border);
+      border-radius:var(--r);
+      background:var(--d-card);
+      overflow:hidden;
+      transition:transform .22s var(--ease),background .22s,box-shadow .22s,border-color .22s;
     }
-    .price-card.main {
-      border-color: var(--blue-bord); background: var(--blue-dim);
-      box-shadow: 0 0 40px rgba(91,138,255,.10);
+    .case-card:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,.09);
+      box-shadow:0 16px 40px rgba(0,0,0,.25);
+      border-color:rgba(255,255,255,.15);
     }
-    .price-card h3 { font-size: 17px; margin-bottom: 6px; }
-    .price {
-      font-family: 'Manrope', sans-serif;
-      font-size: 34px; font-weight: 800;
-      color: var(--blue); letter-spacing: -.03em;
-      margin: 14px 0 18px; line-height: 1;
+    .case-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:18px 18px 10px}
+    .niche-row{display:flex;align-items:center;gap:10px}
+    .niche-av{
+      width:36px;height:36px;flex:0 0 auto;
+      display:grid;place-items:center;border-radius:9px;
+      font-size:11px;font-weight:700;letter-spacing:.3px;
+      color:rgba(255,255,255,.9);
     }
-    .price span { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-top: 4px; letter-spacing: 0; }
-    .price-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
-    .price-card li { position: relative; padding-left: 20px; color: var(--muted); font-size: 14px; line-height: 1.5; }
-    .price-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .niche-name{font-size:14px;font-weight:700;color:var(--d-text);line-height:1.25}
+    .city-tag{
+      font-size:11px;font-weight:600;color:var(--d-muted);
+      background:rgba(255,255,255,.07);padding:4px 9px;
+      border-radius:20px;white-space:nowrap;flex:0 0 auto;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .case-badge{
+      display:inline-flex;align-items:center;align-self:flex-start;
+      margin:2px 18px 10px;padding:6px 12px;border-radius:8px;
+      background:rgba(132,204,22,.13);color:#a3e635;
+      font-size:13px;font-weight:700;line-height:1.3;
+      border:1px solid rgba(132,204,22,.2);
+    }
+    .case-desc{padding:0 18px 14px;font-size:13px;color:var(--d-muted);line-height:1.55;flex:1}
+    .case-img{
+      height:140px;
+      background:center/cover no-repeat #0d1625;
+      border-top:1px solid var(--d-border);
+      border-bottom:1px solid var(--d-border);
+      flex-shrink:0;
+    }
+    .case-link{
+      display:flex;align-items:center;justify-content:center;gap:5px;
+      margin:8px 16px 12px;
+      padding:6px 12px;
+      border-radius:6px;
+      background:rgba(29,78,216,.14);
+      color:#93c5fd;font-size:12px;font-weight:600;
+      border:1px solid rgba(29,78,216,.25);
+      transition:background .18s,color .18s;
+      min-height:0;line-height:1;
+    }
+    .case-link svg{width:13px;height:13px;flex:0 0 13px}
+    .case-link:hover{background:rgba(29,78,216,.28);color:#bfdbfe}
 
-    /* ── MATERIALS ── */
-    .materials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-    .material-card {
-      padding: 26px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s2);
-      transition: border-color .2s, transform .2s;
+    /* ─── PRICE ─── */
+    .price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+    .price-card{
+      padding:40px 36px;border:1px solid var(--line);
+      border-radius:var(--rl);background:#fff;box-shadow:var(--sh-sm);
     }
-    .material-card:hover { border-color: var(--blue-bord); transform: translateY(-2px); }
-    .material-tag {
-      display: inline-block; padding: 3px 10px; border-radius: 5px;
-      background: var(--blue-dim); color: var(--blue);
-      border: 1px solid var(--blue-bord);
-      font-size: 11px; font-weight: 600; margin-bottom: 12px;
+    .price-card.main{
+      border-color:rgba(29,78,216,.25);
+      background:linear-gradient(165deg,#fff 0%,#eef6ff 100%);
+      box-shadow:var(--sh-md);
+      position:relative;overflow:hidden;
     }
-    .material-card h3 { font-size: 15px; margin-bottom: 8px; }
-    .material-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .price-card.main::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--blue),#06b6d4);
+    }
+    .price{font-size:42px;font-weight:800;line-height:1.1;margin:18px 0 22px;letter-spacing:-1.5px;font-family:'Inter',sans-serif}
+    .price span{display:block;margin-top:6px;font-size:14px;font-weight:500;color:var(--muted)}
+    .price-card ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+    .price-card li{
+      position:relative;padding-left:20px;
+      color:var(--muted);line-height:1.45;font-size:15px;
+    }
+    .price-card li::before{
+      content:"";position:absolute;left:0;top:7px;
+      width:7px;height:7px;border-radius:50%;background:var(--lime);
+    }
 
-    /* ── FAQ ── */
-    .faq-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-    .faq-card {
-      padding: 22px; border-radius: var(--r);
-      border: 1px solid var(--line); background: var(--s1);
+    /* ─── MATERIALS ─── */
+    .materials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .material-card{
+      padding:28px 26px;border-radius:var(--r);border:1px solid var(--line);
+      background:#fff;box-shadow:var(--sh-sm);
+      transition:transform .22s var(--ease);
     }
-    .faq-card h3 { font-size: 15px; margin-bottom: 9px; }
-    .faq-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .material-card:hover{transform:translateY(-5px)}
+    .material-tag{
+      display:inline-flex;align-items:center;margin-bottom:18px;
+      padding:5px 10px;border-radius:6px;
+      background:var(--blue-lt);color:var(--blue);
+      font-size:11px;font-weight:700;letter-spacing:.5px;
+    }
+    .material-card h3{font-size:17px}
+    .material-card p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
 
-    /* ── CTA ── */
-    .cta {
-      padding: 72px 0;
-      background: var(--s1);
-      border-top: 1px solid var(--line);
-      position: relative; overflow: hidden;
+    /* ─── FAQ ─── */
+    .faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .faq-card{
+      padding:28px 24px;border:1px solid var(--line);
+      border-radius:var(--r);background:#fff;box-shadow:var(--sh-sm);
     }
-    .cta::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(91,138,255,.10) 0%, transparent 65%);
-    }
-    .cta-box {
-      position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center;
-    }
-    .cta h2 { color: var(--ink); }
-    .cta .kicker { color: var(--muted); }
-    .cta .kicker::before { background: var(--muted); }
-    .cta .lead { color: var(--muted); margin-bottom: 0; }
+    .faq-card h3{margin-bottom:10px;font-size:17px}
+    .faq-card p{color:var(--muted);font-size:14px;line-height:1.65;margin-bottom:0}
 
-    /* ── FORM (CTA) ── */
-    .form { display: grid; gap: 10px; }
-    .form input {
-      height: 48px; padding: 0 16px;
-      border: 1px solid var(--line); border-radius: var(--r);
-      background: var(--s2); color: var(--ink);
-      font-family: 'Inter', sans-serif; font-size: 15px; outline: none;
-      transition: border-color .15s;
+    /* ─── CONTACT ─── */
+    .cta{
+      padding:110px 0;
+      background:var(--dark);color:#fff;
+      position:relative;overflow:hidden;
     }
-    .form input::placeholder { color: var(--muted-2); }
-    .form input:focus { border-color: var(--blue-bord); }
-    .form .btn-primary { height: 52px; font-size: 15px; font-weight: 700; width: 100%; justify-content: center; }
+    .cta::before{
+      content:"";position:absolute;
+      top:-200px;right:-200px;
+      width:700px;height:700px;border-radius:50%;
+      background:radial-gradient(circle,rgba(29,78,216,.12),transparent 68%);
+      pointer-events:none;
+    }
+    .cta-box{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:1fr 1.05fr;
+      gap:60px;align-items:start;
+    }
+    .cta h2{font-size:52px;color:#fff}
+    .cta-lead{color:var(--d-muted);font-size:17px;line-height:1.65;margin-top:16px}
 
-    /* ── FOOTER ── */
-    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--s1); }
-    .footer-in { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .footer-logo { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 15px; color: var(--ink); }
-    .footer-links { display: flex; gap: 2px; }
-    .footer-links a { font-size: 13px; color: var(--muted-2); padding: 6px 11px; border-radius: 7px; transition: all .15s; }
-    .footer-links a:hover { color: var(--ink); background: rgba(255,255,255,.05); }
-    .footer-copy { font-size: 12px; color: var(--muted-2); }
+    /* messenger buttons */
+    .messenger-btns{display:grid;gap:12px;margin-top:36px}
+    .msg-btn{
+      display:flex;align-items:center;gap:14px;
+      padding:16px 22px;border-radius:var(--r);
+      font-size:15px;font-weight:700;color:#fff;
+      transition:transform .18s var(--ease),box-shadow .18s var(--ease),filter .15s;
+    }
+    .msg-btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+    .msg-btn svg{flex:0 0 auto;width:24px;height:24px}
+    .msg-btn .mm{display:flex;flex-direction:column}
+    .msg-btn .mm small{font-size:12px;font-weight:500;opacity:.7;margin-top:2px}
+    .msg-btn.tg{background:linear-gradient(135deg,#229ed9,#1578a8);box-shadow:0 4px 22px rgba(34,158,217,.30)}
+    .msg-btn.tg:hover{box-shadow:0 8px 30px rgba(34,158,217,.45)}
+    .msg-btn.wa{background:linear-gradient(135deg,#25d366,#17a34a);box-shadow:0 4px 22px rgba(37,211,102,.28)}
+    .msg-btn.wa:hover{box-shadow:0 8px 30px rgba(37,211,102,.42)}
+    .msg-btn.max{background:linear-gradient(135deg,#6b4bff,#4a2fd4);box-shadow:0 4px 22px rgba(107,75,255,.32)}
+    .msg-btn.max:hover{box-shadow:0 8px 30px rgba(107,75,255,.48)}
 
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-    .reveal.is-visible { opacity: 1; transform: none; }
+    /* or divider */
+    .or-line{
+      display:flex;align-items:center;gap:14px;
+      margin:28px 0;color:#3d5272;font-size:12px;font-weight:600;letter-spacing:.5px;
+    }
+    .or-line::before,.or-line::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.08)}
 
-    /* ── BURGER / MOB ── */
-    .burger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px;
+    /* smart form */
+    .form{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--d-border);
+      border-radius:var(--rl);padding:26px;
+      backdrop-filter:blur(16px);
     }
-    .burger span { width: 20px; height: 1.5px; background: var(--muted); border-radius: 2px; }
-    .mob-menu {
-      display: none; flex-direction: column;
-      background: var(--s1); border-bottom: 1px solid var(--line);
-      padding: 12px 24px 20px; gap: 2px;
+    .form-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+    .toggle-label{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 14px;border:1.5px solid rgba(255,255,255,.12);
+      border-radius:10px;cursor:pointer;user-select:none;
+      font-size:13px;font-weight:600;color:var(--d-muted);
+      transition:all .18s var(--ease);
     }
-    .mob-menu.open { display: flex; }
-    .mob-menu a {
-      padding: 12px 0; font-size: 15px; color: var(--muted);
-      border-bottom: 1px solid var(--line); font-weight: 500;
-    }
-    .mob-menu a:last-of-type { border: none; }
-    .mob-menu .btn { margin-top: 14px; width: 100%; justify-content: center; }
+    .toggle-label input{display:none}
+    .toggle-label.is-on{border-color:var(--lime);color:var(--lime);background:rgba(132,204,22,.09)}
+    .toggle-label svg{width:16px;height:16px;flex:0 0 auto}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .map-board { min-height: 420px; max-width: 560px; }
-      .section-head { grid-template-columns: 1fr; gap: 16px; }
-      .work-layout { grid-template-columns: 1fr; }
-      .work-sticky { position: static; }
-      .cta-box { grid-template-columns: 1fr; gap: 40px; }
+    .fi{position:relative;margin-bottom:10px}
+    .fi input{
+      width:100%;min-height:52px;padding:0 16px;
+      border:1.5px solid rgba(255,255,255,.12);border-radius:10px;
+      color:#fff;background:rgba(255,255,255,.07);
+      font:500 15px/1 'Inter',sans-serif;outline:none;
+      transition:border-color .18s,background .18s;
     }
-    @media (max-width: 768px) {
-      section { padding: 60px 0; }
-      .wrap { width: calc(100% - 32px); }
-      .nav-links, .nav-cta { display: none; }
-      .burger { display: flex; }
-      h1 { font-size: 36px; }
-      .hero { padding: 60px 0; }
-      .hero-metrics { grid-template-columns: 1fr 1fr; }
-      .pain-grid { grid-template-columns: 1fr 1fr; }
-      .compare { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr 1fr; }
-      .proof-grid { grid-template-columns: 1fr; }
-      .price-grid { grid-template-columns: 1fr; }
-      .materials-grid { grid-template-columns: 1fr; }
-      .faq-grid { grid-template-columns: 1fr; }
-      .footer-in { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .footer-links { flex-wrap: wrap; }
+    .fi input::placeholder{color:rgba(255,255,255,.3)}
+    .fi input:focus{border-color:rgba(29,78,216,.6);background:rgba(29,78,216,.09)}
+
+    .fg{display:none}
+    .fg.on{display:grid;gap:10px}
+
+    /* ─── EDITORIAL ARTICLES ─── */
+    .blog-wrap{display:grid;gap:3px}
+    .blog-row1{display:grid;grid-template-columns:1.55fr 1fr;gap:3px}
+    .blog-row2{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .blog-row3{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+
+    .ac{
+      display:flex;flex-direction:column;
+      padding:32px 28px;background:#fff;
+      border:1px solid var(--line);
+      cursor:pointer;
+      transition:background .22s,border-color .22s,transform .22s var(--ease);
+      position:relative;overflow:hidden;
     }
-    @media (max-width: 480px) {
-      .hero-metrics { grid-template-columns: 1fr; }
-      .pain-grid { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr; }
+    .ac:hover{background:#fafafa;border-color:var(--ink);transform:translateY(-3px)}
+    .ac::before{
+      content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+      background:var(--lime);transform:scaleY(0);transform-origin:bottom;
+      transition:transform .25s var(--ease);
+    }
+    .ac:hover::before{transform:scaleY(1)}
+
+    /* featured card */
+    .ac-feat{
+      padding:48px 44px;min-height:400px;
+      background:var(--ink);color:#fff;border-color:var(--ink);
+      justify-content:flex-end;
+    }
+    .ac-feat:hover{background:#0f1829;border-color:#0f1829}
+    .ac-feat::before{background:var(--lime)}
+    .ac-feat .ac-num{color:rgba(255,255,255,.18)}
+    .ac-feat .ac-cat{background:rgba(132,204,22,.15);color:var(--lime);border-color:rgba(132,204,22,.25)}
+    .ac.ac-feat h3{font-family:'Newsreader',serif;font-size:34px;line-height:1.12;color:#fff;letter-spacing:-.3px}
+    .ac-feat .ac-desc{color:rgba(255,255,255,.6)}
+    .ac-feat .ac-arrow{color:var(--lime)}
+
+    .ac-num{
+      font-family:'Newsreader',serif;font-size:11px;font-style:italic;
+      color:rgba(6,13,28,.5);font-weight:400;margin-bottom:auto;padding-bottom:20px;
+      letter-spacing:.5px;
+    }
+    .ac-cat{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-bottom:12px;padding:4px 10px;border-radius:4px;
+      background:var(--blue-lt);color:var(--blue);
+      font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+      border:1px solid rgba(29,78,216,.12);width:fit-content;
+    }
+    .ac h3{
+      font-family:'Newsreader',serif;font-size:22px;line-height:1.2;
+      font-weight:600;color:var(--ink);margin-bottom:10px;letter-spacing:-.2px;
+    }
+    .ac-desc{color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px;flex:1}
+    .ac-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+    .ac-time{font-size:12px;color:var(--muted);font-weight:500}
+    .ac-arrow{
+      display:flex;align-items:center;gap:5px;
+      color:var(--blue);font-size:13px;font-weight:700;
+      transition:gap .2s;
+    }
+    .ac:hover .ac-arrow{gap:10px}
+
+    @media(max-width:1040px){
+      .blog-row1,.blog-row2,.blog-row3{grid-template-columns:1fr 1fr}
+      .ac.ac-feat h3{font-size:26px}
+    }
+    @media(max-width:640px){
+      .blog-row1,.blog-row2,.blog-row3{grid-template-columns:1fr}
+      .ac-feat{min-height:300px;padding:32px 28px}
+    }
+
+    /* ─── FOOTER ─── */
+    .footer{
+      padding:28px 0;
+      background:var(--dark-2,#071022);
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+    .footer-in{
+      display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:12px;font-size:13px;color:#3d5272;
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal{
+      opacity:0;transform:translateY(28px);
+      transition:opacity .7s var(--ease),transform .7s var(--ease);
+    }
+    .reveal.in{opacity:1;transform:translateY(0)}
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+    /* ─── HERO IMG ─── */
+    .hero-img-block{
+      transform:perspective(1200px) rotateY(-5deg) rotateX(2deg);
+      transition:transform .4s var(--ease);
+    }
+    .hero-img-block:hover{transform:perspective(1200px) rotateY(-2deg) rotateX(1deg)}
+    @media(max-width:1040px){.hero-img-block{transform:none}}
+
+    /* ─── WHY V2 ─── */
+    .pain-grid-v2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+    .pain-card-v2{
+      position:relative;padding:30px 24px;
+      border:1px solid var(--line);border-radius:var(--r);
+      background:#fff;box-shadow:var(--sh-sm);overflow:hidden;
+      transition:transform .22s var(--ease),box-shadow .22s var(--ease);
+    }
+    .pain-card-v2:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+    .pain-card-v2::after{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,#ef4444,#f97316);
+    }
+    .pain-card-v2::before{
+      content:attr(data-num);
+      position:absolute;right:-4px;top:-8px;
+      font-size:88px;font-weight:900;font-family:'Inter',sans-serif;
+      color:rgba(239,68,68,.06);line-height:1;
+      user-select:none;pointer-events:none;
+    }
+    .pain-icon{
+      width:44px;height:44px;display:grid;place-items:center;
+      margin-bottom:18px;border-radius:10px;
+      background:rgba(239,68,68,.08);color:#ef4444;flex:0 0 auto;
+    }
+    .pain-card-v2 h3{font-size:17px;margin-bottom:8px}
+    .pain-card-v2 p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
+
+    .compare-v2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .compare-v2-box{padding:36px 32px;border-radius:var(--rl);border:1px solid var(--line)}
+    .compare-v2-box ul{margin:0;padding:0;list-style:none;display:grid;gap:13px}
+    .compare-v2-box li{position:relative;padding-left:20px;line-height:1.55;font-size:15px}
+    .compare-v2-box li::before{
+      content:"";position:absolute;left:0;top:8px;
+      width:7px;height:7px;border-radius:50%;
+    }
+    .compare-v2-box strong{display:block;margin-bottom:22px;font-size:19px;line-height:1.25;font-weight:700}
+    .compare-v2-box.weak{background:#f1f5f9;border-color:#e2e8f0}
+    .compare-v2-box.weak strong{color:#475569}
+    .compare-v2-box.weak li{color:#64748b}
+    .compare-v2-box.weak li::before{background:#94a3b8}
+    .compare-v2-box.strong{
+      background:linear-gradient(145deg,#070f24,#0e2565);
+      border-color:rgba(29,78,216,.35);
+      box-shadow:0 24px 60px rgba(29,78,216,.2),0 4px 16px rgba(0,0,0,.15);
+      color:#fff;
+    }
+    .compare-v2-box.strong strong{color:#fff}
+    .compare-v2-box.strong li{color:rgba(224,231,255,.9)}
+    .compare-v2-box.strong li::before{background:var(--lime);box-shadow:0 0 8px var(--lime-glow)}
+
+    /* ─── FEATURE V2 ─── */
+    .feature-grid-v2{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .feature-v2{
+      padding:32px 28px;
+      border:1px solid var(--d-border);border-radius:var(--r);
+      background:var(--d-card);
+      transition:transform .22s var(--ease),background .22s,box-shadow .22s,border-color .22s;
+      position:relative;overflow:hidden;
+    }
+    .feature-v2::after{
+      content:"";position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--blue),var(--lime));
+      opacity:0;transition:opacity .22s;
+    }
+    .feature-v2:hover{
+      transform:translateY(-5px);background:rgba(255,255,255,.09);
+      box-shadow:0 16px 40px rgba(0,0,0,.25),0 0 0 1px rgba(132,204,22,.1);
+      border-color:rgba(132,204,22,.18);
+    }
+    .feature-v2:hover::after{opacity:1}
+    .feature-num-v2{
+      width:48px;height:48px;display:grid;place-items:center;
+      margin-bottom:22px;border-radius:12px;
+      background:linear-gradient(135deg,var(--blue),#060d1c);
+      color:#fff;font-weight:700;font-size:14px;font-family:'Inter',sans-serif;
+      box-shadow:0 4px 16px rgba(29,78,216,.26);
+    }
+    .feature-v2 h3{font-size:17px;color:#e2e8f0;margin-bottom:10px}
+    .feature-v2 p{color:var(--d-muted);line-height:1.65;margin-bottom:0;font-size:14px}
+
+    /* ─── CASES EXPAND ─── */
+    .case-extra{display:none}
+    .case-extra.shown{display:flex}
+    .cases-show-wrap{display:flex;justify-content:center;margin-top:36px}
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1040px){
+      .nav-links{display:none}
+      .hero-grid,.work-layout,.cta-box{grid-template-columns:1fr}
+      h1{font-size:50px}
+      h2,.cta h2{font-size:36px}
+      .map-board{transform:none}
+      .work-sticky{position:relative;top:auto}
+      .cases-grid{grid-template-columns:repeat(2,1fr)}
+      .pain-grid-v2{grid-template-columns:repeat(2,1fr)}
+      .feature-grid-v2{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:780px){
+      .wrap{width:min(100% - 28px,1200px)}
+      .topbar .btn{display:none}
+      h1{font-size:37px}
+      h2,.cta h2{font-size:29px}
+      .lead{font-size:16px}
+      .metric-row,.pain-grid,.pain-grid-v2,.feature-grid,.feature-grid-v2,.cases-grid,
+      .price-grid,.materials,.faq-grid,.compare,.compare-v2{grid-template-columns:1fr}
+      .section,.cta{padding:68px 0}
+      .hero-grid{padding:80px 0 90px}
     }
   </style>
 </head>
 <body>
 
+<!-- ══ HEADER ══ -->
 <header class="topbar">
   <div class="wrap nav">
-    <a class="brand" href="#top">
-      <span class="brand-mark">V</span>
-      VITRINA SERM
+    <a class="brand" href="#top" aria-label="VITRINA SERM">
+      <img src="logo.jpg" alt="" aria-hidden="true" style="width:36px;height:36px;flex:0 0 auto;border-radius:9px;box-shadow:0 4px 14px rgba(27,58,106,.5);object-fit:cover;display:block">
+      <span>VITRINA SERM</span>
     </a>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Основная навигация">
       <a href="#why">Почему карты</a>
-      <a href="#value">Что делаем</a>
-      <a href="#work">Процесс</a>
+      <a href="#value">За что выбирают</a>
+      <a href="#work">30 дней</a>
       <a href="#cases">Кейсы</a>
       <a href="#price">Стоимость</a>
     </nav>
-    <div class="nav-cta">
-      <a class="btn btn-ghost" href="#price">Стоимость</a>
-      <a class="btn btn-primary" href="#contact">Получить аудит</a>
-    </div>
-    <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-  <div class="mob-menu" id="mob">
-    <a href="#why" onclick="this.closest('.mob-menu').classList.remove('open')">Почему карты</a>
-    <a href="#value" onclick="this.closest('.mob-menu').classList.remove('open')">Что делаем</a>
-    <a href="#work" onclick="this.closest('.mob-menu').classList.remove('open')">Процесс</a>
-    <a href="#cases" onclick="this.closest('.mob-menu').classList.remove('open')">Кейсы</a>
-    <a href="#price" onclick="this.closest('.mob-menu').classList.remove('open')">Стоимость</a>
-    <a class="btn btn-primary" href="#contact" onclick="this.closest('.mob-menu').classList.remove('open')">Получить аудит</a>
+    <a class="btn primary" href="#contact" style="min-height:40px;padding:9px 18px">Получить готовый прототип</a>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="reveal">
-        <div class="eyebrow">Геомаркетинг и SERM</div>
-        <h1>Клиенты найдут многих.<br/><span>Но выберут именно вас.</span></h1>
-        <p class="lead">Управляем карточками в Яндекс.Картах и 2ГИС: позиции в выдаче, SEO, отзывы, визуал и путь до звонка или заявки.</p>
-        <div class="actions">
-          <a class="btn btn-primary btn-lg" href="#contact">Получить бесплатный аудит</a>
-          <a class="btn btn-ghost btn-lg" href="#work">Как работаем</a>
-        </div>
-        <div class="hero-metrics">
-          <div class="metric"><b>+247%</b><span>рост переходов в профиль за 3 месяца</span></div>
-          <div class="metric"><b>ТОП-3</b><span>позиция в локальной выдаче</span></div>
-          <div class="metric"><b>4.8 ★</b><span>средний рейтинг клиентов</span></div>
-        </div>
-      </div>
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="wrap hero-grid">
 
-      <div class="map-board reveal">
-        <div class="search-window">
-          <div class="window-top">
-            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-          </div>
-          <div class="search-line"><span class="mag"></span>обменник валюты Казань</div>
-          <div class="result-list">
-            <div class="result top">
-              <div class="place">1</div>
-              <div><h4>Ваша компания</h4><p>4.9 · 84 отзыва · фото · услуги · ответы</p></div>
-              <div class="score">+38%</div>
-            </div>
-            <div class="result">
-              <div class="place" style="background:var(--muted-2)">2</div>
-              <div><h4>Конкурент</h4><p>4.5 · 31 отзыв · мало фото</p></div>
-              <div class="score dim">ниже</div>
-            </div>
-            <div class="result">
-              <div class="place" style="background:var(--muted-2)">3</div>
-              <div><h4>Конкурент</h4><p>4.3 · нет новостей · слабые услуги</p></div>
-              <div class="score dim">ниже</div>
-            </div>
-          </div>
-        </div>
-        <div class="pin p1"><span>1</span></div>
-        <div class="pin p2"><span>2</span></div>
-        <div class="pin p3"><span>3</span></div>
-        <article class="company-panel">
-          <div class="photo-strip">
-            <span class="photo"></span><span class="photo"></span><span class="photo"></span>
-          </div>
-          <div class="panel-body">
-            <div class="panel-title"><b>Карточка, которую выбирают</b><span class="badge">ТОП</span></div>
-            <div class="stars">4.9 ★★★★★ · 84 отзыва</div>
-            <div class="panel-actions"><span>Позвонить</span><span>Маршрут</span><span>Сайт</span></div>
-          </div>
-        </article>
+    <div class="reveal">
+      <div class="eyebrow">Геомаркетинг и SERM под ключ</div>
+      <h1>Клиенты найдут<br>многих.<br><span class="h1-accent">Но выберут вас!</span></h1>
+      <p class="lead">За 30 дней превращаем карточку в картах в канал заявок — позиции, отзывы, визуал, услуги и путь до звонка или маршрута.</p>
+      <div class="actions">
+        <a class="btn primary btn-lg" href="#contact">Получить готовый прототип</a>
+        <a class="btn" href="#cases" style="min-height:58px;padding:16px 24px;font-size:15px;border-radius:12px;background:rgba(29,78,216,.16);color:#93c5fd;border:1.5px solid rgba(29,78,216,.32)">Смотреть кейсы</a>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><b>30 дней</b><span>карточка начинает работать как канал заявок</span></div>
+        <div class="metric"><b>90 дней</b><span>делаем заметный отрыв от конкурентов</span></div>
+        <div class="metric"><b>3 карты</b><span>Яндекс Карты, 2ГИС и Google Maps</span></div>
       </div>
     </div>
-  </section>
 
-  <!-- LOGO STRIP -->
-  <div class="logo-strip">
-    <div class="marquee">
-      <div class="logo-track">
-        <span class="logo-item b">1EX</span>
-        <span class="logo-item">GAUDI</span>
-        <span class="logo-item d">ИДЕЛЬ</span>
-        <span class="logo-item s">ГРАНТ</span>
-        <span class="logo-item">КЛИНИКА</span>
-        <span class="logo-item">АВТО</span>
-        <span class="logo-item">РЕСТОРАН</span>
-        <span class="logo-item b">1EX</span>
-        <span class="logo-item">GAUDI</span>
-        <span class="logo-item d">ИДЕЛЬ</span>
+    <div class="hero-img-block reveal" aria-label="Интерфейс поиска на картах">
+      <img src="hero-right-block.png" alt="Карточка компании в картах — пример результата" style="width:100%;height:auto;display:block;border-radius:var(--rl);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.45)">
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ LOGO STRIP ══ -->
+<div class="logo-strip" aria-label="Клиенты агентства">
+  <div class="marquee">
+    <div class="logo-track">
+      <span class="logo hl">ATOM</span>
+      <span class="logo gr">GAUDI</span>
+      <span class="logo">WIWO</span>
+      <span class="logo">КЛИНИКА</span>
+      <span class="logo">РЕСТОРАН</span>
+      <span class="logo">АВТО</span>
+      <span class="logo">ОПТИКА</span>
+      <span class="logo">FITNESS</span>
+      <span class="logo">СУШИ</span>
+      <span class="logo">КОФЕ</span>
+    </div>
+    <div class="logo-track" aria-hidden="true">
+      <span class="logo hl">ATOM</span>
+      <span class="logo gr">GAUDI</span>
+      <span class="logo">WIWO</span>
+      <span class="logo">КЛИНИКА</span>
+      <span class="logo">РЕСТОРАН</span>
+      <span class="logo">АВТО</span>
+      <span class="logo">ОПТИКА</span>
+      <span class="logo">FITNESS</span>
+      <span class="logo">СУШИ</span>
+      <span class="logo">КОФЕ</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHY ══ -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Почему карты</div>
+      <h2>Клиент уже ищет услугу — осталось стать лучшим выбором</h2>
+    </div>
+    <div class="pain-grid-v2">
+      <article class="pain-card-v2 reveal" data-num="01">
+        <div class="pain-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+        </div>
+        <h3>Вас не видно</h3>
+        <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
+      </article>
+      <article class="pain-card-v2 reveal" data-num="02">
+        <div class="pain-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3>Вам не доверяют</h3>
+        <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
+      </article>
+      <article class="pain-card-v2 reveal" data-num="03">
+        <div class="pain-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Карточка не продаёт</h3>
+        <p>Фото, услуги и описание не объясняют, почему выбрать именно вас.</p>
+      </article>
+      <article class="pain-card-v2 reveal" data-num="04">
+        <div class="pain-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>Нет контроля</h3>
+        <p>Неясно, кто растёт, кто забирает заявки и какие правки делать первыми.</p>
+      </article>
+    </div>
+    <div class="compare-v2 reveal">
+      <div class="compare-v2-box weak">
+        <strong>Обычная реклама догоняет холодных людей</strong>
+        <ul>
+          <li>Человек может не искать услугу прямо сейчас.</li>
+          <li>Бюджет тратится до того, как возникло намерение.</li>
+          <li>Без сильной карточки трафик уходит к конкурентам.</li>
+        </ul>
       </div>
-      <div class="logo-track" aria-hidden="true">
-        <span class="logo-item b">1EX</span>
-        <span class="logo-item">GAUDI</span>
-        <span class="logo-item d">ИДЕЛЬ</span>
-        <span class="logo-item s">ГРАНТ</span>
-        <span class="logo-item">КЛИНИКА</span>
-        <span class="logo-item">АВТО</span>
-        <span class="logo-item">РЕСТОРАН</span>
-        <span class="logo-item b">1EX</span>
-        <span class="logo-item">GAUDI</span>
-        <span class="logo-item d">ИДЕЛЬ</span>
+      <div class="compare-v2-box strong">
+        <strong>Карты забирают горячий спрос</strong>
+        <ul>
+          <li>Клиент уже выбрал категорию и сравнивает варианты рядом.</li>
+          <li>Карточка ведёт к звонку, маршруту, сайту или заявке.</li>
+          <li>Хорошая упаковка работает каждый день без менеджера.</li>
+        </ul>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- WHY -->
-  <section id="why">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Почему карты</div>
-          <h2>Клиент уже ищет. Осталось стать лучшим выбором</h2>
+<!-- ══ VALUE ══ -->
+<section class="section dk" id="value">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">За что нас выбирают</div>
+      <h2>Карты должны продавать, а не просто красиво выглядеть</h2>
+    </div>
+    <div class="feature-grid-v2">
+      <article class="feature-v2 reveal"><div class="feature-num-v2">01</div><h3>Без рискованных схем</h3><p>Не гоним карточку методами, которые могут ударить по развитию в будущем.</p></article>
+      <article class="feature-v2 reveal"><div class="feature-num-v2">02</div><h3>Кейсы в разных нишах</h3><p>Авто, медицина, мебель, рестораны, доставка, услуги и локальный ритейл.</p></article>
+      <article class="feature-v2 reveal"><div class="feature-num-v2">03</div><h3>Под ключ</h3><p>Берём карточки, отзывы, визуал, услуги, новости, отчёты и коммуникацию с площадками.</p></article>
+      <article class="feature-v2 reveal"><div class="feature-num-v2">04</div><h3>Постоянный SEO-контроль</h3><p>Смотрим запросы, позиции и конкурентов. Правим то, что влияет на выбор.</p></article>
+      <article class="feature-v2 reveal"><div class="feature-num-v2">05</div><h3>Три площадки</h3><p>Ведём Яндекс Карты, 2ГИС и Google Maps в одной логике.</p></article>
+      <article class="feature-v2 reveal"><div class="feature-num-v2">06</div><h3>Воронка внутри карточки</h3><p>Доводим пользователя до звонка, маршрута, сайта или заявки.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WORK ══ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Первые 30 дней</div>
+      <h2>Сначала фундамент — потом наращиваем отрыв</h2>
+    </div>
+    <div class="work-layout">
+      <aside class="work-sticky reveal">
+        <h3>Что происходит в первый месяц</h3>
+        <p>Мы приводим карточку в состояние, где она может конкурировать: данные, SEO, визуал, отзывы, услуги, ответы и точки действия.</p>
+        <div class="metric-row" style="grid-template-columns:1fr;margin-top:24px">
+          <div class="metric"><b>Аудит</b><span>где вы проигрываете конкурентам</span></div>
+          <div class="metric"><b>Упаковка</b><span>что видит клиент до звонка</span></div>
+          <div class="metric"><b>Рост</b><span>что делаем после запуска</span></div>
         </div>
-        <p>В Яндекс.Картах клиент сравнивает вас с конкурентами здесь и сейчас — рейтинг, отзывы, фото, кнопка звонка.</p>
-      </div>
-      <div class="pain-grid">
-        <article class="pain-card reveal">
-          <div class="pain-mark">01</div>
-          <h3>Вас не видно</h3>
-          <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
-        </article>
-        <article class="pain-card reveal">
-          <div class="pain-mark">02</div>
-          <h3>Вам не доверяют</h3>
-          <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
-        </article>
-        <article class="pain-card reveal">
-          <div class="pain-mark">03</div>
-          <h3>Карточка не продаёт</h3>
-          <p>Фото, категории и описание не объясняют, почему выбрать именно вас.</p>
-        </article>
-        <article class="pain-card reveal">
-          <div class="pain-mark">04</div>
-          <h3>Нет аналитики</h3>
-          <p>Непонятно, откуда приходят клиенты и какие правки дают результат.</p>
-        </article>
-      </div>
-      <div class="compare reveal">
-        <div class="compare-box">
-          <strong>Обычная реклама догоняет холодных</strong>
-          <ul>
-            <li>Человек может не искать услугу прямо сейчас.</li>
-            <li>Бюджет тратится до того, как возникло намерение.</li>
-            <li>Без сильной карточки трафик уходит конкурентам.</li>
-          </ul>
-        </div>
-        <div class="compare-box pro">
-          <strong>Карты забирают горячий спрос</strong>
-          <ul>
-            <li>Клиент уже выбирает — сравнивает варианты рядом.</li>
-            <li>Карточка ведёт к звонку, маршруту или заявке.</li>
-            <li>Хорошая упаковка работает каждый день без рекламного бюджета.</li>
-          </ul>
-        </div>
+      </aside>
+      <div class="timeline">
+        <article class="work-card reveal"><div class="day">1–3</div><div><h3>Разбор рынка</h3><p>Запросы, позиции, конкуренты, отзывы, визуал, услуги и текущие точки потери клиентов.</p></div></article>
+        <article class="work-card reveal"><div class="day">4–10</div><div><h3>SEO-структура</h3><p>Категории, услуги, описания, товары, ключевые запросы и логика карточки.</p></div></article>
+        <article class="work-card reveal"><div class="day">11–18</div><div><h3>Визуальная упаковка</h3><p>Фото, обложки, истории, витрина услуг и понятный путь до действия.</p></div></article>
+        <article class="work-card reveal"><div class="day">19–24</div><div><h3>Репутация</h3><p>Ответы, регламент сбора отзывов, работа с негативом и доверие в карточке.</p></div></article>
+        <article class="work-card reveal"><div class="day">25–30</div><div><h3>Запуск роста</h3><p>Отчёт, план гипотез, контроль позиций и ежемесячное сопровождение.</p></div></article>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- VALUE -->
-  <section class="section-alt" id="value">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Что делаем</div>
-          <h2>Управляемый рост карточки как канала спроса</h2>
-        </div>
-        <p>Не «покрасили в карточке» — а измеримые переходы, звонки и заявки. Работаем с факторами, которые реально влияют на выбор.</p>
-      </div>
-      <div class="feature-grid">
-        <article class="feature reveal">
-          <div class="feature-num">01</div>
-          <h3>Аудит и конкуренты</h3>
-          <p>Стартовый разбор карточки: позиции, категории, фото, воронка, отзывы, источники трафика.</p>
-        </article>
-        <article class="feature reveal">
-          <div class="feature-num">02</div>
-          <h3>SEO и семантика</h3>
-          <p>Ключевые запросы, правильные категории, товары и услуги с нормальными описаниями.</p>
-        </article>
-        <article class="feature reveal">
-          <div class="feature-num">03</div>
-          <h3>Визуал и контент</h3>
-          <p>Фото, логотип, сторис, витрина, новости. Всё что помогает выбрать и довериться.</p>
-        </article>
-        <article class="feature reveal">
-          <div class="feature-num">04</div>
-          <h3>Работа с отзывами</h3>
-          <p>Получаем качественные отзывы, отвечаем в стиле бренда, нейтрализуем негатив.</p>
-        </article>
-        <article class="feature reveal">
-          <div class="feature-num">05</div>
-          <h3>Воронка до заявки</h3>
-          <p>Карточка → сайт / мессенджер / звонок → заявка. Убираем разрывы, тестируем с мобильных.</p>
-        </article>
-        <article class="feature reveal">
-          <div class="feature-num">06</div>
-          <h3>Аналитика и отчёты</h3>
-          <p>Не таблица — нарратив: что выросло, почему, что это значит. Переходы, источники, позиции.</p>
-        </article>
-      </div>
+<!-- ══ CASES ══ -->
+<section class="section dk" id="cases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Кейсы</div>
+      <h2>Не обещания — а изменения в прибыли</h2>
+      <p class="sub">18 кейсов из разных ниш. Читайте подробные разборы по каждому.</p>
     </div>
-  </section>
+    <div class="cases-grid" id="cases-grid">
 
-  <!-- PROCESS -->
-  <section id="work">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Первые 30 дней</div>
-          <h2>Сначала фундамент, потом отрыв от конкурентов</h2>
+      <!-- helper: niche-av colors -->
+      <!-- each card uses a unique accent via inline style -->
+
+      <article class="case-card reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(236,72,153,.18);color:#f9a8d4">СЛН</div><div class="niche-name">Салон красоты</div></div>
+          <span class="city-tag">Казань</span>
         </div>
-        <p>Собственник управляет бизнесом — мы ведём канал. Первые правки в карточке появляются в первую неделю.</p>
-      </div>
-      <div class="work-layout">
-        <aside class="work-sticky reveal">
-          <h3>Что происходит в первый месяц</h3>
-          <p>Приводим карточку в состояние, где она может конкурировать: данные, SEO, визуал, отзывы, услуги и точки действия.</p>
-          <div class="work-metrics">
-            <div class="work-metric"><b>Аудит</b><span>где проигрываем конкурентам</span></div>
-            <div class="work-metric"><b>Упаковка</b><span>что видит клиент до звонка</span></div>
-            <div class="work-metric"><b>Рост</b><span>что делаем после запуска</span></div>
+        <span class="case-badge">С 30-го на 4-е место за месяц</span>
+        <p class="case-desc">Рост позиций в Яндекс Картах через SEO-упаковку и работу с отзывами.</p>
+        <div class="case-img" style="background-image:url('case-images/01-beauty-salon.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/NUd8dWbZfmJ" target="_blank" rel="noopener" aria-label="Читать кейс Салон красоты Казань">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(245,158,11,.15);color:#fcd34d">АВТ</div><div class="niche-name">Автосервис</div></div>
+          <span class="city-tag">Москва</span>
+        </div>
+        <span class="case-badge">Топ-3, +14 позиций</span>
+        <p class="case-desc">Вышли в тройку лидеров по ключевым запросам через комплексную оптимизацию.</p>
+        <div class="case-img" style="background-image:url('case-images/02-auto-service-moscow.png')"></div>
+        <a class="case-link" href="https://teletype.in/@serm_cases/E1I3Vfen0Ao" target="_blank" rel="noopener" aria-label="Читать кейс Автосервис Москва">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(59,130,246,.18);color:#93c5fd">СТР</div><div class="niche-name">Строительство</div></div>
+          <span class="city-tag">Санкт-Петербург</span>
+        </div>
+        <span class="case-badge">Топ-1 в 2ГИС за год</span>
+        <p class="case-desc">За год системной работы заняли первое место среди конкурентов в 2ГИС.</p>
+        <div class="case-img" style="background-image:url('case-images/03-construction.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/SxNE-SVZdgN" target="_blank" rel="noopener" aria-label="Читать кейс Строительная компания СПБ">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(139,92,246,.18);color:#c4b5fd">ГРВ</div><div class="niche-name">Гравировка</div></div>
+          <span class="city-tag">Москва</span>
+        </div>
+        <span class="case-badge">С 6-го на 3-е место за месяц</span>
+        <p class="case-desc">Быстрый результат за счёт SEO-оптимизации и упаковки карточки.</p>
+        <div class="case-img" style="background-image:url('case-images/04-engraving.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/EiWDgFrois4" target="_blank" rel="noopener" aria-label="Читать кейс Гравировка Москва">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(239,68,68,.18);color:#fca5a5">РСТ</div><div class="niche-name">Ресторан</div></div>
+          <span class="city-tag">Таганрог</span>
+        </div>
+        <span class="case-badge">Топ-1, активности +80%</span>
+        <p class="case-desc">Карточка стала заметнее конкурентов и начала забирать горячий спрос.</p>
+        <div class="case-img" style="background-image:url('case-images/05-restaurant.png')"></div>
+        <a class="case-link" href="https://teletype.in/@serm_cases/CSOQIwNuLQa" target="_blank" rel="noopener" aria-label="Читать кейс Ресторан Таганрог">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(16,185,129,.15);color:#6ee7b7">КЛН</div><div class="niche-name">Клиника</div></div>
+          <span class="city-tag">Москва</span>
+        </div>
+        <span class="case-badge">+466 537 ₽ к выручке</span>
+        <p class="case-desc">Рост выручки через видимость, доверие и работу с действиями в карточке.</p>
+        <div class="case-img" style="background-image:url('case-images/06-clinic.png')"></div>
+        <a class="case-link" href="https://teletype.in/@serm_cases/mYG6KjzZ2mj" target="_blank" rel="noopener" aria-label="Читать кейс Клиника Москва">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(217,119,6,.15);color:#fde68a">КФН</div><div class="niche-name">Кофейня</div></div>
+          <span class="city-tag">Санкт-Петербург</span>
+        </div>
+        <span class="case-badge">Точка восстановлена, +35% звонков</span>
+        <p class="case-desc">Вернули удалённую точку на карту и вырастили поток звонков.</p>
+        <div class="case-img" style="background-image:url('case-images/07-coffee-shop.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/nC9ifw_M3a9" target="_blank" rel="noopener" aria-label="Читать кейс Кофейня СПБ">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(6,182,212,.15);color:#67e8f9">АМЙ</div><div class="niche-name">Автомойка</div></div>
+          <span class="city-tag">Санкт-Петербург</span>
+        </div>
+        <span class="case-badge">+82% трафика, +72% звонков</span>
+        <p class="case-desc">Значительный рост переходов и звонков после комплексной работы с карточкой.</p>
+        <div class="case-img" style="background-image:url('case-images/08-car-wash.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/EmRxdju3smX" target="_blank" rel="noopener" aria-label="Читать кейс Автомойка СПБ">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(99,102,241,.18);color:#a5b4fc">ОПТ</div><div class="niche-name">Оптика</div></div>
+          <span class="city-tag">Санкт-Петербург</span>
+        </div>
+        <span class="case-badge">+135% звонков</span>
+        <p class="case-desc">Рост в 2,3 раза без повышения позиции — только за счёт упаковки карточки.</p>
+        <div class="case-img" style="background-image:url('case-images/09-optics.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/Xyw6Zgv2kCg" target="_blank" rel="noopener" aria-label="Читать кейс Оптика СПБ">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(132,204,22,.13);color:#bef264">10К</div><div class="niche-name">10 кейсов</div></div>
+          <span class="city-tag">Сборный</span>
+        </div>
+        <span class="case-badge">10 разных ниш в одном разборе</span>
+        <p class="case-desc">Авто, медицина, еда, услуги — результаты сразу по 10 проектам.</p>
+        <div class="case-img" style="background-image:url('case-images/10-ten-cases.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/FbX3tHkcUTx" target="_blank" rel="noopener" aria-label="Читать сборный кейс 10 проектов">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(249,115,22,.15);color:#fdba74">МГЗ</div><div class="niche-name">Интернет-магазин</div></div>
+          <span class="city-tag">Москва</span>
+        </div>
+        <span class="case-badge">С 45-го на 1-е место</span>
+        <p class="case-desc">Магазин поднялся с позиции 45 на первое место и удерживает его.</p>
+        <div class="case-img" style="background-image:url('case-images/11-ecommerce.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/H1XMWCvV5XX" target="_blank" rel="noopener" aria-label="Читать кейс Интернет-магазин Москва">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(52,211,153,.13);color:#6ee7b7">ПРД</div><div class="niche-name">Продукты / орехи</div></div>
+          <span class="city-tag">—</span>
+        </div>
+        <span class="case-badge">Рост в рейтинге среди конкурентов</span>
+        <p class="case-desc">Продуктовая точка вышла в топ по ключевым запросам после оптимизации.</p>
+        <div class="case-img" style="background-image:url('case-images/12-products-nuts.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/cNOfIao07qM" target="_blank" rel="noopener" aria-label="Читать кейс Продукты">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(148,163,184,.13);color:#cbd5e1">ПТК</div><div class="niche-name">Натяжные потолки</div></div>
+          <span class="city-tag">Белгород</span>
+        </div>
+        <span class="case-badge">Тест-драйв: +15 звонков</span>
+        <p class="case-desc">За короткий тестовый период получили 15 дополнительных звонков с карты.</p>
+        <div class="case-img" style="background-image:url('case-images/13-stretch-ceilings.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/Z2qnOck6fXw" target="_blank" rel="noopener" aria-label="Читать кейс Натяжные потолки Белгород">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(239,68,68,.15);color:#fca5a5">СШ</div><div class="niche-name">Доставка суши</div></div>
+          <span class="city-tag">Калининград</span>
+        </div>
+        <span class="case-badge">100+ новых клиентов</span>
+        <p class="case-desc">Более 100 новых клиентов без платного продвижения — только через карточку.</p>
+        <div class="case-img" style="background-image:url('case-images/14-sushi-delivery.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/L7fskEsxCEL" target="_blank" rel="noopener" aria-label="Читать кейс Суши Калининград">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(245,158,11,.15);color:#fde68a">АК</div><div class="niche-name">Автокомплекс</div></div>
+          <span class="city-tag">Новосибирск</span>
+        </div>
+        <span class="case-badge">+84% с нуля</span>
+        <p class="case-desc">Вырастили видимость и поток клиентов на 84% за счёт системной работы.</p>
+        <div class="case-img" style="background-image:url('case-images/15-auto-complex.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/70mhGZ46PsO" target="_blank" rel="noopener" aria-label="Читать кейс Автокомплекс Новосибирск">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(16,185,129,.15);color:#6ee7b7">ФТ</div><div class="niche-name">Фитнес-клуб</div></div>
+          <span class="city-tag">—</span>
+        </div>
+        <span class="case-badge">+500% активностей</span>
+        <p class="case-desc">Пятикратный рост активностей в карточке после редизайна и SEO.</p>
+        <div class="case-img" style="background-image:url('case-images/16-fitness-club.png')"></div>
+                <a class="case-link" href="https://teletype.in/@serm_cases/zBjxnWc00ij" target="_blank" rel="noopener" aria-label="Читать кейс Фитнес-клуб">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(251,191,36,.13);color:#fde68a">ШМ</div><div class="niche-name">Кафе «Шаурма»</div></div>
+          <span class="city-tag">Ростов-на-Дону</span>
+        </div>
+        <span class="case-badge">+180 000 ₽ за месяц</span>
+        <p class="case-desc">Забили кафе посетителями и увеличили выручку на 180 000 ₽ за один месяц.</p>
+        <div class="case-img" style="background-image:url('case-images/17-shawarma-cafe.png')"></div>
+                <a class="case-link" href="https://vk.com/@smmgerov-zabit-kafe-posetitelyami-i-uvelichit-vyruchku-prosto-kak-123" target="_blank" rel="noopener" aria-label="Читать кейс Шаурма Ростов">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="case-card case-extra reveal">
+        <div class="case-top">
+          <div class="niche-row"><div class="niche-av" style="background:rgba(99,102,241,.18);color:#a5b4fc">АУФ</div><div class="niche-name">Автосервис</div></div>
+          <span class="city-tag">Уфа</span>
+        </div>
+        <span class="case-badge">20–30 клиентов в день</span>
+        <p class="case-desc">Стабильный поток 20–30 новых клиентов ежедневно через карточку в картах.</p>
+        <div class="case-img" style="background-image:url('case-images/18-auto-service-ufa.png')"></div>
+                <a class="case-link" href="https://vk.com/kadyrov.marketing?w=wall16491460_1896" target="_blank" rel="noopener" aria-label="Читать кейс Автосервис Уфа">
+          Читать кейс
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+    </div>
+    <div class="cases-show-wrap">
+      <button id="cases-btn" class="btn ghost btn-lg" onclick="showAllCases()" aria-expanded="false">
+        Смотреть все кейсы
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICE ══ -->
+<section class="section" id="price">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Стоимость</div>
+      <h2>Понятная цена за канал, который должен окупаться</h2>
+    </div>
+    <div class="price-grid">
+      <article class="price-card main reveal">
+        <h3 style="font-size:20px">Запуск SERM в картах</h3>
+        <div class="price">150 000 ₽<span>первый месяц работы</span></div>
+        <ul>
+          <li>Аудит карточек и конкурентов.</li>
+          <li>SEO-структура услуг, категорий и описаний.</li>
+          <li>Визуальная упаковка карточки.</li>
+          <li>Работа с отзывами и репутацией.</li>
+          <li>План роста на 90 дней.</li>
+        </ul>
+        <a class="btn blue" href="#contact" style="margin-top:28px;width:100%;min-height:50px;font-size:15px">Начать работу</a>
+      </article>
+      <article class="price-card reveal">
+        <h3 style="font-size:20px">Ежемесячное сопровождение</h3>
+        <div class="price">49 990 ₽<span>после запуска</span></div>
+        <ul>
+          <li>Контроль позиций и конкурентов.</li>
+          <li>Регулярные обновления карточек.</li>
+          <li>Ответы и работа с отзывами.</li>
+          <li>Отчёт по действиям и динамике.</li>
+          <li>Новые гипотезы для роста.</li>
+        </ul>
+        <a class="btn ghost" href="#contact" style="margin-top:28px;width:100%;min-height:50px;font-size:15px;background:var(--soft);color:var(--blue);border-color:var(--line)">Обсудить детали</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MATERIALS ══ -->
+<section class="section alt" id="materials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Польза сразу</div>
+      <h2>Запустим за неделю — или отдадим всю экспертизу</h2>
+      <p class="sub">Мы делаем сразу правильно — и быстрее, чем любой другой специалист или SMM-щик. Первые заявки появляются уже через 7 дней: вы занимаетесь бизнесом, а мы — картами. Хотите разобраться сами — ниже база знаний по Яндекс Картам и 2ГИС.</p>
+    </div>
+    <div class="materials">
+      <article class="material-card reveal">
+        <span class="material-tag">Чеклист</span>
+        <h3>15 ошибок карточки</h3>
+        <p>Что мешает карточке приносить звонки прямо сейчас. Исправьте сами — или покажите нам, сделаем быстрее.</p>
+      </article>
+      <article class="material-card reveal">
+        <span class="material-tag">Разбор</span>
+        <h3>Почему конкурент выше</h3>
+        <p>Пошаговый разбор: как анализировать конкурентов и находить точки роста раньше, чем они вас обгонят.</p>
+      </article>
+      <article class="material-card reveal">
+        <span class="material-tag">План</span>
+        <h3>30 дней роста</h3>
+        <p>Та же методология, что мы применяем у клиентов — пошаговый план с конкретными задачами на каждую неделю.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ БАЗА ЗНАНИЙ ══ -->
+<section class="section" id="blog" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:40px">
+      <div class="kicker">Бесплатные материалы</div>
+      <h2>База знаний по продвижению в картах</h2>
+      <p class="sub">Разборы, алгоритмы и инструкции — берите и применяйте сегодня.</p>
+    </div>
+  </div>
+  <div style="width:min(1200px,100%);margin:0 auto;padding:0 24px">
+    <div class="blog-wrap reveal">
+
+      <!-- Row 1: featured + side -->
+      <div class="blog-row1">
+        <a class="ac ac-feat" href="articles/kak-otvechat-na-otzyvy.html" aria-label="Читать статью об ответах на отзывы">
+          <div class="ac-num">01 — Отзывы</div>
+          <span class="ac-cat">Самое важное</span>
+          <h3>Как правильно отвечать на отзывы в Яндекс Картах, 2ГИС и Google Maps</h3>
+          <p class="ac-desc">Один неправильный ответ на негатив — и потенциальный клиент уходит к конкуренту. Полный алгоритм с примерами.</p>
+          <div class="ac-footer">
+            <span class="ac-time">7 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-        </aside>
-        <div class="timeline">
-          <article class="work-card reveal"><div class="day">1–3</div><div><h3>Разбор рынка</h3><p>Запросы, позиции, конкуренты, отзывы, визуал и текущие точки потери клиентов.</p></div></article>
-          <article class="work-card reveal"><div class="day">4–10</div><div><h3>SEO-структура</h3><p>Категории, товары, услуги, описания, ключевые запросы и логика карточки под спрос.</p></div></article>
-          <article class="work-card reveal"><div class="day">11–18</div><div><h3>Визуальная упаковка</h3><p>Фото, обложки, сторис, витрина услуг и понятный путь до действия клиента.</p></div></article>
-          <article class="work-card reveal"><div class="day">19–24</div><div><h3>Репутация</h3><p>Ответы на отзывы, регламент их сбора, работа с негативом и доверие в карточке.</p></div></article>
-          <article class="work-card reveal"><div class="day">25–30</div><div><h3>Отчёт и рост</h3><p>Итоги первого месяца, план гипотез, контроль позиций и старт ежемесячного сопровождения.</p></div></article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CASES -->
-  <section class="section-dark" id="cases">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker" style="color:rgba(255,255,255,.5)">Кейсы</div>
-          <h2>Показываем изменения, а не обещания</h2>
-        </div>
-        <p style="color:var(--muted-2)">Ниша, проблема, действия и результат. Без лишних слов — только практика.</p>
-      </div>
-      <div class="proof-grid">
-        <article class="case-card reveal">
-          <div class="case-shot"><img src="assets/case-images/klinika-moskva-466k-vyruchki/01.png" alt="Рост звонков и маршрутов клиники"></div>
-          <div class="case-body">
-            <h3>Мебельный салон · Мелеуз</h3>
-            <span class="case-result">+247% переходов</span>
-            <p>Аудит, SEO-семантика, новые категории, сторис и работа с отзывами. Карточка вышла в ТОП-3 по ключевым запросам.</p>
+        </a>
+        <a class="ac" href="articles/kak-kartochka-rabotaet-kak-sajt.html" aria-label="Карточка как мини-сайт">
+          <div class="ac-num">02 — Оформление</div>
+          <span class="ac-cat">Основы</span>
+          <h3>Почему карточка в картах — это ваш мини-сайт</h3>
+          <p class="ac-desc">Большинство теряют клиентов из-за этого заблуждения. Объясняем как на самом деле работает карточка.</p>
+          <div class="ac-footer">
+            <span class="ac-time">4 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-        </article>
-        <article class="case-card reveal">
-          <div class="case-shot"><img src="assets/case-images/restoran-taganrog-top-1/01.png" alt="Результат продвижения обменника"></div>
-          <div class="case-body">
-            <h3>Крипто-обменник · Казань</h3>
-            <span class="case-result">ТОП-3 в выдаче</span>
-            <p>Карточка в нескольких городах. Работа с рейтингом, ответами на отзывы и правильными категориями под спрос.</p>
+        </a>
+      </div>
+
+      <!-- Row 2: three equal -->
+      <div class="blog-row2">
+        <a class="ac" href="articles/chto-takoe-hajlajty.html" aria-label="Что такое хайлайты">
+          <div class="ac-num">03 — Оформление</div>
+          <span class="ac-cat">Детали</span>
+          <h3>Что такое хайлайты и как их заполнить</h3>
+          <p class="ac-desc">Пошаговый алгоритм: от анализа конкурентов до готовых баннеров.</p>
+          <div class="ac-footer">
+            <span class="ac-time">5 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-        </article>
-        <article class="case-card reveal">
-          <div class="case-shot"><img src="assets/case-images/avtoservis-moskva-top-3/01.png" alt="Кейс дизайн-студии"></div>
-          <div class="case-body">
-            <h3>Дизайн-студия · Регион</h3>
-            <span class="case-result">+4.8 рейтинг</span>
-            <p>Упаковка карточки, визуал, воронка до заявки. Клиент начал получать запросы напрямую из 2ГИС.</p>
+        </a>
+        <a class="ac" href="articles/mozhno-li-udalit-otzyv.html" aria-label="Удаление отзыва">
+          <div class="ac-num">04 — Отзывы</div>
+          <span class="ac-cat">Практика</span>
+          <h3>Можно ли удалить негативный отзыв</h3>
+          <p class="ac-desc">Какие удалить реально, как подать жалобу и почему правильный ответ иногда лучше.</p>
+          <div class="ac-footer">
+            <span class="ac-time">4 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
-        </article>
+        </a>
+        <a class="ac" href="articles/kak-zapolnit-blok-storis.html" aria-label="Блок историй">
+          <div class="ac-num">05 — Наполнение</div>
+          <span class="ac-cat">Инструкция</span>
+          <h3>Как заполнить блок «Истории» в Яндекс Картах</h3>
+          <p class="ac-desc">Где находятся сторис, как добавить и что писать для максимальной конверсии.</p>
+          <div class="ac-footer">
+            <span class="ac-time">4 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- PRICE -->
-  <section id="price">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Стоимость</div>
-          <h2>Понятная цена за канал, который окупается</h2>
+      <!-- Row 3: two + one -->
+      <div class="blog-row3">
+        <a class="ac" href="articles/kak-nastroit-reklamu.html" aria-label="Реклама в Яндекс Бизнесе">
+          <div class="ac-num">06 — Реклама</div>
+          <span class="ac-cat">Лайфхак</span>
+          <h3>Как настроить рекламу в Яндекс.Бизнесе и сэкономить вдвое</h3>
+          <p class="ac-desc">Один звонок менеджеру — и стоимость рекламы падает в два раза. Рассказываем как.</p>
+          <div class="ac-footer">
+            <span class="ac-time">5 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+        <a class="ac" href="articles/kak-sostavit-tz-dizajneru.html" aria-label="ТЗ дизайнеру">
+          <div class="ac-num">07 — Оформление</div>
+          <span class="ac-cat">Гайд</span>
+          <h3>Как составить ТЗ дизайнеру для карточки</h3>
+          <p class="ac-desc">Что должно быть в техзадании, чтобы получить оформление которое продаёт, а не просто выглядит.</p>
+          <div class="ac-footer">
+            <span class="ac-time">6 мин чтения</span>
+            <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Row 4: full width last -->
+      <a class="ac" href="articles/chto-delat-posle-upakovki.html" style="border-top:none" aria-label="После упаковки">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+          <div>
+            <div class="ac-num" style="padding-bottom:10px">08 — Ведение</div>
+            <span class="ac-cat">Следующий шаг</span>
+            <h3 style="margin-bottom:0;font-size:24px">Карточка оформлена. Что делать дальше?</h3>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;flex:0 0 auto">
+            <span class="ac-time">3 мин чтения</span>
+            <span class="ac-arrow" style="font-size:14px;font-weight:700">Читать статью <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </div>
         </div>
-        <p>Первый месяц — запуск и упаковка. Дальше — сопровождение, контроль и рост позиций.</p>
-      </div>
-      <div class="price-grid reveal">
-        <article class="price-card main">
-          <h3>Запуск и упаковка</h3>
-          <div class="price">от 30 000 ₽<span>первый месяц работы</span></div>
-          <ul>
-            <li>Аудит карточки и конкурентов.</li>
-            <li>SEO-структура: категории, запросы, описания.</li>
-            <li>Визуальная упаковка карточки.</li>
-            <li>Работа с отзывами и репутацией.</li>
-            <li>План роста на следующие месяцы.</li>
-          </ul>
-        </article>
-        <article class="price-card">
-          <h3>Ежемесячное сопровождение</h3>
-          <div class="price">от 15 000 ₽<span>после запуска</span></div>
-          <ul>
-            <li>Контроль позиций и конкурентов.</li>
-            <li>Регулярные обновления карточки.</li>
-            <li>Ответы на отзывы и работа с репутацией.</li>
-            <li>Отчёт с объяснением результата.</li>
-            <li>Новые гипотезы для роста.</li>
-          </ul>
-        </article>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Коротко о важном</div>
+      <h2>Вопросы перед стартом</h2>
+    </div>
+    <div class="faq-grid">
+      <article class="faq-card reveal"><h3>Почему не обещаете топ-1?</h3><p>Место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку.</p></article>
+      <article class="faq-card reveal"><h3>Что нужно от собственника?</h3><p>На старте — доступы, вводная по бизнесу и согласование ключевых вещей. Дальше смотрите отчёты.</p></article>
+      <article class="faq-card reveal"><h3>Когда ждать результат?</h3><p>Первые изменения видны в первый месяц. Отрыв от конкурентов строится на горизонте 90 дней.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="cta" id="contact">
+  <div class="wrap cta-box">
+
+    <div class="reveal">
+      <div class="eyebrow">Следующий шаг</div>
+      <h2>Покажем, где карточка проигрывает конкурентам</h2>
+      <p class="cta-lead">Напишите в удобный мессенджер — разберём вашу карточку и покажем точки роста. Или оставьте заявку, мы свяжемся сами.</p>
+      <div class="messenger-btns">
+        <!-- ↓↓↓ ВСТАВЬТЕ СВОИ ССЫЛКИ ↓↓↓ -->
+        <a class="msg-btn tg" href="https://t.me/ВСТАВЬТЕ_ТГ" target="_blank" rel="noopener" aria-label="Написать в Telegram">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.804-1.692 7.976c-.126.568-.464.706-.94.44l-2.6-1.916-1.254 1.207c-.139.139-.255.255-.522.255l.186-2.644 4.815-4.35c.21-.186-.045-.29-.324-.103L7.7 14.36 5.13 13.56c-.558-.174-.568-.558.117-.826l7.693-2.966c.465-.168.872.115.99.036z" fill="white"/></svg>
+          <div class="mm">Написать в Telegram<small>Ответим в течение часа</small></div>
+        </a>
+        <a class="msg-btn wa" href="https://wa.me/ВСТАВЬТЕ_НОМЕР" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.062 14.062c-.213.6-1.055 1.097-1.73 1.24-.46.096-1.06.173-3.082-.662-2.585-1.053-4.247-3.666-4.376-3.836-.124-.17-1.047-1.392-1.047-2.655s.663-1.88.9-2.137c.213-.226.466-.283.62-.283l.447.009c.142.006.334-.054.523.4.195.467.663 1.614.72 1.73.057.114.095.248.019.4-.076.152-.113.246-.227.38-.113.132-.237.296-.34.397-.113.113-.23.235-.1.46.13.226.58.95 1.244 1.54.854.76 1.576 1 1.8 1.112.227.114.36.095.493-.057.133-.152.571-.666.723-.895.152-.227.303-.19.51-.114.208.076 1.323.624 1.55.738.227.114.38.17.437.265.057.095.057.548-.156 1.148z" fill="white"/></svg>
+          <div class="mm">Написать в WhatsApp<small>Ответим в течение часа</small></div>
+        </a>
+        <a class="msg-btn max" href="https://max.ru/ВСТАВЬТЕ_ССЫЛКУ" target="_blank" rel="noopener" aria-label="Написать в Макс">
+          <img src="max.jpg" alt="" aria-hidden="true" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;flex:0 0 24px">
+          <div class="mm">Написать в Макс<small>Ответим в течение часа</small></div>
+        </a>
       </div>
     </div>
-  </section>
 
-  <!-- MATERIALS -->
-  <section class="section-alt" id="materials">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Польза сразу</div>
-          <h2>Можно разобраться самому. Можно отдать нам.</h2>
+    <div class="reveal">
+      <div class="or-line">или оставьте заявку</div>
+      <form class="form" id="cForm" onsubmit="handleForm(event)" novalidate>
+        <div class="form-toggle">
+          <label class="toggle-label is-on" id="lbl-yes">
+            <input type="radio" name="hc" value="yes" checked onchange="sw('yes')">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Есть карточка
+          </label>
+          <label class="toggle-label" id="lbl-no">
+            <input type="radio" name="hc" value="no" onchange="sw('no')">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8a5 5 0 0110 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11" r="2" fill="currentColor"/></svg>
+            Нет карточки
+          </label>
         </div>
-        <p>Делимся экспертизой открыто. Эти материалы помогут проверить карточку без обращения к агентству.</p>
-      </div>
-      <div class="materials-grid">
-        <article class="material-card reveal">
-          <span class="material-tag">Чеклист</span>
-          <h3>15 ошибок карточки</h3>
-          <p>Что мешает получать звонки и маршруты из Яндекс.Карт и 2ГИС прямо сейчас.</p>
-        </article>
-        <article class="material-card reveal">
-          <span class="material-tag">Разбор</span>
-          <h3>Почему конкурент выше</h3>
-          <p>Как сравнить отзывы, фото, категории, активность и доверие — и что с этим делать.</p>
-        </article>
-        <article class="material-card reveal">
-          <span class="material-tag">План</span>
-          <h3>30 дней роста</h3>
-          <p>Какие правки делать первыми, чтобы карточка начала работать как канал заявок.</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <!-- FAQ -->
-  <section>
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">FAQ</div>
-          <h2>Что спрашивают перед стартом</h2>
+        <div class="fg on" id="fg-yes">
+          <div class="fi"><input type="url" id="f-url" placeholder="Ссылка на карточку компании в картах" aria-label="Ссылка на карточку" required></div>
+          <div class="fi"><input type="text" id="f-tg1" placeholder="Telegram — @username или +7..." aria-label="Ваш Telegram" required></div>
         </div>
-      </div>
-      <div class="faq-grid">
-        <article class="faq-card reveal">
-          <h3>Почему не гарантируете топ-1?</h3>
-          <p>Место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку и дают измеримый рост.</p>
-        </article>
-        <article class="faq-card reveal">
-          <h3>Что нужно от собственника?</h3>
-          <p>На старте — доступы, вводная по бизнесу и согласование ключевых решений. Дальше смотрите отчёты и задаёте вопросы.</p>
-        </article>
-        <article class="faq-card reveal">
-          <h3>Когда ждать результат?</h3>
-          <p>Первые изменения видны в первую неделю. Заметный рост позиций и переходов — на горизонте 60–90 дней.</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="cta" id="contact">
-    <div class="wrap cta-box">
-      <div class="reveal">
-        <div class="kicker">Следующий шаг</div>
-        <h2>Покажем, где карточка проигрывает конкурентам</h2>
-        <p class="lead">Разберём выдачу, отзывы, визуал, категории и воронку. После аудита будет понятно, что исправить первым.</p>
-      </div>
-      <form class="form reveal" onsubmit="event.preventDefault(); alert('Заявка принята! Свяжемся в течение дня.');">
-        <input placeholder="Компания и город" aria-label="Компания и город">
-        <input placeholder="Ссылка на карточку в картах" aria-label="Ссылка на карточку">
-        <input placeholder="Telegram или телефон" aria-label="Контакт">
-        <button class="btn btn-primary" type="submit">Получить бесплатный аудит →</button>
+        <div class="fg" id="fg-no">
+          <div class="fi"><input type="tel" id="f-tel" placeholder="Телефон — +7 900 000-00-00" aria-label="Ваш телефон"></div>
+          <div class="fi"><input type="text" id="f-tg2" placeholder="Telegram — @username или +7..." aria-label="Ваш Telegram"></div>
+        </div>
+
+        <button class="btn primary" type="submit" style="width:100%;min-height:54px;font-size:16px;margin-top:6px;border-radius:12px">
+          Получить бесплатный аудит
+        </button>
+        <p style="margin:10px 0 0;font-size:12px;color:#3d5272;text-align:center">
+          Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+        </p>
       </form>
     </div>
-  </section>
+
+  </div>
+</section>
 
 </main>
 
-<footer>
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
   <div class="wrap footer-in">
-    <div class="footer-logo">VITRINA SERM</div>
-    <div class="footer-links">
-      <a href="#why">Почему карты</a>
-      <a href="#value">Что делаем</a>
-      <a href="#work">Процесс</a>
-      <a href="#cases">Кейсы</a>
-      <a href="#price">Стоимость</a>
-    </div>
-    <div class="footer-copy">© 2026 VITRINA SERM · Яндекс.Карты · 2ГИС</div>
+    <span>VITRINA SERM &nbsp;·&nbsp; Геомаркетинг &nbsp;·&nbsp; SERM &nbsp;·&nbsp; Яндекс Карты · 2ГИС · Google Maps</span>
+    <span>© 2025</span>
   </div>
 </footer>
 
 <script>
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  window.scrollTo(0, 0);
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: .09 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+  // Show all cases
+  function showAllCases() {
+    document.querySelectorAll('.case-extra').forEach(c => {
+      c.classList.add('shown');
+      obs.observe(c);
     });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('cases-btn').style.display = 'none';
+  }
+
+  // Form toggle
+  function sw(v) {
+    const yes = v === 'yes';
+    document.getElementById('lbl-yes').classList.toggle('is-on', yes);
+    document.getElementById('lbl-no').classList.toggle('is-on', !yes);
+    document.getElementById('fg-yes').classList.toggle('on', yes);
+    document.getElementById('fg-no').classList.toggle('on', !yes);
+    document.getElementById('f-url').required  = yes;
+    document.getElementById('f-tg1').required  = yes;
+    document.getElementById('f-tg2').required  = !yes;
+  }
+
+  function handleForm(e) {
+    e.preventDefault();
+    const yes = document.querySelector('input[name="hc"]:checked').value === 'yes';
+    const data = yes
+      ? { card: document.getElementById('f-url').value, tg: document.getElementById('f-tg1').value }
+      : { phone: document.getElementById('f-tel').value, tg: document.getElementById('f-tg2').value };
+    console.log('Заявка:', data);
+    alert('Заявка принята! Свяжемся с вами в ближайшее время.');
+    e.target.reset(); sw('yes');
+  }
 </script>
 </body>
 </html>

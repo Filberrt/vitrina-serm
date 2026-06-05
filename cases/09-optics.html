@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -66,6 +66,17 @@
     .footer-in{width:min(1200px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#3d5272}
     @media(max-width:768px){.nav-links{display:none}.case-hero{padding:48px 0 40px}.case-hero h1{font-size:26px}.case-lead{font-size:15px}.metrics-inner{grid-template-columns:repeat(2,1fr)}.cta-inner{grid-template-columns:1fr;gap:20px}.result-grid{grid-template-columns:repeat(2,1fr)}.case-body-wrap{padding:36px 0 56px}}
     @media(max-width:440px){.metrics-inner,.result-grid{grid-template-columns:1fr 1fr}}
+  
+    .case-nav{background:var(--dark-2);padding:36px 0;border-top:1px solid rgba(255,255,255,.08)}
+    .case-nav-inner{width:min(860px,calc(100% - 40px));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .case-nav-back{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:14px;font-weight:600;transition:background .18s,color .18s,border-color .18s;text-decoration:none}
+    .case-nav-back:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.22)}
+    .case-nav-back svg,.case-nav-next svg{width:16px;height:16px;flex:0 0 16px}
+    .case-nav-next{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;transition:background .18s,transform .18s,box-shadow .18s;box-shadow:0 4px 16px rgba(29,78,216,.32);text-decoration:none}
+    .case-nav-next:hover{background:var(--blue-2);transform:translateX(4px);box-shadow:0 6px 24px rgba(29,78,216,.44)}
+    .case-nav-next-label{display:flex;flex-direction:column;gap:2px}
+    .case-nav-next-label small{font-size:11px;font-weight:500;opacity:.65;text-transform:uppercase;letter-spacing:.6px}
+    @media(max-width:560px){.case-nav-inner{justify-content:center;gap:12px}.case-nav-back,.case-nav-next{width:100%;justify-content:center}}
   </style>
 </head>
 <body>
@@ -210,6 +221,22 @@
   </div>
 </section>
 
+
+<nav class="case-nav" aria-label="Навигация по кейсам">
+  <div class="case-nav-inner">
+    <a class="case-nav-back" href="../index.html#cases">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      На все кейсы
+    </a>
+    <a class="case-nav-next" href="10-ten-cases.html">
+      <div class="case-nav-next-label">
+        <small>Следующий кейс</small>
+        10 кейсов — сборник
+      </div>
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
 <footer class="footer">
   <div class="footer-in">
     <span>© 2025 VITRINA SERM</span>

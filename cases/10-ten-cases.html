@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 кейсов по заполнению карт: репетиторы, юристы, пиво, запчасти и другие — VITRINA SERM</title>
+  <meta name="description" content="Сборник 10 реальных кейсов по продвижению на Яндекс Картах и Google: репетиторский центр, юристы, остекление, тенты, крафтовое пиво, автозапчасти, ремонт iPhone и другие.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#060d1c;--muted:#64748b;--line:#e2e8f0;--blue:#1d4ed8;--blue-lt:#eff6ff;--lime:#84cc16;--lime-glow:rgba(132,204,22,.28);--white:#ffffff;--dark:#040b18;--dark-2:#071022;--d-border:rgba(255,255,255,.09);--d-muted:#8896ac;--sh-lg:0 24px 60px rgba(6,13,28,.15);--r:14px;--rl:22px}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    h1,h2,h3,h4{font-family:'Calistoga',serif;font-weight:400;margin-top:0}
+    p{margin-top:0}
+    #prog{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--lime);z-index:1000;transition:width .1s linear}
+    .topbar{position:sticky;top:0;z-index:200;background:rgba(4,11,24,.85);backdrop-filter:blur(28px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav{height:64px;width:min(1200px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
+    .nav-links{display:flex;gap:24px;font-size:13px;font-weight:500;color:rgba(255,255,255,.5)}
+    .nav-links a:hover{color:#fff}
+    .nav-btn{display:inline-flex;align-items:center;min-height:36px;padding:8px 18px;border-radius:8px;background:var(--lime);color:var(--ink);font:700 13px/1 'Inter',sans-serif;border:none;white-space:nowrap}
+
+    /* HERO */
+    .case-hero{background:var(--dark);color:#fff;padding:72px 0 60px;position:relative;overflow:hidden}
+    .case-hero::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.15),transparent 68%);pointer-events:none}
+    .hero-inner{width:min(900px,calc(100% - 40px));margin:0 auto;position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:12px;color:rgba(255,255,255,.4)}
+    .breadcrumb a{color:rgba(132,204,22,.8)}.breadcrumb span{color:rgba(255,255,255,.25)}
+    .case-niche{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.5px}
+    .case-hero h1{font-size:clamp(28px,5vw,52px);line-height:1.05;letter-spacing:-.3px;margin-bottom:20px;color:#fff}
+    .case-lead{font-size:18px;line-height:1.65;color:var(--d-muted);margin-bottom:36px;max-width:720px}
+    .result-badge{display:inline-flex;align-items:center;padding:10px 20px;border-radius:10px;background:rgba(132,204,22,.13);border:1px solid rgba(132,204,22,.25);color:#a3e635;font-size:16px;font-weight:700}
+
+    /* METRICS */
+    .metrics-bar{background:var(--dark-2);border-bottom:1px solid rgba(255,255,255,.06);padding:28px 0}
+    .metrics-inner{width:min(900px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+    .metric-item{text-align:center;padding:16px;border-radius:var(--r);border:1px solid var(--d-border);background:rgba(255,255,255,.04)}
+    .metric-item b{display:block;font-size:28px;font-weight:800;color:#fff;font-family:'Calistoga',serif;margin-bottom:4px}
+    .metric-item span{font-size:12px;color:var(--d-muted);font-weight:500;line-height:1.3}
+
+    /* BODY WRAP */
+    .body-wrap{width:min(1000px,calc(100% - 40px));margin:0 auto;padding:64px 0 80px}
+
+    /* INTRO */
+    .intro-section{max-width:760px;margin:0 auto 56px}
+    .section-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue)}
+    .section-label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);flex:0 0 auto}
+    .intro-section h2{font-size:clamp(24px,4vw,38px);line-height:1.1;margin-bottom:16px;color:var(--ink)}
+    .intro-section p{color:#3f4756;line-height:1.8;font-size:16px;margin-bottom:16px}
+
+    /* CASE CARDS */
+    .cases-grid{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:56px}
+    .case-card{display:grid;grid-template-columns:56px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--rl);margin-bottom:20px;overflow:hidden;background:var(--white);box-shadow:0 4px 20px rgba(6,13,28,.07);transition:box-shadow .2s}
+    .case-card:hover{box-shadow:0 8px 36px rgba(6,13,28,.12)}
+    .case-num{background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Calistoga',serif;font-size:18px;font-weight:400;writing-mode:vertical-rl;letter-spacing:2px;padding:20px 0;flex-shrink:0;min-height:100%}
+    .case-content{padding:28px 32px}
+    .case-tag{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;padding:3px 10px;border-radius:12px;background:var(--blue-lt);font-size:11px;font-weight:600;color:var(--blue);letter-spacing:.4px}
+    .case-content h3{font-size:22px;line-height:1.15;margin-bottom:10px;color:var(--ink)}
+    .case-content p{color:#3f4756;font-size:15px;line-height:1.75;margin-bottom:14px}
+    .case-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:4px}
+    .case-meta-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--muted)}
+    .case-meta-item strong{color:var(--ink);font-weight:600;display:block;font-size:13px}
+    .case-meta-item span{font-size:12px;color:var(--muted);display:block;margin-top:1px}
+    .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:600}
+    .pill-done{background:#dcfce7;color:#15803d}
+    .pill-wip{background:#fef9c3;color:#854d0e}
+    .divider{height:1px;background:var(--line);margin:0 32px}
+
+    /* HIGHLIGHT */
+    .highlight-box{padding:26px 30px;border-radius:var(--r);background:var(--blue-lt);border-left:4px solid var(--blue);margin:0 0 48px}
+    .highlight-box p{color:#1e293b;font-size:16px;line-height:1.7;margin:0;font-weight:500}
+
+    /* SUMMARY */
+    .summary-box{padding:36px;border-radius:var(--rl);background:var(--dark);color:#fff;margin-bottom:48px}
+    .summary-box h2{color:#fff;font-size:clamp(22px,3vw,30px);margin-bottom:20px}
+    .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+    .sum-stat{padding:18px;border-radius:var(--r);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);text-align:center}
+    .sum-stat b{display:block;font-size:30px;font-weight:800;color:var(--lime);font-family:'Calistoga',serif;margin-bottom:6px}
+    .sum-stat span{font-size:12px;color:var(--d-muted);line-height:1.4}
+
+    /* CTA */
+    .case-cta{background:var(--dark);color:#fff;padding:72px 0}
+    .cta-inner{width:min(860px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+    .case-cta h2{font-size:clamp(26px,4vw,36px);color:#fff;margin-bottom:8px}
+    .case-cta p{color:var(--d-muted);font-size:15px;margin:0}
+    .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:10px;background:var(--lime);color:var(--ink);font:700 14px/1 'Inter',sans-serif;white-space:nowrap}
+    .footer{padding:28px 0;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.05)}
+    .footer-in{width:min(1200px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#3d5272}
+
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .case-hero{padding:48px 0 40px}
+      .case-hero h1{font-size:26px}
+      .case-lead{font-size:15px}
+      .metrics-inner{grid-template-columns:repeat(2,1fr)}
+      .cta-inner{grid-template-columns:1fr;gap:20px}
+      .case-card{grid-template-columns:44px 1fr}
+      .case-content{padding:20px 18px}
+      .case-num{font-size:14px}
+      .body-wrap{padding:36px 0 56px}
+      .summary-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:440px){
+      .case-card{grid-template-columns:1fr}
+      .case-num{writing-mode:horizontal-tb;min-height:auto;padding:10px 20px;font-size:14px}
+      .summary-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+<div id="prog"></div>
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="../index.html">
+      <img src="../logo.jpg" alt="" style="width:34px;height:34px;flex:0 0 auto;border-radius:8px;object-fit:cover;display:block">
+      <span>VITRINA SERM</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html#why">Почему карты</a>
+      <a href="../index.html#cases">Кейсы</a>
+      <a href="../index.html#price">Стоимость</a>
+    </nav>
+    <a class="nav-btn" href="../index.html#contact">Получить готовый прототип</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="case-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Главная</a>
+      <span>/</span>
+      <a href="../index.html#cases">Кейсы</a>
+      <span>/</span>
+      <span>10 кейсов СERM</span>
+    </div>
+    <div class="case-niche">📋 Сборник · Разные ниши</div>
+    <h1>10 кейсов по заполнению и продвижению карт</h1>
+    <p class="case-lead">Репетиторы, юристы, строительство, общепит, ретейл, сервисы — разбираем реальные результаты работы с Яндекс Картами и Google по 10 проектам из разных ниш. Что делали, как заполняли, что получили.</p>
+    <div class="result-badge">10 реальных кейсов · Разные ниши и города</div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics-bar">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <b>10</b>
+      <span>кейсов в одном разборе</span>
+    </div>
+    <div class="metric-item">
+      <b>7+</b>
+      <span>разных ниш бизнеса</span>
+    </div>
+    <div class="metric-item">
+      <b>3</b>
+      <span>платформы: Яндекс, Google, 2ГИС</span>
+    </div>
+    <div class="metric-item">
+      <b>8/10</b>
+      <span>кейсов завершены в срок</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body-wrap">
+
+  <div class="intro-section">
+    <div class="section-label">О сборнике</div>
+    <h2>Карты работают в любой нише</h2>
+    <p>Часто думают, что карты — это только для кафе и парикмахерских. На практике это инструмент, который работает для любого локального бизнеса: от юридической конторы до магазина крафтового пива. Этот сборник доказывает именно это.</p>
+    <p>Все кейсы реальные. Работа выполнялась в разных городах России, для разных типов бизнеса. В каждом описаны задача, что делали и каков итог.</p>
+  </div>
+
+  <div class="highlight-box">
+    <p>Общий принцип всех кейсов: заполненная карточка с фото, описанием, актуальными данными и отзывами всегда ранжируется выше пустой — вне зависимости от ниши и города.</p>
+  </div>
+
+  <!-- CASES -->
+  <div class="cases-grid">
+
+    <!-- CASE 1 -->
+    <div class="case-card">
+      <div class="case-num">01</div>
+      <div class="case-content">
+        <div class="case-tag">Образование · Архангельск</div>
+        <h3>Репетиторский центр — два филиала на Яндекс и Google</h3>
+        <p>Репетиторский центр в Архангельске с двумя точками. Карточки были созданы, но не заполнены — ни расписание, ни предметы, ни фото кабинетов. Родители, ищущие репетиторов рядом с домом, просто не находили центр.</p>
+        <p>Выполнили полное наполнение двух филиалов на Яндекс Картах и Google: добавили список предметов, педагогов, фото классов, режим работы, расписание. Для каждого филиала — отдельная карточка с адресом и телефоном.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Что сделали</strong><span>2 карточки на Яндекс + Google</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Попадание в локальный пакет</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 2 -->
+    <div class="case-card">
+      <div class="case-num">02</div>
+      <div class="case-content">
+        <div class="case-tag">Юридические услуги · Тюмень</div>
+        <h3>Юрист — оформление Яндекс Карт и настройка приоритизации</h3>
+        <p>Частнопрактикующий юрист в Тюмени. Клиенты находили через сарафанное радио, но в картах юриста не было — упускал клиентов, которые ищут «юрист рядом» или «юридическая консультация».</p>
+        <p>Заполнили карточку Яндекс Карт: специализации (трудовые, семейные, гражданские дела), режим работы, описание, фото офиса. Настроили приоритизацию ключевых запросов через описание и атрибуты.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Платформа</strong><span>Яндекс Карты</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Появился в поиске по «юрист Тюмень»</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 3 -->
+    <div class="case-card">
+      <div class="case-num">03</div>
+      <div class="case-content">
+        <div class="case-tag">Юридические услуги · Рязань</div>
+        <h3>Юрист — наполнение карт с нулевой базы</h3>
+        <p>Юрист в Рязани вообще отсутствовал на картах. Никакой карточки — ни на Яндексе, ни в Google. Создание с нуля, верификация, полное заполнение.</p>
+        <p>Зарегистрировали, прошли верификацию, заполнили профиль: специализация — арбитраж и корпоративное право. Добавили фото, описание услуг, первые отзывы.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Что сделали</strong><span>Создание с нуля + верификация</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Карточка активна, появилась в выдаче</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 4 -->
+    <div class="case-card">
+      <div class="case-num">04</div>
+      <div class="case-content">
+        <div class="case-tag">Строительство · Московская область</div>
+        <h3>Остекление балконов — Яндекс и Google Карты</h3>
+        <p>Компания по остеклению балконов в Московской области. Специфика — работают на большой территории, охватывают множество районов. Задача: присутствие в картах, чтобы получать заявки по запросам «остекление балкона» в разных городах области.</p>
+        <p>Оформили карточки на Яндекс и Google: портфолио работ, виды остекления (холодное, тёплое, французское), зоны обслуживания. Настроили описание с упоминанием ключевых районов работы.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Платформы</strong><span>Яндекс + Google</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Охват по районам МО</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 5 -->
+    <div class="case-card">
+      <div class="case-num">05</div>
+      <div class="case-content">
+        <div class="case-tag">Производство · Сочи</div>
+        <h3>Тенты и навесы — базовое заполнение карт</h3>
+        <p>Производитель и установщик тентов и навесов в Сочи. Узкоспециализированный бизнес — аудитория небольшая, но целевая. Карточка отсутствовала.</p>
+        <p>Создали и заполнили карточку: виды продукции (тенты для кафе, балконные навесы, маркизы), фото выполненных работ, прайс, контакты. Базовое заполнение позволило появиться в поиске по специализированным запросам.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Что сделали</strong><span>Базовое заполнение + фото работ</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Появился в поиске по нише</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 6 -->
+    <div class="case-card">
+      <div class="case-num">06</div>
+      <div class="case-content">
+        <div class="case-tag">Ретейл · Москва</div>
+        <h3>Магазин крафтового пива — три платформы, полное наполнение</h3>
+        <p>Магазин крафтового и разливного пива в Москве. Сильная конкуренция в сегменте — нужно было выделиться за счёт качества присутствия на картах. Задача: добавить на Яндекс, Google и 2ГИС с полным наполнением.</p>
+        <p>Заполнили три платформы: богатый каталог сортов, фото витрин и интерьера, ассортимент закусок, режим работы. Добавили атрибуты «разливное пиво», «крафт», «бонусная карта». Получили первые отзывы с упоминанием конкретных сортов.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Платформы</strong><span>Яндекс + Google + 2ГИС</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Топ по «крафтовое пиво» в районе</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 7 -->
+    <div class="case-card">
+      <div class="case-num">07</div>
+      <div class="case-content">
+        <div class="case-tag">Автозапчасти · Москва</div>
+        <h3>Магазин автозапчастей — полное наполнение, подтверждение филиалов</h3>
+        <p>Сеть магазинов автозапчастей в Москве. Несколько точек, каждая требовала отдельного заполнения и верификации. Карточки существовали, но часть не была подтверждена, данные устарели.</p>
+        <p>Прошли верификацию всех точек, обновили данные, заполнили карточки: марки авто, которые обслуживаем, типы запчастей, режим работы, фото торгового зала. Синхронизировали информацию между всеми филиалами.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Что сделали</strong><span>Несколько филиалов + верификация</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-done">Завершено</span></span></div>
+          <div class="case-meta-item"><strong>Результат</strong><span>Все точки активны и заполнены</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 8 -->
+    <div class="case-card">
+      <div class="case-num">08</div>
+      <div class="case-content">
+        <div class="case-tag">Автосервис · Харьков</div>
+        <h3>Ремонт стартеров — продвижение в Google Картах</h3>
+        <p>Специализированный автосервис по ремонту стартеров и генераторов. Узкая ниша — аудитория небольшая, но очень целевая. Человек, у которого сломался стартер, ищет именно специалиста, а не обычный автосервис.</p>
+        <p>Настройка Google Бизнес-профиля: специализация в категориях, список ремонтируемых марок, фото диагностического оборудования, прайс на основные работы. Работа на момент публикации была в процессе.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Платформа</strong><span>Google Карты</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-wip">В процессе</span></span></div>
+          <div class="case-meta-item"><strong>Ниша</strong><span>Узкоспециализированный автосервис</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 9 -->
+    <div class="case-card">
+      <div class="case-num">09</div>
+      <div class="case-content">
+        <div class="case-tag">Сервис · Россия</div>
+        <h3>Ремонт скважин — добавление и наполнение карточек</h3>
+        <p>Компания по ремонту и бурению скважин. Работают по широкой географии. Задача: присутствие в картах, чтобы попадать в выдачу по запросам «ремонт скважины» + название населённого пункта.</p>
+        <p>Создание и заполнение карточек на Яндекс и Google: виды работ (бурение, чистка, ремонт), оборудование, зоны работы, фото выполненных объектов. На момент публикации кейса работа продолжалась.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Что делали</strong><span>Добавление + наполнение</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-wip">В процессе</span></span></div>
+          <div class="case-meta-item"><strong>Специфика</strong><span>Широкая география</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 10 -->
+    <div class="case-card">
+      <div class="case-num">10</div>
+      <div class="case-content">
+        <div class="case-tag">Электроника · Россия</div>
+        <h3>Ремонт iPhone — Яндекс и Google Карты</h3>
+        <p>Сервисный центр по ремонту iPhone и других мобильных устройств. Высококонкурентная ниша в любом городе. Задача: встать в один ряд с крупными сетями сервисных центров через правильную упаковку карточек.</p>
+        <p>Заполнение на Яндекс и Google: виды ремонта (замена стекла, батареи, камеры, Face ID), поддерживаемые модели, цены, гарантия. Загрузка фото мастерской и оборудования. На момент публикации кейса в процессе.</p>
+        <div class="divider"></div>
+        <div class="case-meta" style="margin-top:14px;">
+          <div class="case-meta-item"><strong>Платформы</strong><span>Яндекс + Google</span></div>
+          <div class="case-meta-item"><strong>Статус</strong><span><span class="pill pill-wip">В процессе</span></span></div>
+          <div class="case-meta-item"><strong>Ниша</strong><span>Высокая конкуренция</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cases-grid -->
+
+  <!-- SUMMARY -->
+  <div class="summary-box">
+    <h2>Итоги сборника</h2>
+    <div class="summary-grid">
+      <div class="sum-stat">
+        <b>10</b>
+        <span>кейсов из разных ниш</span>
+      </div>
+      <div class="sum-stat">
+        <b>3</b>
+        <span>платформы: Яндекс, Google, 2ГИС</span>
+      </div>
+      <div class="sum-stat">
+        <b>8/10</b>
+        <span>завершены с результатом в топ</span>
+      </div>
+      <div class="sum-stat">
+        <b>0 ₽</b>
+        <span>платного продвижения в 7 из 10 кейсов</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-section" style="margin-bottom:0">
+    <div class="section-label">Вывод</div>
+    <h2>Карты работают в любой нише</h2>
+    <p>10 кейсов из 10 разных отраслей подтверждают один вывод: правильно заполненная карточка на Яндекс Картах и в Google — это базовый инструмент локального бизнеса. Он работает для юриста в Рязани так же, как для кофейни в Москве.</p>
+    <p>Важный нюанс, который прослеживается во всех кейсах: большинство конкурентов имеют слабо заполненные карточки. Это значит, что <strong>выйти в топ можно без больших вложений</strong> — за счёт качества упаковки.</p>
+  </div>
+
+</div><!-- /body-wrap -->
+
+<!-- CTA -->
+<section class="case-cta">
+  <div class="cta-inner">
+    <div>
+      <h2>Ваш бизнес тоже есть в этом списке?</h2>
+      <p>Упакуем карточку, заполним полностью и выведем в топ по вашим запросам.</p>
+    </div>
+    <a class="cta-btn" href="../index.html#contact">Обсудить проект →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <span>© 2025 VITRINA SERM</span>
+    <span>Продвижение на картах для локального бизнеса</span>
+  </div>
+</footer>
+
+<script>window.addEventListener('scroll',()=>{const p=document.getElementById('prog');if(p){const s=document.documentElement;p.style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%'}});</script>
+</body>
+</html>

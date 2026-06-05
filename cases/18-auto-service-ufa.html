@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Автосервис Уфа — 20–30 новых клиентов в день через карты — VITRINA SERM</title>
+  <meta name="description" content="Автосервис в Уфе получает 20–30 новых клиентов ежедневно через Яндекс Карты и 2ГИС после системной работы с карточкой.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#060d1c;--muted:#64748b;--line:#e2e8f0;--blue:#1d4ed8;--blue-lt:#eff6ff;--lime:#84cc16;--lime-glow:rgba(132,204,22,.28);--white:#ffffff;--dark:#040b18;--dark-2:#071022;--d-border:rgba(255,255,255,.09);--d-muted:#8896ac;--sh-lg:0 24px 60px rgba(6,13,28,.15);--r:14px;--rl:22px}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    h1,h2,h3{font-family:'Calistoga',serif;font-weight:400;margin-top:0}
+    p{margin-top:0}
+    #prog{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--lime);z-index:1000;transition:width .1s linear}
+    .topbar{position:sticky;top:0;z-index:200;background:rgba(4,11,24,.85);backdrop-filter:blur(28px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav{height:64px;width:min(1200px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:#fff;white-space:nowrap}
+    .nav-links{display:flex;gap:24px;font-size:13px;font-weight:500;color:rgba(255,255,255,.5)}
+    .nav-links a:hover{color:#fff}
+    .nav-btn{display:inline-flex;align-items:center;min-height:36px;padding:8px 18px;border-radius:8px;background:var(--lime);color:var(--ink);font:700 13px/1 'Inter',sans-serif;border:none;white-space:nowrap}
+    .case-hero{background:var(--dark);color:#fff;padding:72px 0 60px;position:relative;overflow:hidden}
+    .case-hero::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(29,78,216,.15),transparent 68%);pointer-events:none}
+    .hero-inner{width:min(900px,calc(100% - 40px));margin:0 auto;position:relative;z-index:1}
+    .breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:12px;color:rgba(255,255,255,.4)}
+    .breadcrumb a{color:rgba(132,204,22,.8)}.breadcrumb span{color:rgba(255,255,255,.25)}
+    .case-niche{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.5px}
+    .case-hero h1{font-size:clamp(28px,5vw,52px);line-height:1.05;letter-spacing:-.3px;margin-bottom:20px;color:#fff}
+    .case-lead{font-size:18px;line-height:1.65;color:var(--d-muted);margin-bottom:36px;max-width:680px}
+    .result-badge{display:inline-flex;align-items:center;padding:10px 20px;border-radius:10px;background:rgba(132,204,22,.13);border:1px solid rgba(132,204,22,.25);color:#a3e635;font-size:16px;font-weight:700}
+    .metrics-bar{background:var(--dark-2);border-bottom:1px solid rgba(255,255,255,.06);padding:28px 0}
+    .metrics-inner{width:min(900px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+    .metric-item{text-align:center;padding:16px;border-radius:var(--r);border:1px solid var(--d-border);background:rgba(255,255,255,.04)}
+    .metric-item b{display:block;font-size:24px;font-weight:800;color:#fff;font-family:'Calistoga',serif;margin-bottom:4px}
+    .metric-item span{font-size:12px;color:var(--d-muted);font-weight:500;line-height:1.3}
+    .case-body-wrap{width:min(860px,calc(100% - 40px));margin:0 auto;padding:56px 0 80px}
+    .case-img-hero{width:100%;border-radius:var(--rl);overflow:hidden;margin-bottom:48px;box-shadow:var(--sh-lg)}
+    .case-img-hero img{width:100%;height:auto;display:block}
+    .case-section{margin-bottom:44px}
+    .section-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--blue)}
+    .section-label::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);flex:0 0 auto}
+    .case-section h2{font-size:clamp(22px,4vw,34px);line-height:1.1;margin-bottom:16px;color:var(--ink)}
+    .case-section p{color:#3f4756;line-height:1.8;font-size:16px;margin-bottom:16px}
+    .case-section ul{padding-left:22px;margin:0 0 20px;display:grid;gap:8px}
+    .case-section li{color:#3f4756;line-height:1.7;font-size:16px}
+    .highlight-box{padding:26px 30px;border-radius:var(--r);background:var(--blue-lt);border-left:4px solid var(--blue);margin:28px 0}
+    .highlight-box p{color:#1e293b;font-size:16px;line-height:1.7;margin:0;font-weight:500}
+    .result-box{padding:30px;border-radius:var(--rl);background:var(--dark);color:#fff;margin:36px 0}
+    .result-box h3{color:#fff;font-size:20px;margin-bottom:18px}
+    .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    .result-stat{padding:16px;border-radius:var(--r);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);text-align:center}
+    .result-stat b{display:block;font-size:26px;font-weight:800;color:var(--lime);font-family:'Calistoga',serif;margin-bottom:5px}
+    .result-stat span{font-size:12px;color:var(--d-muted)}
+    .case-cta{background:var(--dark);color:#fff;padding:72px 0}
+    .cta-inner{width:min(860px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+    .case-cta h2{font-size:clamp(26px,4vw,36px);color:#fff;margin-bottom:8px}
+    .case-cta p{color:var(--d-muted);font-size:15px;margin:0}
+    .cta-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:10px;background:var(--lime);color:var(--ink);font:700 14px/1 'Inter',sans-serif;white-space:nowrap}
+    .footer{padding:28px 0;background:var(--dark-2);border-top:1px solid rgba(255,255,255,.05)}
+    .footer-in{width:min(1200px,calc(100% - 40px));margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#3d5272}
+    @media(max-width:768px){.nav-links{display:none}.case-hero{padding:48px 0 40px}.case-hero h1{font-size:26px}.case-lead{font-size:15px}.metrics-inner{grid-template-columns:repeat(2,1fr)}.cta-inner{grid-template-columns:1fr;gap:20px}.result-grid{grid-template-columns:repeat(2,1fr)}.case-body-wrap{padding:36px 0 56px}}
+    @media(max-width:440px){.metrics-inner,.result-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div id="prog"></div>
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="../index.html">
+      <img src="../logo.jpg" alt="" style="width:34px;height:34px;flex:0 0 auto;border-radius:8px;object-fit:cover;display:block">
+      <span>VITRINA SERM</span>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html#why">Почему карты</a>
+      <a href="../index.html#cases">Кейсы</a>
+      <a href="../index.html#price">Стоимость</a>
+    </nav>
+    <a class="nav-btn" href="../index.html#contact">Получить готовый прототип</a>
+  </div>
+</header>
+
+<section class="case-hero">
+  <div class="hero-inner">
+    <nav class="breadcrumb"><a href="../index.html">Главная</a><span>›</span><a href="../index.html#cases">Кейсы</a><span>›</span><span>Автосервис</span></nav>
+    <div class="case-niche">Автосервис · Уфа</div>
+    <h1>20–30 новых клиентов в день — стабильный поток через карты</h1>
+    <p class="case-lead">Автосервис в Уфе получает от 20 до 30 новых клиентов ежедневно через Яндекс Карты и 2ГИС. Карточка работает как самостоятельный канал привлечения без рекламных затрат.</p>
+    <div class="result-badge">20–30 клиентов в день</div>
+  </div>
+</section>
+
+<div class="metrics-bar">
+  <div class="metrics-inner">
+    <div class="metric-item"><b>20–30</b><span>новых клиентов ежедневно</span></div>
+    <div class="metric-item"><b>600+</b><span>клиентов в месяц через карты</span></div>
+    <div class="metric-item"><b>3</b><span>платформы: Яндекс, Google, 2ГИС</span></div>
+    <div class="metric-item"><b>стабильно</b><span>поток не зависит от рекламы</span></div>
+  </div>
+</div>
+
+<main class="case-body-wrap">
+  <div class="case-img-hero">
+    <img src="../case-images/18-auto-service-ufa.jpg" alt="Автосервис Уфа — продвижение в Яндекс Картах и 2ГИС">
+  </div>
+
+  <section class="case-section">
+    <div class="section-label">Контекст и задача</div>
+    <h2>Автосервис с хорошей базой, но слабой видимостью на картах</h2>
+    <p>Автосервис в Уфе с опытной командой и широким спектром услуг — от ТО до кузовного ремонта. Несмотря на качество работ, карточка на картах не отражала реального уровня компании: мало отзывов, слабое SEO, неполное описание услуг.</p>
+    <p>Клиенты приходили в основном по сарафанному радио. Задача — выстроить стабильный канал через карты, который работает без постоянных вложений в рекламу.</p>
+  </section>
+
+  <section class="case-section">
+    <div class="section-label">Проблема</div>
+    <h2>Карточка не конвертировала просмотры в звонки</h2>
+    <ul>
+      <li>Услуги перечислены общими словами, без цен и деталей</li>
+      <li>Мало актуальных фотографий — клиент не понимал уровень сервиса</li>
+      <li>Отзывы без ответов — ощущение брошенной карточки</li>
+      <li>Позиции ниже конкурентов по ключевым запросам района</li>
+      <li>Отсутствие регулярной активности — алгоритмы понижали в выдаче</li>
+    </ul>
+  </section>
+
+  <div class="highlight-box">
+    <p>Человек, который ищет автосервис на картах, уже едет — ему нужны маршрут, телефон и понимание что его там встретят профессионалы. Карточка должна закрывать это доверие за 10 секунд.</p>
+  </div>
+
+  <section class="case-section">
+    <div class="section-label">Что мы сделали</div>
+    <h2>Системная упаковка и ежемесячное сопровождение</h2>
+    <ul>
+      <li>Переписали описание услуг с ценами, сроками и гарантиями</li>
+      <li>Загрузили профессиональные фото боксов, оборудования и готовых работ</li>
+      <li>Выстроили систему сбора отзывов — карточка стала расти в рейтинге</li>
+      <li>Настроили SEO-структуру: категории, ключевые запросы, атрибуты</li>
+      <li>Ввели регулярные обновления: акции, новости, ответы на все отзывы</li>
+      <li>Подключили 2ГИС и Google Maps в единой логике с Яндексом</li>
+    </ul>
+  </section>
+
+  <div class="result-box">
+    <h3>Результаты</h3>
+    <div class="result-grid">
+      <div class="result-stat"><b>20–30</b><span>новых клиентов в день</span></div>
+      <div class="result-stat"><b>600+</b><span>клиентов в месяц</span></div>
+      <div class="result-stat"><b>3</b><span>площадки в топе</span></div>
+      <div class="result-stat"><b>стабильно</b><span>без рекламного бюджета</span></div>
+    </div>
+  </div>
+
+  <section class="case-section">
+    <div class="section-label">Вывод</div>
+    <h2>Карточка стала главным каналом привлечения клиентов</h2>
+    <p>Для автосервиса карты — это идеальный канал: человек ищет «автосервис рядом» уже с готовностью приехать. Правильно упакованная карточка с фото, ценами, отзывами и высоким рейтингом забирает этот спрос у конкурентов. Результат — стабильный поток 20–30 новых клиентов ежедневно без затрат на рекламу.</p>
+  </section>
+</main>
+
+<section class="case-cta">
+  <div class="cta-inner">
+    <div><h2>Хотите такой же результат?</h2><p>Разберём вашу карточку бесплатно и покажем точки роста.</p></div>
+    <a class="cta-btn" href="../index.html#contact">Получить готовый прототип</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-in">
+    <span>VITRINA SERM · Геомаркетинг · SERM · Яндекс Карты · 2ГИС · Google Maps</span>
+    <span>© 2025</span>
+  </div>
+</footer>
+<script>window.addEventListener('scroll',()=>{const p=document.getElementById('prog');if(p){const s=document.documentElement;p.style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%'}});</script>
+</body>
+</html>

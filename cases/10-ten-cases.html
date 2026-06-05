@@ -111,10 +111,10 @@
       .summary-grid{grid-template-columns:1fr 1fr}
     }
   
-    .case-nav{background:var(--dark-2);padding:36px 0;border-top:1px solid rgba(255,255,255,.08)}
+    .case-nav{background:#fff;padding:40px 0;border-top:1px solid var(--line)}
     .case-nav-inner{width:min(860px,calc(100% - 40px));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-    .case-nav-back{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:14px;font-weight:600;transition:background .18s,color .18s,border-color .18s;text-decoration:none}
-    .case-nav-back:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.22)}
+    .case-nav-back{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:10px;background:#f1f5f9;border:1px solid var(--line);color:var(--muted);font-size:14px;font-weight:600;transition:background .18s,color .18s,border-color .18s;text-decoration:none}
+    .case-nav-back:hover{background:#e2e8f0;color:var(--ink);border-color:#cbd5e1}
     .case-nav-back svg,.case-nav-next svg{width:16px;height:16px;flex:0 0 16px}
     .case-nav-next{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:10px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;transition:background .18s,transform .18s,box-shadow .18s;box-shadow:0 4px 16px rgba(29,78,216,.32);text-decoration:none}
     .case-nav-next:hover{background:var(--blue-2);transform:translateX(4px);box-shadow:0 6px 24px rgba(29,78,216,.44)}
@@ -398,9 +398,6 @@
     <p>Важный нюанс, который прослеживается во всех кейсах: большинство конкурентов имеют слабо заполненные карточки. Это значит, что <strong>выйти в топ можно без больших вложений</strong> — за счёт качества упаковки.</p>
   </div>
 
-</div><!-- /body-wrap -->
-
-<!-- CTA -->
 <nav class="case-nav" aria-label="Навигация по кейсам">
   <div class="case-nav-inner">
     <a class="case-nav-back" href="../index.html#cases">
@@ -416,6 +413,9 @@
     </a>
   </div>
 </nav>
+</div><!-- /body-wrap -->
+
+<!-- CTA -->
 <section class="case-cta">
   <div class="cta-inner">
     <div>

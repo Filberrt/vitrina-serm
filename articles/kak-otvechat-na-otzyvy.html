@@ -238,6 +238,12 @@
     }
     .pn-home:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
     .pn-home svg{flex:0 0 auto}
+
+    /* ARTICLE BLOCK BORDERS */
+    .art-body{background:#fff;border:1px solid var(--line);border-radius:14px;padding:36px 44px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .art-body h2{border-top:1px solid #f0f0f0;margin-top:40px;padding-top:36px}
+    .pn-nav{display:flex!important;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+    .pn-nav span{min-width:120px}
   </style>
 </head>
 <body>
@@ -375,26 +381,12 @@
     </article>
   </div>
 
-  <div class="art-cta">
-    <div class="cta-inner">
-      <div>
-        <h2>Хотите такой же результат?</h2>
-        <p>Разберём вашу карточку бесплатно и покажем где теряете клиентов прямо сейчас.</p>
-      </div>
-      <a class="cta-btn" href="../index.html#contact">
-        Получить бесплатный аудит
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
-
   <nav class="pn-nav" aria-label="Соседние статьи">
-    <a class="pn-home" href="../index.html">
+    <span></span>
+    <a class="pn-home" href="../index.html#blog">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 8L7 2l5 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="4.5" y="8" width="5" height="4.5" rx=".5" stroke="currentColor" stroke-width="1.4"/></svg>
       На главную
     </a>
-
-    <span></span>
     <a class="pn-link" href="kak-kartochka-rabotaet-kak-sajt.html">Карточка — это мини-сайт<svg viewBox="0 0 16 16" fill="none"><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </nav>
 </main>

@@ -980,6 +980,11 @@
     }
     .price-setup-gift-badge svg{flex:0 0 auto}
     .price-spacer{height:29px;margin-bottom:12px;display:block;pointer-events:none}
+    .price-section-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin:0 0 20px}
+    .price-section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+    .price-tariffs-gap{height:52px}
+    .price-setup-cta{display:block;width:100%;text-align:center;padding:13px 20px;background:var(--blue);color:#fff;border-radius:var(--r);font-size:14px;font-weight:600;letter-spacing:-.1px;transition:background .18s,transform .18s}
+    .price-setup-cta:hover{background:#1a3fd8;transform:translateY(-1px)}
 
     /* ─── BLOCK POLISH (для остальных блоков) ─── */
     .pain-card-v2{border-radius:14px;transition:transform .22s var(--ease),box-shadow .22s}
@@ -1513,6 +1518,7 @@
       <h2>Прозрачная цена<br>за реальный результат</h2>
     </div>
 
+    <div class="price-section-label">Разовая услуга</div>
     <!-- Перестройка как отдельная услуга -->
     <div class="price-setup-card reveal">
       <div class="price-setup-card-head">
@@ -1550,13 +1556,12 @@
             <span>Стратегия и план роста на 90 дней</span>
           </li>
         </ul>
-        <div class="price-setup-gift-badge">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-          При оплате любого тарифа на год — перестройка в подарок (−150 000 ₽)
-        </div>
+        <a class="price-setup-cta" href="#contact">Заказать перестройку карточки</a>
       </div>
     </div>
 
+    <div class="price-tariffs-gap"></div>
+    <div class="price-section-label">Ежемесячные тарифы</div>
     <!-- Три тарифа -->
     <div class="price-grid-3">
       <article class="price-card-3 reveal">
@@ -1572,7 +1577,7 @@
           <li>Ежемесячный отчёт</li>
         </ul>
         <div class="price-cta">
-          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:var(--blue);background:var(--blue-lt);border:1.5px solid rgba(29,78,216,.2)">Выбрать</a>
+          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:#fff;background:var(--ink);border:none;font-weight:600;font-size:14px">Выбрать тариф</a>
         </div>
       </article>
 
@@ -1609,7 +1614,7 @@
           <li>Еженедельный отчёт + созвон</li>
         </ul>
         <div class="price-cta">
-          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:var(--blue);background:var(--blue-lt);border:1.5px solid rgba(29,78,216,.2)">Выбрать</a>
+          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:#fff;background:var(--ink);border:none;font-weight:600;font-size:14px">Выбрать тариф</a>
         </div>
       </article>
     </div>
@@ -1905,6 +1910,11 @@
       btn.dataset.shown = '0';
       btn.innerHTML = 'Показать ещё кейсы ' + ARROW_DOWN;
       btn.setAttribute('aria-expanded', 'false');
+      const casesSection = document.getElementById('cases');
+      if (casesSection) {
+        const top = casesSection.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
       return;
     }
 

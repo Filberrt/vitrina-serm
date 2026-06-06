@@ -836,6 +836,127 @@
       .section,.cta{padding:68px 0}
       .hero-grid{padding:80px 0 90px}
     }
+
+    /* ─── HERO RESULT HOVER ─── */
+    .result{cursor:pointer;transition:background .22s,border-color .22s,transform .22s var(--ease)}
+    .result:hover{background:rgba(255,255,255,.08);border-color:rgba(29,78,216,.4);transform:translateX(4px)}
+
+    /* ─── UTP GRID ─── */
+    .utp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .utp-card{
+      padding:28px 24px;border:1px solid var(--d-border);border-radius:var(--r);
+      background:var(--d-card);position:relative;overflow:hidden;
+      transition:transform .22s var(--ease),background .22s,border-color .22s;
+    }
+    .utp-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.09);border-color:rgba(132,204,22,.2)}
+    .utp-tag{
+      display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;
+      padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+    }
+    .utp-tag.guarantee{background:rgba(132,204,22,.15);color:var(--lime);border:1px solid rgba(132,204,22,.25)}
+    .utp-tag.ai{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.25)}
+    .utp-num{font-size:11px;font-weight:700;color:var(--d-muted);margin-bottom:10px;letter-spacing:.5px}
+    .utp-card h3{font-size:16px;color:#e2e8f0;margin-bottom:8px;line-height:1.3}
+    .utp-card p{color:var(--d-muted);font-size:13px;line-height:1.6;margin-bottom:0}
+
+    /* ─── PRICE 3 ─── */
+    .price-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
+    .price-card-3{
+      padding:32px 28px;border:1px solid var(--line);
+      border-radius:var(--rl);background:#fff;box-shadow:var(--sh-sm);
+      display:flex;flex-direction:column;
+      transition:transform .22s var(--ease),box-shadow .22s;
+    }
+    .price-card-3:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+    .price-card-3.featured{
+      border-color:rgba(29,78,216,.3);
+      background:linear-gradient(165deg,#fff,#eef6ff);
+      box-shadow:var(--sh-md);position:relative;overflow:hidden;
+    }
+    .price-card-3.featured::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--blue),#06b6d4);
+    }
+    .price-badge{
+      display:inline-flex;align-items:center;margin-bottom:12px;
+      padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;
+      background:rgba(29,78,216,.1);color:var(--blue);border:1px solid rgba(29,78,216,.15);
+      width:fit-content;
+    }
+    .price-badge.hot{background:rgba(132,204,22,.12);color:#4d7c0f;border-color:rgba(132,204,22,.25)}
+    .price-name{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
+    .price-amount{font-size:34px;font-weight:800;line-height:1;letter-spacing:-1px;margin-bottom:4px;font-family:'Inter',sans-serif}
+    .price-period{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.4}
+    .price-saving{
+      display:flex;align-items:flex-start;gap:6px;margin-bottom:20px;
+      padding:10px 14px;border-radius:8px;font-size:12px;font-weight:600;line-height:1.45;
+      background:rgba(16,185,129,.08);color:#059669;border:1px solid rgba(16,185,129,.18);
+    }
+    .price-feats{margin:0;padding:0;list-style:none;display:grid;gap:10px;flex:1}
+    .price-feats li{
+      position:relative;padding-left:20px;font-size:14px;color:var(--muted);line-height:1.45;
+    }
+    .price-feats li::before{
+      content:"";position:absolute;left:0;top:6px;
+      width:7px;height:7px;border-radius:50%;background:var(--lime);
+    }
+    .price-cta{margin-top:24px}
+    .price-note{
+      padding:20px 24px;border-radius:var(--r);
+      background:var(--blue-lt);border:1px solid rgba(29,78,216,.12);
+      font-size:14px;color:var(--ink);line-height:1.6;
+    }
+    .price-note strong{color:var(--blue)}
+
+    /* ─── FAQ ACCORDION ─── */
+    .faq-accordion{display:grid;gap:8px;max-width:800px}
+    .faq-item{
+      border:1px solid var(--line);border-radius:var(--r);
+      background:#fff;box-shadow:var(--sh-sm);overflow:hidden;
+    }
+    .faq-q{
+      width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:22px 24px;background:transparent;border:none;cursor:pointer;
+      font:400 17px/1.3 'Calistoga',serif;color:var(--ink);text-align:left;
+      transition:background .18s;
+    }
+    .faq-q:hover{background:var(--soft)}
+    .faq-q svg{flex:0 0 20px;transition:transform .3s var(--ease);color:var(--muted)}
+    .faq-item.open .faq-q svg{transform:rotate(45deg)}
+    .faq-a{
+      padding:0 24px;max-height:0;overflow:hidden;
+      transition:max-height .35s var(--ease),padding .25s;
+      font-size:15px;color:var(--muted);line-height:1.7;
+    }
+    .faq-item.open .faq-a{max-height:200px;padding:0 24px 22px}
+
+    /* ─── CHANNEL BUTTONS ─── */
+    .channel-list{display:grid;gap:10px;margin-top:28px}
+    .channel-btn{
+      display:flex;align-items:center;gap:14px;
+      padding:14px 18px;border-radius:var(--r);
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+      color:#fff;font:600 15px/1 'Inter',sans-serif;
+      transition:background .18s,border-color .18s,transform .18s var(--ease);
+    }
+    .channel-btn:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+    .ch-icon{
+      width:40px;height:40px;border-radius:10px;display:grid;place-items:center;flex:0 0 40px;
+    }
+    .ch-icon.tg-icon{background:rgba(34,158,217,.18);color:#38bdf8}
+    .ch-icon.wa-icon{background:rgba(37,211,102,.15);color:#4ade80}
+    .ch-icon.max-icon{background:rgba(107,75,255,.18);color:#a78bfa}
+    .ch-info{display:flex;flex-direction:column;gap:3px}
+    .ch-info small{font-size:12px;font-weight:400;opacity:.6}
+
+    /* ─── RESPONSIVE ADDITIONS ─── */
+    @media(max-width:1040px){
+      .utp-grid{grid-template-columns:repeat(2,1fr)}
+      .price-grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:780px){
+      .utp-grid,.price-grid-3{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
@@ -924,21 +1045,21 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Почему карты</div>
-      <h2>Клиент уже ищет услугу — осталось стать лучшим выбором</h2>
+      <h2>Клиент уже ищет услугу — вы станете лучшим выбором</h2>
     </div>
     <div class="pain-grid-v2">
       <article class="pain-card-v2 reveal" data-num="01">
         <div class="pain-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
         </div>
-        <h3>Вас не видно</h3>
+        <h3>Вы теряете деньги</h3>
         <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
       </article>
       <article class="pain-card-v2 reveal" data-num="02">
         <div class="pain-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
-        <h3>Вам не доверяют</h3>
+        <h3>Клиенты уходят к конкурентам</h3>
         <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
       </article>
       <article class="pain-card-v2 reveal" data-num="03">
@@ -952,25 +1073,25 @@
         <div class="pain-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
-        <h3>Нет контроля</h3>
+        <h3>Карточку не находят</h3>
         <p>Неясно, кто растёт, кто забирает заявки и какие правки делать первыми.</p>
       </article>
     </div>
     <div class="compare-v2 reveal">
-      <div class="compare-v2-box weak">
-        <strong>Обычная реклама догоняет холодных людей</strong>
-        <ul>
-          <li>Человек может не искать услугу прямо сейчас.</li>
-          <li>Бюджет тратится до того, как возникло намерение.</li>
-          <li>Без сильной карточки трафик уходит к конкурентам.</li>
-        </ul>
-      </div>
       <div class="compare-v2-box strong">
         <strong>Карты забирают горячий спрос</strong>
         <ul>
           <li>Клиент уже выбрал категорию и сравнивает варианты рядом.</li>
           <li>Карточка ведёт к звонку, маршруту, сайту или заявке.</li>
           <li>Хорошая упаковка работает каждый день без менеджера.</li>
+        </ul>
+      </div>
+      <div class="compare-v2-box weak">
+        <strong>Обычная реклама догоняет холодных людей</strong>
+        <ul>
+          <li>Человек может не искать услугу прямо сейчас.</li>
+          <li>Бюджет тратится до того, как возникло намерение.</li>
+          <li>Без сильной карточки трафик уходит к конкурентам.</li>
         </ul>
       </div>
     </div>
@@ -981,16 +1102,43 @@
 <section class="section dk" id="value">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">За что нас выбирают</div>
-      <h2>Карты должны продавать, а не просто красиво выглядеть</h2>
+      <div class="eyebrow">За что выбирают</div>
+      <h2>6 причин, по которым
+      нас выбирают снова</h2>
     </div>
-    <div class="feature-grid-v2">
-      <article class="feature-v2 reveal"><div class="feature-num-v2">01</div><h3>Без рискованных схем</h3><p>Не гоним карточку методами, которые могут ударить по развитию в будущем.</p></article>
-      <article class="feature-v2 reveal"><div class="feature-num-v2">02</div><h3>Кейсы в разных нишах</h3><p>Авто, медицина, мебель, рестораны, доставка, услуги и локальный ритейл.</p></article>
-      <article class="feature-v2 reveal"><div class="feature-num-v2">03</div><h3>Под ключ</h3><p>Берём карточки, отзывы, визуал, услуги, новости, отчёты и коммуникацию с площадками.</p></article>
-      <article class="feature-v2 reveal"><div class="feature-num-v2">04</div><h3>Постоянный SEO-контроль</h3><p>Смотрим запросы, позиции и конкурентов. Правим то, что влияет на выбор.</p></article>
-      <article class="feature-v2 reveal"><div class="feature-num-v2">05</div><h3>Три площадки</h3><p>Ведём Яндекс Карты, 2ГИС и Google Maps в одной логике.</p></article>
-      <article class="feature-v2 reveal"><div class="feature-num-v2">06</div><h3>Воронка внутри карточки</h3><p>Доводим пользователя до звонка, маршрута, сайта или заявки.</p></article>
+    <div class="utp-grid">
+      <article class="utp-card reveal">
+        <span class="utp-tag guarantee">Гарантия</span>
+        <div class="utp-num">01</div>
+        <h3>Сначала результат — потом сотрудничество</h3>
+        <p>Видим рост — продолжаем. Нет результата — не платите. Полная гарантия без оговорок.</p>
+      </article>
+      <article class="utp-card reveal">
+        <div class="utp-num">02</div>
+        <h3>Запускаем за 7 дней</h3>
+        <p>Перестройка карточки занимает ~7 дней. Первые заявки — раньше, чем конкурент успеет среагировать.</p>
+      </article>
+      <article class="utp-card reveal">
+        <span class="utp-tag ai">Ноу-хау</span>
+        <div class="utp-num">03</div>
+        <h3>ИИ обновляет карточку каждый час</h3>
+        <p>Авторская технология: SEO-наполнение меняется автоматически 24/7 — без вашего участия.</p>
+      </article>
+      <article class="utp-card reveal">
+        <div class="utp-num">04</div>
+        <h3>Еженедельная отчётность</h3>
+        <p>Детальный отчёт каждую неделю: что сделано, как изменились позиции, что делаем дальше.</p>
+      </article>
+      <article class="utp-card reveal">
+        <div class="utp-num">05</div>
+        <h3>18+ NDA-кейсов из разных ниш</h3>
+        <p>Реальные результаты: авто, медицина, рестораны, услуги. Имена скрыты по NDA — цифры открыты.</p>
+      </article>
+      <article class="utp-card reveal">
+        <div class="utp-num">06</div>
+        <h3>Не готовы платить — не бросим</h3>
+        <p>Даём бесплатного менеджера и обучаем оформить карточку самостоятельно, если пока не готовы к сопровождению.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -1290,8 +1438,8 @@
 
     </div>
     <div class="cases-show-wrap">
-      <button id="cases-btn" class="btn ghost btn-lg" onclick="showAllCases()" aria-expanded="false">
-        Смотреть все кейсы
+      <button id="cases-btn" class="btn ghost btn-lg" onclick="showAllCases()" aria-expanded="false" data-shown="0">
+        Показать ещё кейсы
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -1303,33 +1451,62 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Стоимость</div>
-      <h2>Понятная цена за канал, который должен окупаться</h2>
+      <h2>Прозрачная цена
+      за реальный результат</h2>
     </div>
-    <div class="price-grid">
-      <article class="price-card main reveal">
-        <h3 style="font-size:20px">Запуск SERM в картах</h3>
-        <div class="price">150 000 ₽<span>первый месяц работы</span></div>
-        <ul>
-          <li>Аудит карточек и конкурентов.</li>
-          <li>SEO-структура услуг, категорий и описаний.</li>
-          <li>Визуальная упаковка карточки.</li>
-          <li>Работа с отзывами и репутацией.</li>
-          <li>План роста на 90 дней.</li>
+    <div class="price-grid-3">
+      <article class="price-card-3 reveal">
+        <div class="price-name">Старт</div>
+        <div class="price-amount">49 990 ₽</div>
+        <div class="price-period">в месяц · только Яндекс Карты</div>
+        <ul class="price-feats">
+          <li>Оптимизация одной платформы</li>
+          <li>Аудит и базовая SEO-упаковка</li>
+          <li>Работа с отзывами</li>
+          <li>Ежемесячный отчёт</li>
         </ul>
-        <a class="btn blue" href="#contact" style="margin-top:28px;width:100%;min-height:50px;font-size:15px">Начать работу</a>
+        <div class="price-cta">
+          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:var(--blue);background:var(--blue-lt);border:1.5px solid rgba(29,78,216,.2)">Выбрать</a>
+        </div>
       </article>
-      <article class="price-card reveal">
-        <h3 style="font-size:20px">Ежемесячное сопровождение</h3>
-        <div class="price">49 990 ₽<span>после запуска</span></div>
-        <ul>
-          <li>Контроль позиций и конкурентов.</li>
-          <li>Регулярные обновления карточек.</li>
-          <li>Ответы и работа с отзывами.</li>
-          <li>Отчёт по действиям и динамике.</li>
-          <li>Новые гипотезы для роста.</li>
+
+      <article class="price-card-3 featured reveal">
+        <div class="price-badge hot">Популярный выбор</div>
+        <div class="price-name">Рост</div>
+        <div class="price-amount">79 990 ₽</div>
+        <div class="price-period">в месяц · Яндекс + 2ГИС + Google</div>
+        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
+        <ul class="price-feats">
+          <li>Три платформы в одной логике</li>
+          <li>Полная SEO-упаковка</li>
+          <li>Работа с отзывами и репутацией</li>
+          <li>Еженедельный отчёт</li>
+          <li>Приоритетная поддержка</li>
         </ul>
-        <a class="btn ghost" href="#contact" style="margin-top:28px;width:100%;min-height:50px;font-size:15px;background:var(--soft);color:var(--blue);border-color:var(--line)">Обсудить детали</a>
+        <div class="price-cta">
+          <a class="btn blue" href="#contact" style="width:100%;min-height:50px;font-size:15px">Выбрать</a>
+        </div>
       </article>
+
+      <article class="price-card-3 reveal">
+        <div class="price-name">Максимум</div>
+        <div class="price-amount">149 990 ₽</div>
+        <div class="price-period">в месяц · все платформы</div>
+        <ul class="price-feats">
+          <li>Яндекс + 2ГИС + Google</li>
+          <li>Расширенная аналитика и конкуренты</li>
+          <li>Брендированный визуал</li>
+          <li>Работа с отзывами 24/7</li>
+          <li>Личный менеджер</li>
+          <li>Еженедельный отчёт + созвон</li>
+        </ul>
+        <div class="price-cta">
+          <a class="btn" href="#contact" style="width:100%;min-height:46px;color:var(--blue);background:var(--blue-lt);border:1.5px solid rgba(29,78,216,.2)">Выбрать</a>
+        </div>
+      </article>
+    </div>
+    <div class="price-note reveal">
+      <strong>Разовая перестройка карточки — 150 000 ₽</strong> — выполняется в первые 7 дней: аудит, SEO-структура, визуал, репутация и план роста. При подписке на год — перестройка в подарок.
     </div>
   </div>
 </section>
@@ -1339,8 +1516,8 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Польза сразу</div>
-      <h2>Запустим за неделю — или отдадим всю экспертизу</h2>
-      <p class="sub">Мы делаем сразу правильно — и быстрее, чем любой другой специалист или SMM-щик. Первые заявки появляются уже через 7 дней: вы занимаетесь бизнесом, а мы — картами. Хотите разобраться сами — ниже база знаний по Яндекс Картам и 2ГИС.</p>
+      <h2>Запустим за неделю — или поможем оформить карточку самостоятельно</h2>
+      <p class="sub">Если вы готовы — запустим карточку за 7 дней и дадим первые заявки. Если пока не готовы платить — не бросаем: даём бесплатного менеджера и обучаем оформить карточку самостоятельно. Ниже — база знаний, которая поможет уже сегодня.</p>
     </div>
     <div class="materials">
       <article class="material-card reveal">
@@ -1372,10 +1549,10 @@
     </div>
   </div>
   <div style="width:min(1200px,100%);margin:0 auto;padding:0 24px">
-    <div class="blog-wrap reveal">
+    <div class="blog-wrap reveal" style="gap:14px">
 
       <!-- Row 1: featured + side -->
-      <div class="blog-row1">
+      <div class="blog-row1" style="gap:14px">
         <a class="ac ac-feat" href="articles/kak-otvechat-na-otzyvy.html" aria-label="Читать статью об ответах на отзывы">
           <div class="ac-num">01 — Отзывы</div>
           <span class="ac-cat">Самое важное</span>
@@ -1399,7 +1576,7 @@
       </div>
 
       <!-- Row 2: three equal -->
-      <div class="blog-row2">
+      <div class="blog-row2" style="gap:14px">
         <a class="ac" href="articles/chto-takoe-hajlajty.html" aria-label="Что такое хайлайты">
           <div class="ac-num">03 — Оформление</div>
           <span class="ac-cat">Детали</span>
@@ -1433,7 +1610,7 @@
       </div>
 
       <!-- Row 3: two + one -->
-      <div class="blog-row3">
+      <div class="blog-row3" style="gap:14px">
         <a class="ac" href="articles/kak-nastroit-reklamu.html" aria-label="Реклама в Яндекс Бизнесе">
           <div class="ac-num">06 — Реклама</div>
           <span class="ac-cat">Лайфхак</span>
@@ -1476,16 +1653,41 @@
 </section>
 
 <!-- ══ FAQ ══ -->
-<section class="section">
+<section class="section alt" id="faq">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="kicker">Коротко о важном</div>
       <h2>Вопросы перед стартом</h2>
     </div>
-    <div class="faq-grid">
-      <article class="faq-card reveal"><h3>Почему не обещаете топ-1?</h3><p>Место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку.</p></article>
-      <article class="faq-card reveal"><h3>Что нужно от собственника?</h3><p>На старте — доступы, вводная по бизнесу и согласование ключевых вещей. Дальше смотрите отчёты.</p></article>
-      <article class="faq-card reveal"><h3>Когда ждать результат?</h3><p>Первые изменения видны в первый месяц. Отрыв от конкурентов строится на горизонте 90 дней.</p></article>
+    <div class="faq-accordion reveal" id="faqAccordion">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Почему не обещаете топ-1?
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="faq-a">Место зависит от алгоритмов, конкурентов и локации. Мы отвечаем за систему факторов, которые усиливают карточку — и это приводит к устойчивому росту.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Что нужно от собственника?
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="faq-a">На старте — доступы к карточкам, вводная по бизнесу и согласование ключевых вещей. Дальше смотрите еженедельные отчёты — мы работаем самостоятельно.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Когда ждать результат?
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="faq-a">Первые изменения видны в первый месяц. Отрыв от конкурентов строится на горизонте 90 дней — карточка работает стабильно и приносит поток заявок.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Что входит в перестройку за 150 000 ₽?
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div class="faq-a">Аудит текущей карточки и конкурентов, SEO-структура услуг и описаний, визуальная упаковка, работа с отзывами, план роста на 90 дней — всё в первые 7 дней работы.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1498,19 +1700,33 @@
       <div class="eyebrow">Следующий шаг</div>
       <h2>Покажем, где карточка проигрывает конкурентам</h2>
       <p class="cta-lead">Напишите в удобный мессенджер — разберём вашу карточку и покажем точки роста. Или оставьте заявку, мы свяжемся сами.</p>
-      <div class="messenger-btns">
-        <!-- ↓↓↓ ВСТАВЬТЕ СВОИ ССЫЛКИ ↓↓↓ -->
-        <a class="msg-btn tg" href="https://t.me/ВСТАВЬТЕ_ТГ" target="_blank" rel="noopener" aria-label="Написать в Telegram">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.804-1.692 7.976c-.126.568-.464.706-.94.44l-2.6-1.916-1.254 1.207c-.139.139-.255.255-.522.255l.186-2.644 4.815-4.35c.21-.186-.045-.29-.324-.103L7.7 14.36 5.13 13.56c-.558-.174-.568-.558.117-.826l7.693-2.966c.465-.168.872.115.99.036z" fill="white"/></svg>
-          <div class="mm">Написать в Telegram<small>Ответим в течение часа</small></div>
+      <div class="channel-list">
+        <a class="channel-btn" href="https://t.me/ВСТАВЬТЕ_ТГ" target="_blank" rel="noopener" aria-label="Написать в Telegram">
+          <div class="ch-icon tg-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.804-1.692 7.976c-.126.568-.464.706-.94.44l-2.6-1.916-1.254 1.207c-.139.139-.255.255-.522.255l.186-2.644 4.815-4.35c.21-.186-.045-.29-.324-.103L7.7 14.36 5.13 13.56c-.558-.174-.568-.558.117-.826l7.693-2.966c.465-.168.872.115.99.036z" fill="currentColor"/></svg>
+          </div>
+          <div class="ch-info">
+            Написать в Telegram
+            <small>Ответим в течение часа</small>
+          </div>
         </a>
-        <a class="msg-btn wa" href="https://wa.me/ВСТАВЬТЕ_НОМЕР" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.062 14.062c-.213.6-1.055 1.097-1.73 1.24-.46.096-1.06.173-3.082-.662-2.585-1.053-4.247-3.666-4.376-3.836-.124-.17-1.047-1.392-1.047-2.655s.663-1.88.9-2.137c.213-.226.466-.283.62-.283l.447.009c.142.006.334-.054.523.4.195.467.663 1.614.72 1.73.057.114.095.248.019.4-.076.152-.113.246-.227.38-.113.132-.237.296-.34.397-.113.113-.23.235-.1.46.13.226.58.95 1.244 1.54.854.76 1.576 1 1.8 1.112.227.114.36.095.493-.057.133-.152.571-.666.723-.895.152-.227.303-.19.51-.114.208.076 1.323.624 1.55.738.227.114.38.17.437.265.057.095.057.548-.156 1.148z" fill="white"/></svg>
-          <div class="mm">Написать в WhatsApp<small>Ответим в течение часа</small></div>
+        <a class="channel-btn" href="https://wa.me/ВСТАВЬТЕ_НОМЕР" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+          <div class="ch-icon wa-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.062 14.062c-.213.6-1.055 1.097-1.73 1.24-.46.096-1.06.173-3.082-.662-2.585-1.053-4.247-3.666-4.376-3.836-.124-.17-1.047-1.392-1.047-2.655s.663-1.88.9-2.137c.213-.226.466-.283.62-.283l.447.009c.142.006.334-.054.523.4.195.467.663 1.614.72 1.73.057.114.095.248.019.4-.076.152-.113.246-.227.38-.113.132-.237.296-.34.397-.113.113-.23.235-.1.46.13.226.58.95 1.244 1.54.854.76 1.576 1 1.8 1.112.227.114.36.095.493-.057.133-.152.571-.666.723-.895.152-.227.303-.19.51-.114.208.076 1.323.624 1.55.738.227.114.38.17.437.265.057.095.057.548-.156 1.148z" fill="currentColor"/></svg>
+          </div>
+          <div class="ch-info">
+            Написать в WhatsApp
+            <small>Ответим в течение часа</small>
+          </div>
         </a>
-        <a class="msg-btn max" href="https://max.ru/ВСТАВЬТЕ_ССЫЛКУ" target="_blank" rel="noopener" aria-label="Написать в Макс">
-          <img src="max.jpg" alt="" aria-hidden="true" style="width:24px;height:24px;border-radius:6px;object-fit:cover;display:block;flex:0 0 24px">
-          <div class="mm">Написать в Макс<small>Ответим в течение часа</small></div>
+        <a class="channel-btn" href="https://max.ru/ВСТАВЬТЕ_ССЫЛКУ" target="_blank" rel="noopener" aria-label="Написать в Макс">
+          <div class="ch-icon max-icon">
+            <img src="max.jpg" alt="" aria-hidden="true" style="width:20px;height:20px;border-radius:4px;object-fit:cover">
+          </div>
+          <div class="ch-info">
+            Написать в Макс
+            <small>Ответим в течение часа</small>
+          </div>
         </a>
       </div>
     </div>
@@ -1572,11 +1788,20 @@
 
   // Show all cases
   function showAllCases() {
-    document.querySelectorAll('.case-extra').forEach(c => {
-      c.classList.add('shown');
-      obs.observe(c);
-    });
-    document.getElementById('cases-btn').style.display = 'none';
+    const extras = document.querySelectorAll('.case-extra');
+    const btn = document.getElementById('cases-btn');
+    const isShown = btn.dataset.shown === '1';
+    if (!isShown) {
+      extras.forEach(c => { c.classList.add('shown'); obs.observe(c); });
+      btn.dataset.shown = '1';
+      btn.innerHTML = 'Скрыть кейсы <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      btn.setAttribute('aria-expanded','true');
+    } else {
+      extras.forEach(c => c.classList.remove('shown'));
+      btn.dataset.shown = '0';
+      btn.innerHTML = 'Показать ещё кейсы <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      btn.setAttribute('aria-expanded','false');
+    }
   }
 
   // Form toggle
@@ -1601,6 +1826,22 @@
     alert('Заявка принята! Свяжемся с вами в ближайшее время.');
     e.target.reset(); sw('yes');
   }
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+      }
+    });
+  });
 </script>
 </body>
 </html>

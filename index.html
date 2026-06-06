@@ -857,8 +857,8 @@
       padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
     }
     .utp-tag.guarantee{background:rgba(132,204,22,.15);color:var(--lime);border:1px solid rgba(132,204,22,.25)}
-    .utp-tag.ai{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.25)}
-    .utp-num{font-size:11px;font-weight:700;color:var(--d-muted);margin-bottom:10px;letter-spacing:.5px}
+    .utp-tag.ai{background:rgba(132,204,22,.1);color:var(--lime);border:1px solid rgba(132,204,22,.2)}
+    .utp-num{display:none}
     .utp-card h3{font-size:16px;color:#e2e8f0;margin-bottom:8px;line-height:1.3}
     .utp-card p{color:var(--d-muted);font-size:13px;line-height:1.6;margin-bottom:0}
     .utp-metric{font-size:52px;font-weight:800;line-height:1;color:var(--lime);font-family:'Inter',sans-serif;letter-spacing:-2px;margin-bottom:4px}
@@ -955,36 +955,29 @@
     .ch-info{display:flex;flex-direction:column;gap:3px}
     .ch-info small{font-size:12px;font-weight:400;opacity:.6}
 
-    /* ─── PRICE SETUP BANNER ─── */
-    /* ─── PRICE SETUP CARD (перестройка как услуга) ─── */
+    /* ─── PRICE SETUP CARD (перестройка — тёмная карточка) ─── */
     .price-setup-card{
-      display:grid;grid-template-columns:1fr 1.6fr;
-      border:1.5px solid rgba(29,78,216,.18);border-radius:var(--rl);
-      background:linear-gradient(135deg,var(--blue-lt),#fff);overflow:hidden;margin-bottom:24px;
+      display:grid;grid-template-columns:1fr 1.35fr;
+      background:#0f172a;border:none;
+      border-radius:20px;overflow:hidden;
     }
-    .price-setup-card-head{padding:32px 32px;border-right:1.5px solid rgba(29,78,216,.1)}
-    .price-setup-card-body{padding:32px 32px}
-    .price-setup-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
-    .price-setup-amount-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
-    .price-setup-amount{font-size:38px;font-weight:800;letter-spacing:-1.5px;color:var(--ink);line-height:1;font-family:'Inter',sans-serif}
-    .price-setup-name{font-size:15px;font-weight:600;color:var(--muted)}
-    .price-setup-desc{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
-    .price-setup-items{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .price-setup-items li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--muted);line-height:1.4}
-    .price-setup-items li svg{flex:0 0 auto;color:#059669;margin-top:2px}
-    .price-setup-gift-badge{
-      display:flex;align-items:center;gap:10px;
-      padding:12px 16px;border-radius:8px;
-      background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.18);
-      font-size:13px;font-weight:600;color:#059669;
-    }
-    .price-setup-gift-badge svg{flex:0 0 auto}
+    .price-setup-card-head{padding:44px 40px;border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column}
+    .price-setup-card-body{padding:44px 40px;display:flex;flex-direction:column}
+    .price-setup-label{font-size:11px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.9px;margin-bottom:20px;display:block}
+    .price-setup-amount-row{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+    .price-setup-amount{font-size:44px;font-weight:800;letter-spacing:-2px;color:#fff;line-height:1;font-family:'Inter',sans-serif}
+    .price-setup-name{font-size:17px;font-weight:600;color:rgba(255,255,255,.55)}
+    .price-setup-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.65;margin:0 0 28px}
+    .price-setup-body-label{font-size:11px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.9px;margin-bottom:18px}
+    .price-setup-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1}
+    .price-setup-items li{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.45}
+    .price-setup-items li svg{flex:0 0 auto;color:var(--lime);margin-top:2px}
     .price-spacer{height:29px;margin-bottom:12px;display:block;pointer-events:none}
-    .price-section-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin:0 0 20px}
-    .price-section-label::after{content:"";flex:1;height:1px;background:var(--line)}
-    .price-tariffs-gap{height:52px}
-    .price-setup-cta{display:block;width:100%;text-align:center;padding:13px 20px;background:var(--blue);color:#fff;border-radius:var(--r);font-size:14px;font-weight:600;letter-spacing:-.1px;transition:background .18s,transform .18s}
-    .price-setup-cta:hover{background:#1a3fd8;transform:translateY(-1px)}
+    .price-section-label{display:flex;align-items:center;gap:14px;font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:1px;margin:0 0 22px}
+    .price-section-label::after{content:"";flex:1;height:1.5px;background:linear-gradient(to right,var(--line),transparent)}
+    .price-tariffs-gap{height:56px}
+    .price-setup-cta{display:block;width:100%;text-align:center;padding:15px 20px;background:var(--lime);color:#0f172a;border-radius:var(--r);font-size:14px;font-weight:700;letter-spacing:-.1px;transition:background .18s,transform .18s;margin-top:auto}
+    .price-setup-cta:hover{background:#bef264;transform:translateY(-1px)}
 
     /* ─── BLOCK POLISH (для остальных блоков) ─── */
     .pain-card-v2{border-radius:14px;transition:transform .22s var(--ease),box-shadow .22s}
@@ -1179,13 +1172,11 @@
 
       <article class="utp-card reveal">
         <span class="utp-tag ai">Ноу-хау</span>
-        <div class="utp-num">03</div>
         <h3>ИИ обновляет карточку каждый час</h3>
         <p>SEO-наполнение меняется автоматически 24/7 — без вашего участия.</p>
       </article>
 
       <article class="utp-card reveal">
-        <div class="utp-num">04</div>
         <h3>Еженедельная отчётность</h3>
         <p>Детальный отчёт каждую неделю: что сделано, как изменились позиции, что делаем дальше.</p>
       </article>
@@ -1198,7 +1189,6 @@
       </article>
 
       <article class="utp-card utp-card--wide reveal">
-        <div class="utp-num">06</div>
         <h3>Не готовы платить — не бросим</h3>
         <p>Даём бесплатного менеджера и обучаем оформить карточку самостоятельно, если пока не готовы к полному сопровождению.</p>
       </article>
@@ -1522,14 +1512,16 @@
     <!-- Перестройка как отдельная услуга -->
     <div class="price-setup-card reveal">
       <div class="price-setup-card-head">
-        <div class="price-setup-label">Разовый платёж · выполняется за 7 дней</div>
+        <div class="price-setup-label">Разовый платёж · за 7 дней</div>
         <div class="price-setup-amount-row">
           <div class="price-setup-amount">150 000 ₽</div>
-          <div class="price-setup-name">Перестройка карточки</div>
         </div>
+        <div class="price-setup-name" style="margin-bottom:14px">Перестройка карточки</div>
         <p class="price-setup-desc">Полная перепаковка карточки с нуля — обязательный фундамент, без которого продвижение не даёт устойчивого результата.</p>
+        <a class="price-setup-cta" href="#contact">Заказать перестройку карточки</a>
       </div>
       <div class="price-setup-card-body">
+        <div class="price-setup-body-label">Что входит</div>
         <ul class="price-setup-items">
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1556,7 +1548,6 @@
             <span>Стратегия и план роста на 90 дней</span>
           </li>
         </ul>
-        <a class="price-setup-cta" href="#contact">Заказать перестройку карточки</a>
       </div>
     </div>
 
@@ -1569,7 +1560,6 @@
         <div class="price-name">Старт</div>
         <div class="price-amount">49 990 ₽</div>
         <div class="price-period">в месяц · только Яндекс Карты</div>
-        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
         <ul class="price-feats">
           <li>Оптимизация одной платформы</li>
           <li>Аудит и базовая SEO-упаковка</li>
@@ -1586,7 +1576,6 @@
         <div class="price-name">Рост</div>
         <div class="price-amount">79 990 ₽</div>
         <div class="price-period">в месяц · Яндекс + 2ГИС + Google</div>
-        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
         <ul class="price-feats">
           <li>Три платформы в одной логике</li>
           <li>Полная SEO-упаковка</li>
@@ -1595,7 +1584,7 @@
           <li>Приоритетная поддержка</li>
         </ul>
         <div class="price-cta">
-          <a class="btn blue" href="#contact" style="width:100%;min-height:50px;font-size:15px">Выбрать</a>
+          <a class="btn blue" href="#contact" style="width:100%;min-height:50px;font-size:15px;font-weight:700">Выбрать тариф</a>
         </div>
       </article>
 
@@ -1604,7 +1593,6 @@
         <div class="price-name">Максимум</div>
         <div class="price-amount">149 990 ₽</div>
         <div class="price-period">в месяц · все платформы</div>
-        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
         <ul class="price-feats">
           <li>Яндекс + 2ГИС + Google</li>
           <li>Расширенная аналитика и конкуренты</li>

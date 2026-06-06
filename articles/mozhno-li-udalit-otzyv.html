@@ -216,6 +216,17 @@
       .art-lead{font-size:17px}
       .art-body > p:first-of-type::first-letter{font-size:52px}
     }
+
+    .art-back-btn{
+      display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;
+      padding:7px 16px;border:1px solid var(--line);border-radius:6px;
+      font-size:13px;font-weight:500;color:var(--muted);background:#fff;
+      box-shadow:0 1px 3px rgba(0,0,0,.06);
+      transition:border-color .18s,color .18s,background .18s;
+      cursor:pointer;
+    }
+    .art-back-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
+    .art-back-btn svg{flex:0 0 auto}
   </style>
 </head>
 <body>

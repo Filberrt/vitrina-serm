@@ -842,13 +842,16 @@
     .result:hover{background:rgba(255,255,255,.08);border-color:rgba(29,78,216,.4);transform:translateX(4px)}
 
     /* ─── UTP GRID ─── */
-    .utp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .utp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     .utp-card{
-      padding:28px 24px;border:1px solid var(--d-border);border-radius:var(--r);
+      padding:28px 24px;border:1px solid var(--d-border);border-radius:14px;
       background:var(--d-card);position:relative;overflow:hidden;
       transition:transform .22s var(--ease),background .22s,border-color .22s;
+      display:flex;flex-direction:column;
     }
     .utp-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.09);border-color:rgba(132,204,22,.2)}
+    .utp-card--featured,.utp-card--wide{grid-column:span 2}
+    .utp-card--featured{background:rgba(132,204,22,.04);border-color:rgba(132,204,22,.18)}
     .utp-tag{
       display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;
       padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
@@ -858,6 +861,9 @@
     .utp-num{font-size:11px;font-weight:700;color:var(--d-muted);margin-bottom:10px;letter-spacing:.5px}
     .utp-card h3{font-size:16px;color:#e2e8f0;margin-bottom:8px;line-height:1.3}
     .utp-card p{color:var(--d-muted);font-size:13px;line-height:1.6;margin-bottom:0}
+    .utp-metric{font-size:52px;font-weight:800;line-height:1;color:var(--lime);font-family:'Inter',sans-serif;letter-spacing:-2px;margin-bottom:4px}
+    .utp-metric-label{font-size:11px;font-weight:700;color:var(--d-muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px}
+    .utp-card--featured .utp-metric{font-size:64px}
 
     /* ─── PRICE 3 ─── */
     .price-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:20px}
@@ -949,13 +955,41 @@
     .ch-info{display:flex;flex-direction:column;gap:3px}
     .ch-info small{font-size:12px;font-weight:400;opacity:.6}
 
+    /* ─── PRICE SETUP BANNER ─── */
+    .price-setup-banner{
+      display:grid;grid-template-columns:1fr 1fr;
+      border:1.5px solid rgba(29,78,216,.18);border-radius:var(--rl);
+      background:var(--blue-lt);overflow:hidden;margin-bottom:24px;
+    }
+    .price-setup-main{padding:24px 28px;border-right:1.5px solid rgba(29,78,216,.12)}
+    .price-setup-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+    .price-setup-amount{font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--ink);line-height:1;margin-bottom:4px;font-family:'Inter',sans-serif}
+    .price-setup-desc{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
+    .price-setup-gift{padding:24px 28px;display:flex;align-items:flex-start;gap:12px}
+    .price-setup-gift-icon{
+      width:36px;height:36px;border-radius:8px;background:rgba(16,185,129,.1);
+      display:grid;place-items:center;flex:0 0 36px;color:#059669;
+    }
+    .price-setup-gift p{margin:0;font-size:14px;color:var(--muted);line-height:1.55}
+    .price-setup-gift strong{color:#059669;display:block;margin-bottom:2px}
+    .price-spacer{height:29px;margin-bottom:12px;display:block;pointer-events:none}
+
+    /* ─── BLOG CARD POLISH ─── */
+    .blog-wrap{display:flex;flex-direction:column}
+    .ac{border-radius:12px!important;transition:box-shadow .22s var(--ease),transform .22s var(--ease)}
+    .ac:hover{box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
+    .ac-feat{border-radius:12px!important}
+
     /* ─── RESPONSIVE ADDITIONS ─── */
     @media(max-width:1040px){
       .utp-grid{grid-template-columns:repeat(2,1fr)}
       .price-grid-3{grid-template-columns:repeat(2,1fr)}
+      .price-setup-banner{grid-template-columns:1fr}
+      .price-setup-main{border-right:none;border-bottom:1.5px solid rgba(29,78,216,.12)}
     }
     @media(max-width:780px){
       .utp-grid,.price-grid-3{grid-template-columns:1fr}
+      .utp-card--featured,.utp-card--wide{grid-column:span 1}
     }
   </style>
 </head>
@@ -1050,31 +1084,31 @@
     <div class="pain-grid-v2">
       <article class="pain-card-v2 reveal" data-num="01">
         <div class="pain-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
         </div>
         <h3>Вы теряете деньги</h3>
-        <p>Карточка ниже конкурентов по запросам, где клиент уже готов обратиться.</p>
+        <p>Каждый день карточка ниже конкурентов — горячие клиенты уходят к тем, кто выше в поиске.</p>
       </article>
       <article class="pain-card-v2 reveal" data-num="02">
         <div class="pain-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
         </div>
         <h3>Клиенты уходят к конкурентам</h3>
-        <p>Мало свежих отзывов, нет ответов, рейтинг слабее соседних компаний.</p>
+        <p>Слабый рейтинг и старые отзывы — клиент скроллит дальше, даже не дочитав вашу карточку.</p>
       </article>
       <article class="pain-card-v2 reveal" data-num="03">
         <div class="pain-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/><line x1="17" y1="9" x2="13" y2="13"/><line x1="13" y1="9" x2="17" y2="13"/></svg>
         </div>
         <h3>Карточка не продаёт</h3>
-        <p>Фото, услуги и описание не объясняют, почему выбрать именно вас.</p>
+        <p>Непонятные услуги, старые фото, нет цен — карточка есть, но не убеждает позвонить.</p>
       </article>
       <article class="pain-card-v2 reveal" data-num="04">
         <div class="pain-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8.5" y1="8.5" x2="13.5" y2="13.5"/><line x1="13.5" y1="8.5" x2="8.5" y2="13.5"/></svg>
         </div>
         <h3>Карточку не находят</h3>
-        <p>Неясно, кто растёт, кто забирает заявки и какие правки делать первыми.</p>
+        <p>По ключевым запросам вас нет — клиент ищет услугу в вашем районе, но не видит вашу компанию.</p>
       </article>
     </div>
     <div class="compare-v2 reveal">
@@ -1106,38 +1140,47 @@
       <h2>6 причин,<br>по которым нас выбирают снова</h2>
     </div>
     <div class="utp-grid">
-      <article class="utp-card reveal">
-        <span class="utp-tag guarantee">Гарантия</span>
-        <div class="utp-num">01</div>
+
+      <article class="utp-card utp-card--featured reveal">
+        <span class="utp-tag guarantee">Гарантия результата</span>
+        <div class="utp-metric">100<span style="font-size:.42em;letter-spacing:0;vertical-align:middle">%</span></div>
         <h3>Сначала результат — потом сотрудничество</h3>
-        <p>Видим рост — продолжаем. Нет результата — не платите. Полная гарантия без оговорок.</p>
+        <p>Видим рост позиций — продолжаем. Нет улучшений — не платите. Это не оговорка, а условие работы с каждым клиентом.</p>
       </article>
+
       <article class="utp-card reveal">
-        <div class="utp-num">02</div>
-        <h3>Запускаем за 7 дней</h3>
-        <p>Перестройка карточки занимает ~7 дней. Первые заявки — раньше, чем конкурент успеет среагировать.</p>
+        <div class="utp-metric">7</div>
+        <div class="utp-metric-label">дней</div>
+        <h3>Запускаем за неделю</h3>
+        <p>Перестройка карточки и первые изменения — уже на 7-й день работы.</p>
       </article>
+
       <article class="utp-card reveal">
         <span class="utp-tag ai">Ноу-хау</span>
         <div class="utp-num">03</div>
         <h3>ИИ обновляет карточку каждый час</h3>
-        <p>Авторская технология: SEO-наполнение меняется автоматически 24/7 — без вашего участия.</p>
+        <p>SEO-наполнение меняется автоматически 24/7 — без вашего участия.</p>
       </article>
+
       <article class="utp-card reveal">
         <div class="utp-num">04</div>
         <h3>Еженедельная отчётность</h3>
         <p>Детальный отчёт каждую неделю: что сделано, как изменились позиции, что делаем дальше.</p>
       </article>
+
       <article class="utp-card reveal">
-        <div class="utp-num">05</div>
-        <h3>18+ NDA-кейсов из разных ниш</h3>
-        <p>Реальные результаты: авто, медицина, рестораны, услуги. Имена скрыты по NDA — цифры открыты.</p>
+        <div class="utp-metric">18<span style="font-size:.42em;letter-spacing:0;vertical-align:middle">+</span></div>
+        <div class="utp-metric-label">NDA-кейсов</div>
+        <h3>Реальные результаты</h3>
+        <p>Авто, медицина, рестораны — разные ниши, открытые цифры.</p>
       </article>
-      <article class="utp-card reveal">
+
+      <article class="utp-card utp-card--wide reveal">
         <div class="utp-num">06</div>
         <h3>Не готовы платить — не бросим</h3>
-        <p>Даём бесплатного менеджера и обучаем оформить карточку самостоятельно, если пока не готовы к сопровождению.</p>
+        <p>Даём бесплатного менеджера и обучаем оформить карточку самостоятельно, если пока не готовы к полному сопровождению.</p>
       </article>
+
     </div>
   </div>
 </section>
@@ -1452,11 +1495,33 @@
       <div class="kicker">Стоимость</div>
       <h2>Прозрачная цена<br>за реальный результат</h2>
     </div>
+
+    <!-- Разовая перестройка — отдельный блок -->
+    <div class="price-setup-banner reveal">
+      <div class="price-setup-main">
+        <div class="price-setup-label">Разовый платёж</div>
+        <div class="price-setup-amount">150 000 ₽</div>
+        <p class="price-setup-desc">Перестройка карточки — выполняется в первые 7 дней: аудит, SEO-структура, визуал, репутация и план роста на 90 дней.</p>
+      </div>
+      <div class="price-setup-gift">
+        <div class="price-setup-gift-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <p>
+          <strong>Перестройка в подарок</strong>
+          При оплате любого тарифа на год вы не платите за перестройку — экономия 150 000 ₽.
+        </p>
+      </div>
+    </div>
+
+    <!-- Три тарифа -->
     <div class="price-grid-3">
       <article class="price-card-3 reveal">
+        <div class="price-spacer" aria-hidden="true"></div>
         <div class="price-name">Старт</div>
         <div class="price-amount">49 990 ₽</div>
         <div class="price-period">в месяц · только Яндекс Карты</div>
+        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
         <ul class="price-feats">
           <li>Оптимизация одной платформы</li>
           <li>Аудит и базовая SEO-упаковка</li>
@@ -1487,9 +1552,11 @@
       </article>
 
       <article class="price-card-3 reveal">
+        <div class="price-spacer" aria-hidden="true"></div>
         <div class="price-name">Максимум</div>
         <div class="price-amount">149 990 ₽</div>
         <div class="price-period">в месяц · все платформы</div>
+        <div class="price-saving">При оплате за год — перестройка в подарок (−150 000 ₽)</div>
         <ul class="price-feats">
           <li>Яндекс + 2ГИС + Google</li>
           <li>Расширенная аналитика и конкуренты</li>
@@ -1503,9 +1570,7 @@
         </div>
       </article>
     </div>
-    <div class="price-note reveal">
-      <strong>Разовая перестройка карточки — 150 000 ₽</strong> — выполняется в первые 7 дней: аудит, SEO-структура, визуал, репутация и план роста. При подписке на год — перестройка в подарок.
-    </div>
+
   </div>
 </section>
 
@@ -1784,21 +1849,32 @@
   }, { threshold: .09 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Show all cases
+  // Show cases 3 at a time
   function showAllCases() {
-    const extras = document.querySelectorAll('.case-extra');
+    const extras = Array.from(document.querySelectorAll('.case-extra'));
     const btn = document.getElementById('cases-btn');
-    const isShown = btn.dataset.shown === '1';
-    if (!isShown) {
-      extras.forEach(c => { c.classList.add('shown'); obs.observe(c); });
-      btn.dataset.shown = '1';
-      btn.innerHTML = 'Скрыть кейсы <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      btn.setAttribute('aria-expanded','true');
-    } else {
+    const ARROW_DOWN = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const ARROW_UP = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 10l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    // If in "hide" mode — collapse back to first 3
+    if (btn.dataset.shown === '1') {
       extras.forEach(c => c.classList.remove('shown'));
       btn.dataset.shown = '0';
-      btn.innerHTML = 'Показать ещё кейсы <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      btn.setAttribute('aria-expanded','false');
+      btn.innerHTML = 'Показать ещё кейсы ' + ARROW_DOWN;
+      btn.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    // Show next batch of 3
+    const hidden = extras.filter(c => !c.classList.contains('shown'));
+    hidden.slice(0, 3).forEach(c => { c.classList.add('shown'); obs.observe(c); });
+
+    // If all shown now — switch to hide mode
+    const allShown = extras.every(c => c.classList.contains('shown'));
+    if (allShown) {
+      btn.dataset.shown = '1';
+      btn.innerHTML = 'Скрыть кейсы ' + ARROW_UP;
+      btn.setAttribute('aria-expanded', 'true');
     }
   }
 

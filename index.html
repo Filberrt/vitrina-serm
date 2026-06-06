@@ -956,23 +956,40 @@
     .ch-info small{font-size:12px;font-weight:400;opacity:.6}
 
     /* ─── PRICE SETUP BANNER ─── */
-    .price-setup-banner{
-      display:grid;grid-template-columns:1fr 1fr;
+    /* ─── PRICE SETUP CARD (перестройка как услуга) ─── */
+    .price-setup-card{
+      display:grid;grid-template-columns:1fr 1.6fr;
       border:1.5px solid rgba(29,78,216,.18);border-radius:var(--rl);
-      background:var(--blue-lt);overflow:hidden;margin-bottom:24px;
+      background:linear-gradient(135deg,var(--blue-lt),#fff);overflow:hidden;margin-bottom:24px;
     }
-    .price-setup-main{padding:24px 28px;border-right:1.5px solid rgba(29,78,216,.12)}
-    .price-setup-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-    .price-setup-amount{font-size:32px;font-weight:800;letter-spacing:-1px;color:var(--ink);line-height:1;margin-bottom:4px;font-family:'Inter',sans-serif}
-    .price-setup-desc{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
-    .price-setup-gift{padding:24px 28px;display:flex;align-items:flex-start;gap:12px}
-    .price-setup-gift-icon{
-      width:36px;height:36px;border-radius:8px;background:rgba(16,185,129,.1);
-      display:grid;place-items:center;flex:0 0 36px;color:#059669;
+    .price-setup-card-head{padding:32px 32px;border-right:1.5px solid rgba(29,78,216,.1)}
+    .price-setup-card-body{padding:32px 32px}
+    .price-setup-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+    .price-setup-amount-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+    .price-setup-amount{font-size:38px;font-weight:800;letter-spacing:-1.5px;color:var(--ink);line-height:1;font-family:'Inter',sans-serif}
+    .price-setup-name{font-size:15px;font-weight:600;color:var(--muted)}
+    .price-setup-desc{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
+    .price-setup-items{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .price-setup-items li{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--muted);line-height:1.4}
+    .price-setup-items li svg{flex:0 0 auto;color:#059669;margin-top:2px}
+    .price-setup-gift-badge{
+      display:flex;align-items:center;gap:10px;
+      padding:12px 16px;border-radius:8px;
+      background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.18);
+      font-size:13px;font-weight:600;color:#059669;
     }
-    .price-setup-gift p{margin:0;font-size:14px;color:var(--muted);line-height:1.55}
-    .price-setup-gift strong{color:#059669;display:block;margin-bottom:2px}
+    .price-setup-gift-badge svg{flex:0 0 auto}
     .price-spacer{height:29px;margin-bottom:12px;display:block;pointer-events:none}
+
+    /* ─── BLOCK POLISH (для остальных блоков) ─── */
+    .pain-card-v2{border-radius:14px;transition:transform .22s var(--ease),box-shadow .22s}
+    .pain-card-v2:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+    .compare-v2-box{border-radius:14px}
+    .work-card{border-radius:12px;transition:box-shadow .22s}
+    .work-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.07)}
+    .material-card{border-radius:14px;transition:transform .22s var(--ease),box-shadow .22s}
+    .material-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08)}
+    .faq-item{border-radius:12px}
 
     /* ─── BLOG CARD POLISH ─── */
     .blog-wrap{display:flex;flex-direction:column}
@@ -1496,21 +1513,47 @@
       <h2>Прозрачная цена<br>за реальный результат</h2>
     </div>
 
-    <!-- Разовая перестройка — отдельный блок -->
-    <div class="price-setup-banner reveal">
-      <div class="price-setup-main">
-        <div class="price-setup-label">Разовый платёж</div>
-        <div class="price-setup-amount">150 000 ₽</div>
-        <p class="price-setup-desc">Перестройка карточки — выполняется в первые 7 дней: аудит, SEO-структура, визуал, репутация и план роста на 90 дней.</p>
-      </div>
-      <div class="price-setup-gift">
-        <div class="price-setup-gift-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <!-- Перестройка как отдельная услуга -->
+    <div class="price-setup-card reveal">
+      <div class="price-setup-card-head">
+        <div class="price-setup-label">Разовый платёж · выполняется за 7 дней</div>
+        <div class="price-setup-amount-row">
+          <div class="price-setup-amount">150 000 ₽</div>
+          <div class="price-setup-name">Перестройка карточки</div>
         </div>
-        <p>
-          <strong>Перестройка в подарок</strong>
-          При оплате любого тарифа на год вы не платите за перестройку — экономия 150 000 ₽.
-        </p>
+        <p class="price-setup-desc">Полная перепаковка карточки с нуля — обязательный фундамент, без которого продвижение не даёт устойчивого результата.</p>
+      </div>
+      <div class="price-setup-card-body">
+        <ul class="price-setup-items">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Аудит карточки и конкурентов</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>SEO-структура: категории, услуги, запросы</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Визуальная упаковка: фото, обложки, витрина</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Работа с отзывами и репутацией на старте</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Описания, услуги и точки действия</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Стратегия и план роста на 90 дней</span>
+          </li>
+        </ul>
+        <div class="price-setup-gift-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          При оплате любого тарифа на год — перестройка в подарок (−150 000 ₽)
+        </div>
       </div>
     </div>
 

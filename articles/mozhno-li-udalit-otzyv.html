@@ -183,7 +183,7 @@
     .cta-btn:hover{background:var(--blue);transform:translateY(-2px)}
 
     /* PREV/NEXT */
-    .pn-nav{
+    .pn-nav-OLD{
       width:min(1200px,calc(100% - 48px));margin:0 auto;
       padding:24px 0 48px;
       display:flex;justify-content:space-between;gap:16px;
@@ -227,6 +227,17 @@
     }
     .art-back-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
     .art-back-btn svg{flex:0 0 auto}
+
+    .pn-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:24px 0;border-top:1px solid var(--line)}
+    .pn-home{
+      display:flex;align-items:center;gap:6px;
+      padding:10px 18px;border:1px solid var(--line);border-radius:var(--r);
+      font-size:13px;font-weight:500;color:var(--muted);background:#fff;
+      white-space:nowrap;
+      transition:border-color .18s,color .18s,background .18s;
+    }
+    .pn-home:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-lt)}
+    .pn-home svg{flex:0 0 auto}
   </style>
 </head>
 <body>
@@ -351,6 +362,11 @@
   </div>
 
   <nav class="pn-nav" aria-label="Соседние статьи">
+    <a class="pn-home" href="../index.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 8L7 2l5 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><rect x="4.5" y="8" width="5" height="4.5" rx=".5" stroke="currentColor" stroke-width="1.4"/></svg>
+      На главную
+    </a>
+
     <a class="pn-link" href="chto-takoe-hajlajty.html"><svg viewBox="0 0 16 16" fill="none"><path d="M11 8H5M8 5l-3 3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Что такое хайлайты</a>
     <a class="pn-link" href="kak-zapolnit-blok-storis.html">Как заполнить сторис<svg viewBox="0 0 16 16" fill="none"><path d="M5 8h6M8 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </nav>

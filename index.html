@@ -87,6 +87,26 @@
     .nav-links a{transition:color .15s}
     .nav-links a:hover{color:#fff}
 
+    /* ─── CURSOR TRAIL ─── */
+    .cur-dot{
+      position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+      width:8px;height:8px;border-radius:50%;
+      background:#a3e635;
+      transform:translate(-50%,-50%);
+      transition:width .15s,height .15s,opacity .3s;
+      mix-blend-mode:difference;
+    }
+    .cur-ring{
+      position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
+      width:36px;height:36px;border-radius:50%;
+      border:1.5px solid rgba(163,230,53,.45);
+      transform:translate(-50%,-50%);
+      transition:opacity .3s;
+    }
+    .cur-dot.hov{width:14px;height:14px}
+    .cur-ring.hov{width:52px;height:52px;border-color:rgba(163,230,53,.7)}
+    @media(hover:none),(max-width:780px){.cur-dot,.cur-ring{display:none}}
+
     /* ─── BUTTONS ─── */
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -120,19 +140,56 @@
       display:flex;align-items:center;overflow:hidden;
       background:var(--dark);color:#fff;
     }
-    /* animated gradient blobs */
+    /* ─── ANIMATED GRADIENT MESH ─── */
     .blob{
       position:absolute;border-radius:50%;
-      filter:blur(90px);pointer-events:none;
-      animation:blobFloat 10s ease-in-out infinite;
+      filter:blur(110px);pointer-events:none;
+      opacity:1;will-change:transform;
     }
-    .blob-1{width:600px;height:600px;top:-150px;right:-100px;background:rgba(29,78,216,.18);animation-duration:11s}
-    .blob-2{width:500px;height:500px;bottom:-80px;left:-80px;background:rgba(16,185,129,.11);animation-duration:14s;animation-delay:-4s}
-    .blob-3{width:380px;height:380px;top:30%;right:30%;background:rgba(132,204,22,.07);animation-duration:9s;animation-delay:-7s}
-    @keyframes blobFloat{
-      0%,100%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(24px,-18px) scale(1.04)}
-      66%{transform:translate(-18px,12px) scale(.97)}
+    .blob-1{
+      width:700px;height:560px;top:-180px;right:-120px;
+      background:radial-gradient(ellipse,rgba(29,78,216,.32) 0%,transparent 70%);
+      animation:mesh1 18s ease-in-out infinite;
+    }
+    .blob-2{
+      width:560px;height:620px;bottom:-120px;left:-80px;
+      background:radial-gradient(ellipse,rgba(16,185,129,.2) 0%,transparent 70%);
+      animation:mesh2 22s ease-in-out infinite;
+    }
+    .blob-3{
+      width:420px;height:420px;top:25%;left:35%;
+      background:radial-gradient(ellipse,rgba(132,204,22,.13) 0%,transparent 70%);
+      animation:mesh3 15s ease-in-out infinite;
+    }
+    .blob-4{
+      width:480px;height:380px;top:10%;left:-60px;
+      background:radial-gradient(ellipse,rgba(99,102,241,.18) 0%,transparent 70%);
+      animation:mesh1 26s ease-in-out infinite reverse;
+    }
+    .blob-5{
+      width:340px;height:340px;bottom:5%;right:10%;
+      background:radial-gradient(ellipse,rgba(14,165,233,.15) 0%,transparent 70%);
+      animation:mesh2 20s ease-in-out infinite -6s;
+    }
+    @keyframes mesh1{
+      0%  {transform:translate(0,0) scale(1)}
+      20% {transform:translate(45px,-70px) scale(1.07)}
+      45% {transform:translate(-25px,55px) scale(.94)}
+      70% {transform:translate(65px,25px) scale(1.04)}
+      100%{transform:translate(0,0) scale(1)}
+    }
+    @keyframes mesh2{
+      0%  {transform:translate(0,0) scale(1)}
+      25% {transform:translate(-60px,40px) scale(1.06)}
+      55% {transform:translate(50px,-55px) scale(.96)}
+      80% {transform:translate(-30px,-20px) scale(1.03)}
+      100%{transform:translate(0,0) scale(1)}
+    }
+    @keyframes mesh3{
+      0%  {transform:translate(0,0) scale(1)}
+      33% {transform:translate(35px,50px) scale(1.09)}
+      66% {transform:translate(-45px,-35px) scale(.92)}
+      100%{transform:translate(0,0) scale(1)}
     }
     @media(prefers-reduced-motion:reduce){.blob{animation:none}}
 
@@ -1318,6 +1375,8 @@
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="blob blob-5"></div>
   <div class="wrap hero-grid">
 
     <div class="reveal">
@@ -2458,6 +2517,55 @@
       cancelAnimationFrame(rafId);
       card.style.transition = '';
       card.style.transform = '';
+    });
+  })();
+
+  // ── CURSOR TRAIL ──
+  (function(){
+    if(window.matchMedia('(hover:none)').matches) return;
+    const dot  = document.createElement('div'); dot.className  = 'cur-dot';
+    const ring = document.createElement('div'); ring.className = 'cur-ring';
+    document.body.append(dot, ring);
+
+    let mx=0,my=0, rx=0,ry=0;
+    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
+    document.addEventListener('mouseleave',()=>{ dot.style.opacity='0'; ring.style.opacity='0'; });
+    document.addEventListener('mouseenter', ()=>{ dot.style.opacity=''; ring.style.opacity=''; });
+
+    // hover state on interactive elements
+    const hoverEls = 'a,button,.btn,.price-btn,.case-link,.proto-list li';
+    document.querySelectorAll(hoverEls).forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ dot.classList.add('hov'); ring.classList.add('hov'); });
+      el.addEventListener('mouseleave',()=>{ dot.classList.remove('hov'); ring.classList.remove('hov'); });
+    });
+
+    let rafId;
+    (function tick(){
+      rafId = requestAnimationFrame(tick);
+      dot.style.transform  = `translate(${mx-4}px,${my-4}px)`;
+      rx += (mx-rx)*.1; ry += (my-ry)*.1;
+      ring.style.transform = `translate(${rx-18}px,${ry-18}px)`;
+    })();
+  })();
+
+  // ── MAGNETIC BUTTONS ──
+  (function(){
+    const STRENGTH = 0.38;
+    document.querySelectorAll('.btn.primary,.price-btn.featured-btn').forEach(btn=>{
+      btn.style.transition = 'transform .5s cubic-bezier(.23,1,.32,1), box-shadow .18s, filter .18s';
+
+      btn.addEventListener('mousemove', e=>{
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width*.5)) * STRENGTH;
+        const dy = (e.clientY - (r.top  + r.height*.5)) * STRENGTH;
+        btn.style.transition = 'transform .08s linear, box-shadow .18s, filter .18s';
+        btn.style.transform  = `translate(${dx}px,${dy}px) translateY(-2px)`;
+      });
+
+      btn.addEventListener('mouseleave', ()=>{
+        btn.style.transition = 'transform .5s cubic-bezier(.23,1,.32,1), box-shadow .18s, filter .18s';
+        btn.style.transform  = '';
+      });
     });
   })();
 

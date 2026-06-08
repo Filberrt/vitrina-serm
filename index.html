@@ -980,106 +980,115 @@
       pointer-events:none;z-index:0;
     }
     .price-grid-3{
-      display:grid;grid-template-columns:repeat(3,1fr);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      grid-template-rows:repeat(5,auto);
       gap:0;margin-bottom:0;position:relative;z-index:1;
-      align-items:start;
     }
-
-    /* Card base */
-    .price-card-3{
-      position:relative;overflow:hidden;
-      display:flex;flex-direction:column;
-      transition:transform .28s var(--ease),box-shadow .28s;
-      border-right:1px solid rgba(255,255,255,.07);
-    }
-    .price-card-3:last-child{border-right:none}
-
-    /* color bar at top */
-    .price-card-3::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
-      background:var(--plan-color, rgba(255,255,255,.15));
-      opacity:.7;
-    }
-    /* glow orb behind card */
-    .price-card-3::after{
-      content:"";position:absolute;top:-60px;left:50%;transform:translateX(-50%);
-      width:200px;height:200px;border-radius:50%;
-      background:radial-gradient(circle,var(--plan-color,rgba(255,255,255,.1)) 0%,transparent 70%);
-      opacity:.12;pointer-events:none;z-index:0;
-      transition:opacity .35s;
-    }
-    .price-card-3:hover::after{opacity:.22}
 
     /* plan color vars */
     .price-card-3.plan-base{--plan-color:#10b981;--plan-rgb:16,185,129}
     .price-card-3.plan-std{--plan-color:#818cf8;--plan-rgb:129,140,248}
     .price-card-3.plan-max{--plan-color:#fbbf24;--plan-rgb:251,191,36}
 
-    /* featured (center) */
-    .price-card-3.featured{
-      background:linear-gradient(160deg,rgba(var(--plan-rgb),.08) 0%,rgba(var(--plan-rgb),.03) 100%);
+    /* Card — subgrid for cross-card alignment */
+    .price-card-3{
+      position:relative;overflow:hidden;
+      display:grid;
+      grid-row:span 5;
+      grid-template-rows:subgrid;
       border-right:1px solid rgba(255,255,255,.07);
+      transition:box-shadow .28s;
+    }
+    .price-card-3:last-child{border-right:none}
+
+    /* colored top bar */
+    .price-card-3::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
+      background:var(--plan-color,rgba(255,255,255,.15));opacity:.7;
+    }
+    /* glow orb */
+    .price-card-3::after{
+      content:"";position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+      width:180px;height:180px;border-radius:50%;
+      background:radial-gradient(circle,var(--plan-color,rgba(255,255,255,.1)) 0%,transparent 70%);
+      opacity:.1;pointer-events:none;z-index:0;transition:opacity .35s;
+    }
+    .price-card-3:hover::after{opacity:.2}
+    .price-card-3.featured::before{opacity:1;height:4px}
+    .price-card-3.featured::after{opacity:.18;top:-40px;width:260px;height:260px}
+    .price-card-3.featured{
+      background:linear-gradient(160deg,rgba(var(--plan-rgb),.08) 0%,rgba(var(--plan-rgb),.02) 100%);
       z-index:2;
     }
-    .price-card-3.featured::before{opacity:1;height:4px}
-    .price-card-3.featured::after{opacity:.2;top:-40px;width:280px;height:280px}
 
-    /* watermark number */
+    /* watermark */
     .price-plan-num{
-      position:absolute;bottom:-10px;right:16px;z-index:0;
-      font-size:120px;font-weight:900;line-height:1;
-      color:rgba(255,255,255,.028);
+      position:absolute;bottom:-10px;right:14px;z-index:0;
+      font-size:110px;font-weight:900;line-height:1;
+      color:rgba(255,255,255,.025);
       font-family:'Inter',sans-serif;letter-spacing:-6px;
       pointer-events:none;user-select:none;
     }
-    .price-card-3.featured .price-plan-num{color:rgba(var(--plan-rgb),.05)}
+    .price-card-3.featured .price-plan-num{color:rgba(var(--plan-rgb),.045)}
 
-    .price-card-3-header{padding:32px 28px 20px;position:relative;z-index:1}
-    .price-card-3-body{padding:20px 28px 28px;flex:1;display:flex;flex-direction:column;position:relative;z-index:1}
+    /* 5 alignment zones — all direct children of .price-card-3 */
+    .price-zone-badge{
+      padding:22px 28px 0;
+      display:flex;align-items:flex-end;
+      min-height:52px;
+    }
+    .price-zone-head{padding:16px 28px 0;position:relative;z-index:1}
+    .price-zone-plat{padding:14px 28px;position:relative;z-index:1}
+    .price-zone-feats{
+      padding:0 28px;position:relative;z-index:1;
+      display:flex;flex-direction:column;
+    }
+    .price-zone-cta{padding:16px 28px 28px;position:relative;z-index:1}
 
-    /* badge on featured */
+    /* badge */
     .price-badge{
       display:inline-flex;align-items:center;
-      padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;
-      width:fit-content;letter-spacing:.5px;white-space:nowrap;
-      background:rgba(var(--plan-rgb),.18);
-      color:var(--plan-color);
+      padding:5px 13px;border-radius:20px;font-size:10px;font-weight:700;
+      letter-spacing:.5px;white-space:nowrap;
+      background:rgba(var(--plan-rgb),.18);color:var(--plan-color);
       border:1px solid rgba(var(--plan-rgb),.3);
-      margin-bottom:14px;
-    }
-    .price-name{
-      font-size:10px;font-weight:700;color:rgba(255,255,255,.3);
-      text-transform:uppercase;letter-spacing:1.4px;margin-bottom:12px;
-    }
-    .price-amount{
-      font-size:46px;font-weight:900;line-height:1;letter-spacing:-2px;
-      margin-bottom:3px;font-family:'Inter',sans-serif;
-      color:#fff;
-    }
-    .price-card-3.featured .price-amount{color:var(--plan-color)}
-    .price-period{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:0}
-    .price-platforms{display:flex;gap:5px;margin-top:14px;flex-wrap:wrap}
-    .price-plat-tag{
-      font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;
-      background:rgba(var(--plan-rgb),.1);
-      color:var(--plan-color);
-      border:1px solid rgba(var(--plan-rgb),.2);
-      letter-spacing:.4px;text-transform:uppercase;
     }
 
-    /* year row */
+    /* name / price / period */
+    .price-name{
+      font-size:10px;font-weight:700;color:rgba(255,255,255,.3);
+      text-transform:uppercase;letter-spacing:1.4px;margin-bottom:10px;
+    }
+    .price-amount{
+      font-size:44px;font-weight:900;line-height:1;letter-spacing:-2px;
+      margin-bottom:4px;font-family:'Inter',sans-serif;color:#fff;
+    }
+    .price-card-3.featured .price-amount{color:var(--plan-color)}
+    .price-period{font-size:12px;color:rgba(255,255,255,.35);font-weight:500}
+
+    /* platform pills */
+    .price-platforms{display:flex;gap:5px;flex-wrap:wrap}
+    .price-plat-tag{
+      font-size:9px;font-weight:800;padding:3px 9px;border-radius:20px;
+      background:rgba(var(--plan-rgb),.1);color:var(--plan-color);
+      border:1px solid rgba(var(--plan-rgb),.2);letter-spacing:.4px;text-transform:uppercase;
+    }
+
+    /* year row — now includes bonus hint */
     .price-year-row{
-      display:flex;flex-direction:column;gap:4px;
+      display:flex;flex-direction:column;gap:3px;
       padding:10px 13px;border-radius:10px;
       background:rgba(var(--plan-rgb),.07);
       border:1px solid rgba(var(--plan-rgb),.18);
-      margin-bottom:16px;
+      margin-bottom:14px;
     }
     .price-year-amount{font-size:11.5px;font-weight:700;color:var(--plan-color)}
-    .price-year-incl{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:5px}
-    .price-year-incl::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--plan-color);flex-shrink:0}
+    .price-year-incl{font-size:10.5px;font-weight:600;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px}
+    .price-year-bonus{font-size:10px;font-weight:700;color:#4ade80;display:flex;align-items:center;gap:4px}
+    .price-year-bonus::before{content:"🎁";font-size:9px}
 
-    /* feature list */
+    /* features */
     .price-feats{margin:0;padding:0;list-style:none;display:grid;gap:8px;flex:1}
     .price-feats li{
       position:relative;padding-left:20px;
@@ -1095,47 +1104,22 @@
       font-size:8px;font-weight:900;color:var(--plan-color);line-height:1;
     }
 
-    /* CTA buttons */
-    .price-cta{margin-top:20px}
+    /* CTA button */
     .price-btn{
       display:block;width:100%;min-height:48px;
       border-radius:12px;font-size:13px;font-weight:700;
       text-align:center;line-height:48px;
       transition:all .22s;text-decoration:none;
       border:1.5px solid rgba(var(--plan-rgb),.3);
-      background:rgba(var(--plan-rgb),.08);
-      color:var(--plan-color);
+      background:rgba(var(--plan-rgb),.08);color:var(--plan-color);
     }
     .price-btn:hover{background:rgba(var(--plan-rgb),.18);border-color:rgba(var(--plan-rgb),.5);transform:translateY(-1px)}
     .price-btn.featured-btn{
-      background:var(--plan-color);color:#fff;
-      border-color:transparent;
+      background:var(--plan-color);color:#fff;border-color:transparent;
       box-shadow:0 8px 24px rgba(var(--plan-rgb),.4);
       font-size:14px;min-height:52px;line-height:52px;
     }
     .price-btn.featured-btn:hover{opacity:.9;box-shadow:0 12px 30px rgba(var(--plan-rgb),.5)}
-
-    /* annual bonus strip */
-    .price-annual-bonus{
-      margin-top:36px;position:relative;z-index:1;
-      background:linear-gradient(100deg,rgba(74,222,128,.05) 0%,rgba(99,102,241,.05) 100%);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px;padding:20px 28px;
-      display:flex;align-items:center;gap:20px;
-    }
-    .price-annual-bonus-icon{
-      width:46px;height:46px;border-radius:12px;flex-shrink:0;
-      background:linear-gradient(135deg,rgba(74,222,128,.15),rgba(99,102,241,.15));
-      border:1px solid rgba(255,255,255,.08);
-      display:flex;align-items:center;justify-content:center;font-size:22px;
-    }
-    .price-annual-bonus-body{flex:1}
-    .price-annual-bonus-label{font-size:10px;font-weight:700;color:#a3e635;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px}
-    .price-annual-bonus-desc{font-size:14px;font-weight:500;color:rgba(255,255,255,.8);line-height:1.5}
-    .price-annual-bonus-savings{
-      font-size:22px;font-weight:900;color:#4ade80;white-space:nowrap;flex-shrink:0;
-      letter-spacing:-1px;
-    }
     .price-note{
       padding:20px 24px;border-radius:var(--r);
       background:var(--blue-lt);border:1px solid rgba(29,78,216,.12);
@@ -1297,9 +1281,7 @@
     @media(max-width:780px){
       .utp-grid,.price-grid-3{grid-template-columns:1fr}
       .price-tariffs-wrap{padding:36px 20px 32px}
-      .price-annual-bonus{flex-direction:column;text-align:center}
-      .price-annual-bonus-savings{font-size:22px}
-      .utp-card--featured,.utp-card--wide{grid-column:span 1}
+.utp-card--featured,.utp-card--wide{grid-column:span 1}
     }
   </style>
 </head>
@@ -1992,18 +1974,25 @@
         <!-- БАЗА -->
         <article class="price-card-3 plan-base">
           <span class="price-plan-num" aria-hidden="true">01</span>
-          <div class="price-card-3-header">
+          <!-- Zone 1: badge row (empty placeholder for alignment) -->
+          <div class="price-zone-badge"></div>
+          <!-- Zone 2: name + price + period -->
+          <div class="price-zone-head">
             <div class="price-name">База</div>
             <div class="price-amount">49 990 ₽</div>
-            <div class="price-period">/ месяц</div>
+            <div class="price-period">в месяц</div>
+          </div>
+          <!-- Zone 3: platforms -->
+          <div class="price-zone-plat">
             <div class="price-platforms">
               <span class="price-plat-tag">Яндекс Карты</span>
             </div>
           </div>
-          <div class="price-card-3-body">
+          <!-- Zone 4: year-row + features -->
+          <div class="price-zone-feats">
             <div class="price-year-row">
-              <div class="price-year-amount">499 900 ₽ / год</div>
-              <div class="price-year-incl">Перестройка за 149 990 ₽ бесплатно</div>
+              <div class="price-year-amount">499 900 ₽ при оплате за год</div>
+              <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
               <li>Ведение карточки в Яндекс Картах</li>
@@ -2014,29 +2003,38 @@
               <li>Ежемесячная SEO-оптимизация</li>
               <li>Ежемесячный отчёт</li>
             </ul>
-            <div class="price-cta">
-              <a class="price-btn" href="#contact">Начать с Базы</a>
-            </div>
+          </div>
+          <!-- Zone 5: CTA -->
+          <div class="price-zone-cta">
+            <a class="price-btn" href="#contact">Начать с Базы</a>
           </div>
         </article>
 
         <!-- СТАНДАРТ -->
         <article class="price-card-3 plan-std featured">
           <span class="price-plan-num" aria-hidden="true">02</span>
-          <div class="price-card-3-header">
+          <!-- Zone 1: badge -->
+          <div class="price-zone-badge">
             <div class="price-badge">★ Популярный выбор</div>
+          </div>
+          <!-- Zone 2: name + price + period -->
+          <div class="price-zone-head">
             <div class="price-name">Стандарт</div>
             <div class="price-amount">79 990 ₽</div>
-            <div class="price-period">/ месяц</div>
+            <div class="price-period">в месяц</div>
+          </div>
+          <!-- Zone 3: platforms -->
+          <div class="price-zone-plat">
             <div class="price-platforms">
               <span class="price-plat-tag">Яндекс Карты</span>
               <span class="price-plat-tag">2ГИС</span>
             </div>
           </div>
-          <div class="price-card-3-body">
+          <!-- Zone 4: year-row + features -->
+          <div class="price-zone-feats">
             <div class="price-year-row">
-              <div class="price-year-amount">799 900 ₽ / год</div>
-              <div class="price-year-incl">Перестройка за 149 990 ₽ бесплатно</div>
+              <div class="price-year-amount">799 900 ₽ при оплате за год</div>
+              <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
               <li>Яндекс Карты + 2ГИС одновременно</li>
@@ -2050,29 +2048,37 @@
               <li>Анализ конкурентов раз в месяц</li>
               <li>План улучшений на следующий месяц</li>
             </ul>
-            <div class="price-cta">
-              <a class="price-btn featured-btn" href="#contact">Выбрать Стандарт</a>
-            </div>
+          </div>
+          <!-- Zone 5: CTA -->
+          <div class="price-zone-cta">
+            <a class="price-btn featured-btn" href="#contact">Выбрать Стандарт</a>
           </div>
         </article>
 
         <!-- МАКСИМУМ -->
         <article class="price-card-3 plan-max">
           <span class="price-plan-num" aria-hidden="true">03</span>
-          <div class="price-card-3-header">
+          <!-- Zone 1: badge row (empty placeholder) -->
+          <div class="price-zone-badge"></div>
+          <!-- Zone 2: name + price + period -->
+          <div class="price-zone-head">
             <div class="price-name">Максимум</div>
             <div class="price-amount">149 990 ₽</div>
-            <div class="price-period">/ месяц</div>
+            <div class="price-period">в месяц</div>
+          </div>
+          <!-- Zone 3: platforms -->
+          <div class="price-zone-plat">
             <div class="price-platforms">
               <span class="price-plat-tag">Яндекс Карты</span>
               <span class="price-plat-tag">2ГИС</span>
               <span class="price-plat-tag">Google</span>
             </div>
           </div>
-          <div class="price-card-3-body">
+          <!-- Zone 4: year-row + features -->
+          <div class="price-zone-feats">
             <div class="price-year-row">
-              <div class="price-year-amount">1 499 900 ₽ / год</div>
-              <div class="price-year-incl">Перестройка за 149 990 ₽ бесплатно</div>
+              <div class="price-year-amount">1 499 900 ₽ при оплате за год</div>
+              <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
               <li>3 платформы: Яндекс + 2ГИС + Google</li>
@@ -2086,24 +2092,14 @@
               <li>Рекламная подписка и витрина</li>
               <li>Приоритетная поддержка 24/7</li>
             </ul>
-            <div class="price-cta">
-              <a class="price-btn" href="#contact">Выбрать Максимум</a>
-            </div>
+          </div>
+          <!-- Zone 5: CTA -->
+          <div class="price-zone-cta">
+            <a class="price-btn" href="#contact">Выбрать Максимум</a>
           </div>
         </article>
 
       </div>
-
-      <!-- ГОДОВОЙ БОНУС -->
-      <div class="price-annual-bonus">
-        <div class="price-annual-bonus-icon">🎁</div>
-        <div class="price-annual-bonus-body">
-          <div class="price-annual-bonus-label">Бонус при оплате на год</div>
-          <div class="price-annual-bonus-desc">Берёте любой тариф <strong style="color:#a3e635">сразу на год</strong> — перестройка карточки идёт <strong style="color:#4ade80">бесплатно</strong>. Экономия 149&nbsp;990&nbsp;₽ в вашем кармане.</div>
-        </div>
-        <div class="price-annual-bonus-savings">−149 990 ₽</div>
-      </div>
-
     </div><!-- /.price-tariffs-wrap -->
 
   </div>

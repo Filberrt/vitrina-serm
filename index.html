@@ -87,23 +87,6 @@
     .nav-links a{transition:color .15s}
     .nav-links a:hover{color:#fff}
 
-    /* ─── CURSOR TRAIL ─── */
-    .cur-dot{
-      position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
-      width:5px;height:5px;border-radius:50%;
-      background:rgba(163,230,53,.9);
-      transform:translate(-50%,-50%);
-      transition:opacity .3s,transform .05s;
-    }
-    .cur-ring{
-      position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
-      width:32px;height:32px;border-radius:50%;
-      border:1px solid rgba(163,230,53,.3);
-      transform:translate(-50%,-50%);
-      transition:width .25s ease,height .25s ease,border-color .25s ease,opacity .3s;
-    }
-    .cur-ring.hov{width:44px;height:44px;border-color:rgba(163,230,53,.6)}
-    @media(hover:none),(max-width:780px){.cur-dot,.cur-ring{display:none}}
 
     /* ─── BUTTONS ─── */
     .btn{
@@ -1163,7 +1146,13 @@
       border:1.5px solid rgba(var(--plan-rgb),.3);
       background:rgba(var(--plan-rgb),.08);color:var(--plan-color);
     }
-    .price-btn:hover{background:rgba(var(--plan-rgb),.18);border-color:rgba(var(--plan-rgb),.5);transform:translateY(-1px)}
+    .price-btn:hover{
+      background:rgba(var(--plan-rgb),.18);
+      border-color:rgba(var(--plan-rgb),.5);
+      transform:translateY(-1px);
+      box-shadow:0 14px 36px rgba(var(--plan-rgb),.45),0 0 0 3px rgba(var(--plan-rgb),.15);
+      filter:brightness(1.05);
+    }
     .price-btn.featured-btn{
       background:var(--plan-color);color:#fff;border-color:transparent;
       box-shadow:0 8px 24px rgba(var(--plan-rgb),.4);
@@ -2522,34 +2511,6 @@
       card.style.transition = '';
       card.style.transform = '';
     });
-  })();
-
-  // ── CURSOR TRAIL ──
-  (function(){
-    if(window.matchMedia('(hover:none)').matches) return;
-    const dot  = document.createElement('div'); dot.className  = 'cur-dot';
-    const ring = document.createElement('div'); ring.className = 'cur-ring';
-    document.body.append(dot, ring);
-
-    let mx=0,my=0, rx=0,ry=0;
-    document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
-    document.addEventListener('mouseleave',()=>{ dot.style.opacity='0'; ring.style.opacity='0'; });
-    document.addEventListener('mouseenter', ()=>{ dot.style.opacity=''; ring.style.opacity=''; });
-
-    // hover state on interactive elements
-    const hoverEls = 'a,button,.btn,.price-btn,.case-link,.proto-list li';
-    document.querySelectorAll(hoverEls).forEach(el=>{
-      el.addEventListener('mouseenter',()=>{ ring.classList.add('hov'); });
-      el.addEventListener('mouseleave',()=>{ ring.classList.remove('hov'); });
-    });
-
-    let rafId;
-    (function tick(){
-      rafId = requestAnimationFrame(tick);
-      dot.style.transform  = `translate(${mx-4}px,${my-4}px)`;
-      rx += (mx-rx)*.1; ry += (my-ry)*.1;
-      ring.style.transform = `translate(${rx-18}px,${ry-18}px)`;
-    })();
   })();
 
   // ── MAGNETIC BUTTONS ──

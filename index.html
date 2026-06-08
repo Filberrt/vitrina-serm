@@ -446,10 +446,10 @@
       transition:transform .22s var(--ease),background .22s,box-shadow .22s,border-color .22s;
     }
     .case-card:hover{
-      transform:translateY(-6px);
+      transform:translateY(-5px);
       background:rgba(255,255,255,.09);
-      box-shadow:0 20px 48px rgba(0,0,0,.32);
-      border-color:rgba(132,204,22,.22);
+      box-shadow:0 16px 40px rgba(0,0,0,.25);
+      border-color:rgba(255,255,255,.15);
     }
     .case-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:18px 18px 10px}
     .niche-row{display:flex;align-items:center;gap:10px}
@@ -475,43 +475,12 @@
     }
     .case-desc{padding:0 18px 14px;font-size:13px;color:var(--d-muted);line-height:1.55;flex:1}
     .case-img{
-      height:160px;
+      height:140px;
       background:center/cover no-repeat #0d1625;
       border-top:1px solid var(--d-border);
       border-bottom:1px solid var(--d-border);
       flex-shrink:0;
-      position:relative;overflow:hidden;
     }
-
-    /* hover reveal panel — injected by JS */
-    .case-reveal{
-      position:absolute;inset:0;
-      background:linear-gradient(to top,rgba(4,10,26,.96) 0%,rgba(4,10,26,.55) 55%,transparent 100%);
-      display:flex;flex-direction:column;justify-content:flex-end;
-      padding:16px 18px 14px;
-      opacity:0;
-      transform:translateY(10px);
-      transition:opacity .32s ease,transform .32s ease;
-      pointer-events:none;
-    }
-    .case-card:hover .case-reveal{
-      opacity:1;transform:translateY(0);
-    }
-    .case-reveal-result{
-      font-size:18px;font-weight:800;letter-spacing:-.4px;line-height:1.15;
-      color:#a3e635;margin-bottom:6px;
-    }
-    .case-reveal-cta{
-      font-size:11.5px;font-weight:600;
-      color:rgba(255,255,255,.55);
-      display:flex;align-items:center;gap:5px;
-    }
-    .case-reveal-cta::after{content:"→";transition:transform .2s ease}
-    .case-card:hover .case-reveal-cta::after{transform:translateX(3px)}
-
-    /* badge fades out slightly when reveal shows */
-    .case-badge{transition:opacity .25s ease,transform .25s ease}
-    .case-card:hover .case-badge{opacity:0;transform:translateY(-3px)}
     .case-link{
       display:flex;align-items:center;justify-content:center;gap:5px;
       margin:8px 16px 12px;
@@ -2507,19 +2476,6 @@
     const targetY = elMid - window.innerHeight / 2;
     window.scrollTo({ top: targetY, behavior: 'smooth' });
   }
-
-  // Case cards — hover reveal panel (injected once at load)
-  document.querySelectorAll('.case-card').forEach(card => {
-    const badge = card.querySelector('.case-badge');
-    const img   = card.querySelector('.case-img');
-    if (!badge || !img) return;
-    const panel = document.createElement('div');
-    panel.className = 'case-reveal';
-    panel.innerHTML =
-      `<div class="case-reveal-result">${badge.textContent.trim()}</div>` +
-      `<div class="case-reveal-cta">Читать кейс</div>`;
-    img.appendChild(panel);
-  });
 
   // Show cases 3 at a time
   function showAllCases() {

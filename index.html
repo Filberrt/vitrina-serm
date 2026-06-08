@@ -663,12 +663,12 @@
       box-shadow:0 12px 32px rgba(var(--cat-rgb),.1);
     }
 
-    /* category colors */
-    .ac[data-cat="reviews"]{--cat-color:#f97316;--cat-rgb:249,115,22}
-    .ac[data-cat="design"]{--cat-color:#3b82f6;--cat-rgb:59,130,246}
-    .ac[data-cat="content"]{--cat-color:#10b981;--cat-rgb:16,185,129}
-    .ac[data-cat="ads"]{--cat-color:#8b5cf6;--cat-rgb:139,92,246}
-    .ac[data-cat="manage"]{--cat-color:#6366f1;--cat-rgb:99,102,246}
+    /* category colors — unified, no multicolor */
+    .ac[data-cat="reviews"],
+    .ac[data-cat="design"],
+    .ac[data-cat="content"],
+    .ac[data-cat="ads"],
+    .ac[data-cat="manage"]{--cat-color:#3b82f6;--cat-rgb:59,130,246}
 
     /* featured card */
     .ac-feat{
@@ -707,10 +707,10 @@
     .ac:not(.ac-feat) .ac-cat{display:none}
     .ac-feat .ac-cat{background:rgba(132,204,22,.15);color:var(--lime);border-color:rgba(132,204,22,.25)}
     .ac h3{
-      font-size:17px;line-height:1.3;font-family:'Calistoga',serif;
-      font-weight:400;color:var(--ink);margin-bottom:10px;
+      font-size:19px;line-height:1.3;font-family:'Inter',sans-serif;
+      font-weight:700;color:var(--ink);margin-bottom:10px;
     }
-    .ac-feat h3{font-size:21px;color:#fff}
+    .ac-feat h3{font-size:22px;color:#fff;font-family:'Calistoga',serif;font-weight:400}
     .ac-desc{color:var(--muted);font-size:13.5px;line-height:1.6;margin-bottom:14px;flex:1}
     .ac-feat .ac-desc{color:rgba(224,231,255,.65)}
     .ac-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
@@ -987,9 +987,9 @@
     }
 
     /* plan color vars */
-    .price-card-3.plan-base{--plan-color:#10b981;--plan-rgb:16,185,129}
-    .price-card-3.plan-std{--plan-color:#818cf8;--plan-rgb:129,140,248}
-    .price-card-3.plan-max{--plan-color:#fbbf24;--plan-rgb:251,191,36}
+    .price-card-3.plan-base{--plan-color:#38bdf8;--plan-rgb:56,189,248}
+    .price-card-3.plan-std{--plan-color:#22c55e;--plan-rgb:34,197,94}
+    .price-card-3.plan-max{--plan-color:#f59e0b;--plan-rgb:245,158,11}
 
     /* Card — subgrid for cross-card alignment */
     .price-card-3{
@@ -1039,7 +1039,8 @@
       min-height:52px;
     }
     .price-zone-head{padding:16px 28px 0;position:relative;z-index:1}
-    .price-zone-plat{padding:14px 28px;position:relative;z-index:1}
+    .price-amount-row{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+    .price-zone-plat{padding:0 28px;position:relative;z-index:1;display:none}
     .price-zone-feats{
       padding:0 28px;position:relative;z-index:1;
       display:flex;flex-direction:column;
@@ -1377,15 +1378,15 @@
     <div class="reveal">
       <div class="proto-badge">Бесплатно</div>
       <h2 class="proto-h2">Что такое<br>готовый прототип?</h2>
-      <p class="proto-lead">Прежде чем платить — вы видите результат. Мы берём вашу карточку, анализируем её, и показываем как она будет выглядеть после оптимизации: заголовок, описание, SEO-структура услуг и визуальная упаковка.</p>
+      <p class="proto-lead">Сначала вы видите результат, потом оплачиваете. Мы берём вашу карточку, анализируем её, и показываем как она будет выглядеть после оптимизации: заголовок, описание, SEO-структура услуг и визуальная упаковка.</p>
       <ul class="proto-list">
         <li>
           <span class="p-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>Разбор вашей карточки — где теряются клиенты прямо сейчас</span>
+          <span>Разбор вашей карточки: где теряются клиенты прямо сейчас</span>
         </li>
         <li>
           <span class="p-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>Новый заголовок, описание и SEO-структура услуг под ваш район</span>
+          <span>Новое описание и SEO-структура услуг под ваш район</span>
         </li>
         <li>
           <span class="p-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -1567,24 +1568,24 @@
     <div class="work-layout">
       <aside class="work-sticky reveal">
         <h3>Как проходит перестройка</h3>
-        <p>Мы работаем через официальные доступы в Яндекс Картах, 2ГИС и Google Maps. Карточки остаются под контролем владельца, а все изменения фиксируются в еженедельной отчётности.</p>
+        <p>Разбираем текущую ситуацию, усиливаем карточки и готовим основу для роста: больше доверия, понятнее услуги, сильнее визуал и короче путь до звонка, маршрута или заявки.</p>
         <div class="metric-row" style="grid-template-columns:1fr;margin-top:24px">
           <div class="metric">
             <span style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <b style="color:#fff;font-size:14px">Доступы остаются у владельца</b>
+              <b style="color:#fff;font-size:14px">Без передачи паролей</b>
             </span>
           </div>
           <div class="metric">
             <span style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <b style="color:#fff;font-size:14px">Карточки обновляются поэтапно</b>
+              <b style="color:#fff;font-size:14px">Постоянная работа</b>
             </span>
           </div>
           <div class="metric">
             <span style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="var(--lime)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <b style="color:#fff;font-size:14px">Через 7 дней — готовая база для роста</b>
+              <b style="color:#fff;font-size:14px">База для роста</b>
             </span>
           </div>
         </div>
@@ -1922,7 +1923,7 @@
 
     <div class="price-section-label">Разовая услуга</div>
     <!-- Перестройка как отдельная услуга -->
-    <div class="price-setup-card reveal">
+    <div class="price-setup-card reveal" id="price-setup">
       <div class="price-setup-card-head">
         <div class="price-setup-label">Разовая услуга · выполняется за 7 дней</div>
         <h3 class="price-setup-title">Перестройка карточки</h3>
@@ -1938,23 +1939,51 @@
         <ul class="price-setup-items">
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Аудит карточки и конкурентов</span>
+            <span>Аудит карточки</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>SEO-структура: категории, услуги, запросы</span>
+            <span>Анализ конкурентов</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Визуальная упаковка: фото, обложки, витрина</span>
+            <span>Стратегия упаковки карточки</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Работа с отзывами и репутацией на старте</span>
+            <span>Обновление основной информации</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Описания, услуги и точки действия</span>
+            <span>Упаковка фото и визуальных блоков</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Оформление товаров и услуг</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Подготовка новостей</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Подготовка Stories</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Оформление акций</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Проработка ответов на отзывы</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>SEO-структура: категории</span>
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Подключение рекламной подписки и оформление витрины</span>
           </li>
           <li>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7L5.5 10 11.5 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1968,26 +1997,23 @@
     <div class="price-section-label">Ежемесячные тарифы</div>
 
     <!-- ТАРИФЫ — IDENTITY CARDS -->
-    <div class="price-tariffs-wrap reveal">
+    <div class="price-tariffs-wrap reveal" id="tariffs">
       <div class="price-grid-3">
 
         <!-- БАЗА -->
         <article class="price-card-3 plan-base">
-          <span class="price-plan-num" aria-hidden="true">01</span>
           <!-- Zone 1: badge row (empty placeholder for alignment) -->
           <div class="price-zone-badge"></div>
           <!-- Zone 2: name + price + period -->
           <div class="price-zone-head">
             <div class="price-name">База</div>
-            <div class="price-amount">49 990 ₽</div>
-            <div class="price-period">в месяц</div>
-          </div>
-          <!-- Zone 3: platforms -->
-          <div class="price-zone-plat">
-            <div class="price-platforms">
-              <span class="price-plat-tag">Яндекс Карты</span>
+            <div class="price-amount-row">
+              <div class="price-amount">49 990 ₽</div>
+              <div class="price-period">в месяц</div>
             </div>
           </div>
+          <!-- Zone 3: platforms (hidden) -->
+          <div class="price-zone-plat"></div>
           <!-- Zone 4: year-row + features -->
           <div class="price-zone-feats">
             <div class="price-year-row">
@@ -1995,7 +2021,7 @@
               <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
-              <li>Ведение карточки в Яндекс Картах</li>
+              <li>Ведение карточки компании</li>
               <li>До 10 публикаций в месяц</li>
               <li>Ответы на отзывы (до 20 в месяц)</li>
               <li>Контроль актуальности информации</li>
@@ -2012,7 +2038,6 @@
 
         <!-- СТАНДАРТ -->
         <article class="price-card-3 plan-std featured">
-          <span class="price-plan-num" aria-hidden="true">02</span>
           <!-- Zone 1: badge -->
           <div class="price-zone-badge">
             <div class="price-badge">★ Популярный выбор</div>
@@ -2020,16 +2045,13 @@
           <!-- Zone 2: name + price + period -->
           <div class="price-zone-head">
             <div class="price-name">Стандарт</div>
-            <div class="price-amount">79 990 ₽</div>
-            <div class="price-period">в месяц</div>
-          </div>
-          <!-- Zone 3: platforms -->
-          <div class="price-zone-plat">
-            <div class="price-platforms">
-              <span class="price-plat-tag">Яндекс Карты</span>
-              <span class="price-plat-tag">2ГИС</span>
+            <div class="price-amount-row">
+              <div class="price-amount">79 990 ₽</div>
+              <div class="price-period">в месяц</div>
             </div>
           </div>
+          <!-- Zone 3: platforms (hidden) -->
+          <div class="price-zone-plat"></div>
           <!-- Zone 4: year-row + features -->
           <div class="price-zone-feats">
             <div class="price-year-row">
@@ -2037,7 +2059,7 @@
               <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
-              <li>Яндекс Карты + 2ГИС одновременно</li>
+              <li>Ведение на 2 платформах одновременно</li>
               <li>От 20 публикаций в месяц</li>
               <li>Ответы на все отзывы ежедневно</li>
               <li>Еженедельный отчёт</li>
@@ -2057,23 +2079,18 @@
 
         <!-- МАКСИМУМ -->
         <article class="price-card-3 plan-max">
-          <span class="price-plan-num" aria-hidden="true">03</span>
           <!-- Zone 1: badge row (empty placeholder) -->
           <div class="price-zone-badge"></div>
           <!-- Zone 2: name + price + period -->
           <div class="price-zone-head">
             <div class="price-name">Максимум</div>
-            <div class="price-amount">149 990 ₽</div>
-            <div class="price-period">в месяц</div>
-          </div>
-          <!-- Zone 3: platforms -->
-          <div class="price-zone-plat">
-            <div class="price-platforms">
-              <span class="price-plat-tag">Яндекс Карты</span>
-              <span class="price-plat-tag">2ГИС</span>
-              <span class="price-plat-tag">Google</span>
+            <div class="price-amount-row">
+              <div class="price-amount">149 990 ₽</div>
+              <div class="price-period">в месяц</div>
             </div>
           </div>
+          <!-- Zone 3: platforms (hidden) -->
+          <div class="price-zone-plat"></div>
           <!-- Zone 4: year-row + features -->
           <div class="price-zone-feats">
             <div class="price-year-row">
@@ -2081,7 +2098,7 @@
               <div class="price-year-bonus">Перестройка 149 990 ₽ — бесплатно</div>
             </div>
             <ul class="price-feats">
-              <li>3 платформы: Яндекс + 2ГИС + Google</li>
+              <li>Полный охват: 3 платформы</li>
               <li>От 20 публикаций в месяц</li>
               <li>Ответы на все отзывы ежедневно</li>
               <li>Еженедельный отчёт + тест гипотез</li>
@@ -2188,12 +2205,11 @@
         </div>
       </a>
 
-      <a class="ac ac-wide" data-cat="manage" data-num="08" href="articles/chto-delat-posle-upakovki.html" aria-label="После упаковки" style="flex-direction:row;align-items:center;gap:24px">
-        <div style="flex:1">
-          <div class="ac-num">08 — Ведение</div>
-          <h3 style="margin-bottom:0">Карточка оформлена. Что делать дальше?</h3>
-        </div>
-        <div style="display:flex;align-items:center;gap:20px;flex-shrink:0">
+      <a class="ac" data-cat="manage" data-num="08" href="articles/chto-delat-posle-upakovki.html" aria-label="После упаковки">
+        <div class="ac-num">08 — Ведение</div>
+        <h3>Карточка оформлена. Что делать дальше?</h3>
+        <p class="ac-desc">Карточка готова — как поддерживать результат, наращивать позиции и получать больше заявок каждый месяц.</p>
+        <div class="ac-footer">
           <span class="ac-time">3 мин чтения</span>
           <span class="ac-arrow">Читать <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
@@ -2389,11 +2405,11 @@
       <div>
         <div class="footer-col-title">Услуги</div>
         <ul class="footer-links">
-          <li><a href="#price">Тариф «База»</a></li>
-          <li><a href="#price">Тариф «Стандарт»</a></li>
-          <li><a href="#price">Тариф «Максимум»</a></li>
-          <li><a href="#price">Перестройка карточки</a></li>
           <li><a href="#contact">Бесплатный аудит</a></li>
+          <li><a href="#price-setup">Перестройка карточки</a></li>
+          <li><a href="#tariffs">Тариф «База»</a></li>
+          <li><a href="#tariffs">Тариф «Стандарт»</a></li>
+          <li><a href="#tariffs">Тариф «Максимум»</a></li>
         </ul>
       </div>
 

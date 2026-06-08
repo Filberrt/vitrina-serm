@@ -117,7 +117,7 @@
     /* ─── HERO ─── */
     .hero{
       position:relative;min-height:100vh;
-      display:flex;align-items:center;overflow:hidden;
+      display:flex;align-items:center;overflow:clip;
       background:var(--dark);color:#fff;
     }
     /* animated gradient blobs */
@@ -404,7 +404,7 @@
     .feature p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
 
     /* ─── WORK ─── */
-    .work-layout{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:start}
+    .work-layout{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:stretch}
     .work-sticky{
       position:sticky;top:84px;padding:32px;border-radius:var(--rl);
       background:linear-gradient(145deg,var(--dark),#0e2565);
@@ -645,10 +645,11 @@
       --cat-color:#3b82f6;--cat-rgb:59,130,246;
       display:flex;flex-direction:column;
       padding:26px 24px;background:#fff;
-      border:1.5px solid var(--line);border-radius:16px;
+      border:1px solid rgba(0,0,0,.12);border-radius:16px;
       cursor:pointer;
       transition:border-color .22s,transform .2s var(--ease),box-shadow .2s;
       position:relative;overflow:hidden;text-decoration:none;color:inherit;
+      box-shadow:0 2px 8px rgba(0,0,0,.06);
     }
     /* colored top accent */
     .ac::before{
@@ -660,7 +661,7 @@
     .ac:hover{
       border-color:var(--cat-color);
       transform:translateY(-4px);
-      box-shadow:0 12px 32px rgba(var(--cat-rgb),.1);
+      box-shadow:0 8px 24px rgba(0,0,0,.10),0 12px 32px rgba(var(--cat-rgb),.1);
     }
 
     /* category colors — unified, no multicolor */
@@ -924,25 +925,59 @@
     /* ─── RESPONSIVE ─── */
     @media(max-width:1040px){
       .nav-links{display:none}
-      .hero-grid,.work-layout,.cta-box{grid-template-columns:1fr}
-      h1{font-size:50px}
-      h2,.cta h2{font-size:36px}
+      .hero-grid{grid-template-columns:1fr 1fr;gap:32px;padding:80px 0 90px}
+      h1{font-size:44px}
+      h2,.cta h2{font-size:34px}
       .map-board{transform:none}
       .work-sticky{position:relative;top:auto}
       .cases-grid{grid-template-columns:repeat(2,1fr)}
       .pain-grid-v2{grid-template-columns:repeat(2,1fr)}
       .feature-grid-v2{grid-template-columns:repeat(2,1fr)}
+      .price-grid-3{grid-template-columns:repeat(3,1fr)}
     }
     @media(max-width:780px){
-      .wrap{width:min(100% - 28px,1200px)}
+      .wrap{width:min(100% - 24px,1200px)}
       .topbar .btn{display:none}
-      h1{font-size:37px}
-      h2,.cta h2{font-size:29px}
-      .lead{font-size:16px}
-      .metric-row,.pain-grid,.pain-grid-v2,.feature-grid,.feature-grid-v2,.cases-grid,
-      .price-grid,.materials,.faq-grid,.compare,.compare-v2{grid-template-columns:1fr}
-      .section,.cta{padding:68px 0}
-      .hero-grid{padding:80px 0 90px}
+      h1{font-size:32px;letter-spacing:-.5px}
+      h2,.cta h2{font-size:26px}
+      .lead{font-size:15px}
+      .section,.cta{padding:56px 0}
+      .hero-grid{grid-template-columns:1fr;gap:40px;padding:70px 0 80px}
+      .hero-img-block{transform:none !important}
+      .work-layout{grid-template-columns:1fr}
+      .work-sticky{position:relative;top:auto}
+      .metric-row{grid-template-columns:repeat(2,1fr);gap:10px}
+      .pain-grid-v2{grid-template-columns:repeat(2,1fr)}
+      .feature-grid-v2{grid-template-columns:repeat(2,1fr)}
+      .cases-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+      .utp-grid{grid-template-columns:repeat(2,1fr)}
+      .proto-layout{grid-template-columns:1fr}
+      .proto-visual{display:none}
+      .price-grid-3{grid-template-columns:1fr;gap:0}
+      .price-card-3{grid-row:auto;grid-template-rows:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+      .price-card-3:last-child{border-bottom:none}
+      .price-tariffs-wrap{padding:36px 16px 28px;border-radius:20px}
+      .price-setup-card{grid-template-columns:1fr}
+      .blog-grid{grid-template-columns:1fr}
+      .blog-grid .ac-feat{grid-column:span 1}
+      .footer-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+      .pain-grid,.faq-grid,.compare,.compare-v2{grid-template-columns:1fr}
+      .cta-box{grid-template-columns:1fr}
+      .price-grid{grid-template-columns:1fr}
+      .materials{grid-template-columns:1fr}
+    }
+    @media(max-width:480px){
+      h1{font-size:28px}
+      h2{font-size:23px}
+      .hero-grid{padding:56px 0 64px}
+      .cases-grid{grid-template-columns:1fr}
+      .pain-grid-v2{grid-template-columns:1fr}
+      .feature-grid-v2{grid-template-columns:1fr}
+      .utp-grid{grid-template-columns:1fr}
+      .metric-row{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .price-amount{font-size:34px}
+      .wrap{width:min(100% - 20px,1200px)}
     }
 
     /* ─── HERO RESULT HOVER ─── */
@@ -1096,13 +1131,11 @@
       font-size:13px;color:rgba(255,255,255,.6);line-height:1.45;
     }
     .price-feats li::before{
-      content:"";position:absolute;left:0;top:5.5px;
+      content:"✓";position:absolute;left:0;top:5.5px;
       width:11px;height:11px;border-radius:50%;
       background:rgba(var(--plan-rgb),.15);border:1.5px solid rgba(var(--plan-rgb),.4);
-    }
-    .price-feats li::after{
-      content:"✓";position:absolute;left:1px;top:4px;
-      font-size:8px;font-weight:900;color:var(--plan-color);line-height:1;
+      display:flex;align-items:center;justify-content:center;
+      font-size:7px;font-weight:900;color:var(--plan-color);line-height:1;
     }
 
     /* CTA button */
@@ -1211,8 +1244,7 @@
     .proto-ba.before b{color:#f87171}
     .proto-ba.after b{color:var(--lime)}
     .proto-ba span{font-size:11px;color:var(--d-muted);font-weight:500}
-    @media(max-width:1040px){.proto-layout{grid-template-columns:1fr}}
-    @media(max-width:780px){.proto-h2{font-size:32px}}
+    @media(max-width:780px){.proto-h2{font-size:26px}}
 
     /* ─── CHANNEL BUTTONS ─── */
     .channel-list{display:grid;gap:10px;margin-top:28px}
@@ -1273,17 +1305,26 @@
     /* ─── RESPONSIVE ADDITIONS ─── */
     @media(max-width:1040px){
       .utp-grid{grid-template-columns:repeat(2,1fr)}
-      .price-grid-3{grid-template-columns:repeat(2,1fr)}
-      .price-card-3{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
-      .price-card-3:last-child{border-bottom:none}
       .price-setup-banner{grid-template-columns:1fr}
       .price-setup-main{border-right:none;border-bottom:1.5px solid rgba(29,78,216,.12)}
     }
     @media(max-width:780px){
-      .utp-grid,.price-grid-3{grid-template-columns:1fr}
-      .price-tariffs-wrap{padding:36px 20px 32px}
 .utp-card--featured,.utp-card--wide{grid-column:span 1}
     }
+    /* ─── HAMBURGER MENU ─── */
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .22s,opacity .22s}
+    @media(max-width:1040px){
+      .nav-hamburger{display:flex}
+      .mobile-nav-open .nav-links{
+        display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;
+        background:var(--dark);z-index:200;align-items:center;justify-content:center;gap:32px;
+        font-size:24px;padding:40px;
+      }
+      .mobile-nav-open .nav-links a{color:#fff;font-size:20px;font-weight:600}
+    }
+    #tariffs{scroll-margin-top:80px}
+    #price-setup{scroll-margin-top:80px}
   </style>
 </head>
 <body>
@@ -1302,6 +1343,9 @@
       <a href="#cases">Кейсы</a>
       <a href="#price">Стоимость</a>
     </nav>
+    <button class="nav-hamburger" aria-label="Меню" id="hamburger" onclick="document.body.classList.toggle('mobile-nav-open')">
+      <span></span><span></span><span></span>
+    </button>
     <a class="btn primary" href="#prototype" style="min-height:40px;padding:9px 18px">Получить готовый прототип</a>
   </div>
 </header>
@@ -2405,7 +2449,6 @@
       <div>
         <div class="footer-col-title">Услуги</div>
         <ul class="footer-links">
-          <li><a href="#contact">Бесплатный аудит</a></li>
           <li><a href="#price-setup">Перестройка карточки</a></li>
           <li><a href="#tariffs">Тариф «База»</a></li>
           <li><a href="#tariffs">Тариф «Стандарт»</a></li>

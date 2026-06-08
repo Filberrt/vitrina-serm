@@ -117,10 +117,9 @@
     /* ─── HERO ─── */
     .hero{
       position:relative;min-height:100vh;
-      display:flex;align-items:center;
+      display:flex;align-items:center;overflow:hidden;
       background:var(--dark);color:#fff;
     }
-    .hero-blobs{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
     /* animated gradient blobs */
     .blob{
       position:absolute;border-radius:50%;
@@ -797,45 +796,6 @@
     }
     @media(max-width:1040px){.hero-img-block{transform:none}}
 
-    /* glass corner triangles */
-    .hero-img-block .g-tri{
-      position:absolute;width:64px;height:64px;
-      background:rgba(255,255,255,.1);
-      backdrop-filter:blur(12px) saturate(1.4);
-      border:1px solid rgba(255,255,255,.22);
-      opacity:0;
-      transition:opacity .35s var(--ease),transform .35s var(--ease);
-      pointer-events:none;z-index:2;
-    }
-    .hero-img-block:hover .g-tri{opacity:1}
-    .hero-img-block .g-tri-tl{
-      top:0;left:0;
-      clip-path:polygon(0 0,100% 0,0 100%);
-      border-radius:var(--rl) 0 0 0;
-      transform:translate(-6px,-6px);
-    }
-    .hero-img-block:hover .g-tri-tl{transform:translate(0,0)}
-    .hero-img-block .g-tri-tr{
-      top:0;right:0;
-      clip-path:polygon(0 0,100% 0,100% 100%);
-      border-radius:0 var(--rl) 0 0;
-      transform:translate(6px,-6px);
-    }
-    .hero-img-block:hover .g-tri-tr{transform:translate(0,0)}
-    .hero-img-block .g-tri-bl{
-      bottom:0;left:0;
-      clip-path:polygon(0 0,0 100%,100% 100%);
-      border-radius:0 0 0 var(--rl);
-      transform:translate(-6px,6px);
-    }
-    .hero-img-block:hover .g-tri-bl{transform:translate(0,0)}
-    .hero-img-block .g-tri-br{
-      bottom:0;right:0;
-      clip-path:polygon(100% 0,0 100%,100% 100%);
-      border-radius:0 0 var(--rl) 0;
-      transform:translate(6px,6px);
-    }
-    .hero-img-block:hover .g-tri-br{transform:translate(0,0)}
 
     /* ─── WHY V2 ─── */
     .pain-grid-v2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
@@ -1355,11 +1315,9 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-blobs">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
   <div class="wrap hero-grid">
 
     <div class="reveal">
@@ -1378,10 +1336,6 @@
     </div>
 
     <div class="hero-img-block reveal" aria-label="Интерфейс поиска на картах">
-      <span class="g-tri g-tri-tl" aria-hidden="true"></span>
-      <span class="g-tri g-tri-tr" aria-hidden="true"></span>
-      <span class="g-tri g-tri-bl" aria-hidden="true"></span>
-      <span class="g-tri g-tri-br" aria-hidden="true"></span>
       <img src="hero-right-block.png" alt="Карточка компании в картах — пример результата" style="width:100%;height:auto;display:block;border-radius:var(--rl);border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.45)">
     </div>
 
@@ -2497,7 +2451,7 @@
         const x = (e.clientX - r.left) / r.width  - 0.5;
         const y = (e.clientY - r.top)  / r.height - 0.5;
         card.style.transition = 'transform .06s linear, box-shadow .6s ease';
-        card.style.transform = `perspective(1200px) rotateY(${x*14}deg) rotateX(${-y*9}deg) scale(1.04)`;
+        card.style.transform = `perspective(1200px) rotateY(${x*10}deg) rotateX(${-y*7}deg)`;
       });
     });
     card.addEventListener('mouseleave', () => {

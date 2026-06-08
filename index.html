@@ -442,9 +442,9 @@
     .feature p{color:var(--muted);line-height:1.65;margin-bottom:0;font-size:14px}
 
     /* ─── WORK ─── */
-    .work-layout{display:grid;grid-template-columns:360px 1fr;gap:28px;align-items:stretch}
+    .work-layout{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:stretch}
     .work-sticky{
-      position:sticky;top:84px;padding:32px;border-radius:var(--rl);
+      position:sticky;top:84px;padding:24px;border-radius:var(--rl);
       background:linear-gradient(145deg,var(--dark),#0e2565);
       color:#fff;
       border:1px solid rgba(29,78,216,.25);
@@ -462,7 +462,7 @@
     .timeline{display:grid;gap:14px}
     .work-card{
       display:grid;grid-template-columns:70px 1fr;
-      gap:18px;padding:22px 24px;
+      gap:18px;padding:28px 32px;
       border:1px solid var(--line);border-radius:var(--r);
       background:#fff;box-shadow:var(--sh-sm);
       transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s;
@@ -473,8 +473,8 @@
       border-radius:10px;background:var(--blue-lt);color:var(--blue);
       font-weight:700;font-size:12px;text-align:center;line-height:1.25;
     }
-    .work-card h3{margin-bottom:5px;font-size:16px}
-    .work-card p{color:var(--muted);margin-bottom:0;font-size:14px;line-height:1.55}
+    .work-card h3{margin-bottom:5px;font-size:18px}
+    .work-card p{color:var(--muted);margin-bottom:0;font-size:15px;line-height:1.55}
 
     /* ─── CASES GRID ─── */
     .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -720,16 +720,6 @@
     }
     .ac-feat::before{opacity:.8;background:linear-gradient(90deg,#84cc16,#3b82f6)}
     .ac-feat:hover{border-color:rgba(132,204,22,.5);transform:translateY(-4px)}
-
-    /* big number watermark */
-    .ac::after{
-      content:attr(data-num);
-      position:absolute;bottom:-8px;right:10px;
-      font-size:88px;font-weight:900;line-height:1;
-      color:rgba(0,0,0,.035);font-family:'Inter',sans-serif;
-      pointer-events:none;user-select:none;letter-spacing:-4px;
-    }
-    .ac-feat::after{color:rgba(255,255,255,.04)}
 
     .ac-num{
       display:inline-flex;align-items:center;
@@ -1036,6 +1026,7 @@
       grid-template-rows:subgrid;
       border-right:1px solid rgba(255,255,255,.07);
       transition:box-shadow .28s;
+      min-height:600px;
     }
     .price-card-3:last-child{border-right:none}
 
@@ -1136,11 +1127,8 @@
       font-size:13px;color:rgba(255,255,255,.6);line-height:1.45;
     }
     .price-feats li::before{
-      content:"✓";position:absolute;left:0;top:5.5px;
-      width:11px;height:11px;border-radius:50%;
-      background:rgba(var(--plan-rgb),.15);border:1.5px solid rgba(var(--plan-rgb),.4);
-      display:flex;align-items:center;justify-content:center;
-      font-size:7px;font-weight:900;color:var(--plan-color);line-height:1;
+      content:"✓";position:absolute;left:0;top:3px;
+      font-size:11px;font-weight:900;color:var(--plan-color);line-height:1;
     }
 
     /* CTA button */
@@ -1655,42 +1643,35 @@
           <div class="day">День<br>1</div>
           <div>
             <h3>Доступы и старт</h3>
-            <p>Получаем доступы, вводные по компании, услугам, район и текущую ситуацию — собираем всё необходимое для работы.</p>
+            <p>Получаем доступы, вводные по компании, услугам, району и текущей ситуации.</p>
           </div>
         </article>
         <article class="work-card reveal">
           <div class="day">Дни<br>1–2</div>
           <div>
             <h3>Анализ компании и конкурентов</h3>
-            <p>Проверяем позиции, отзывы, визуал и то, как вы выглядите в выдаче среди конкурентов. Фиксируем слабые места и точки роста.</p>
+            <p>Проверяем позиции, отзывы, визуал, выдачу конкурентов и точки роста.</p>
           </div>
         </article>
         <article class="work-card reveal">
           <div class="day">Дни<br>2–3</div>
           <div>
             <h3>Стратегия продвижения</h3>
-            <p>Определяем, что усилить, какие запросы закрыть, что добавить в карточку и как сделать её понятнее для клиента.</p>
+            <p>Определяем, что усилить, какие запросы закрыть и что добавить в карточку.</p>
           </div>
         </article>
         <article class="work-card reveal">
-          <div class="day">Дни<br>3–6</div>
+          <div class="day">Дни<br>3–7</div>
           <div>
             <h3>Заполнение и упаковка</h3>
-            <p>Обновляем описания, услуги, товары, фото, витрину, stories и ответы на отзывы — всё, что влияет на доверие и выбор клиента.</p>
-          </div>
-        </article>
-        <article class="work-card reveal">
-          <div class="day">День<br>7</div>
-          <div>
-            <h3>Финальная проверка и отчётность</h3>
-            <p>Проверяем заполненность, визуал, логику карточки и путь до звонка или маршрута. Убираем слабые места — карточка готова к росту.</p>
+            <p>Обновляем описания, услуги, товары, фото, витрину, stories и ответы.</p>
           </div>
         </article>
         <article class="work-card reveal" style="border-color:rgba(132,204,22,.3);background:linear-gradient(180deg,#fff,#f0fdf4)">
           <div class="day" style="background:rgba(132,204,22,.15);color:#3f6212">После<br>7-го</div>
           <div>
             <h3 style="color:#166534">Результат перестройки</h3>
-            <p>Карточка становится понятнее, сильнее визуально и лучше подготовлена к конкуренции в поиске по картам. Дальше — системный рост.</p>
+            <p>Карточка понятнее, сильнее визуально и лучше готова к конкуренции.</p>
           </div>
         </article>
       </div>
@@ -2518,6 +2499,20 @@
       card.style.transition = '';
       card.style.transform = '';
     });
+  })();
+
+  // ── NON-BREAKING SPACE AFTER PREPOSITIONS ──
+  (function(){
+    const re=/(\s)(в|на|с|по|за|у|к|о|до|из|от|под|для|про|при|а|и|но|не|ни|бы|же|ли|или|что|как|то)\s/gi;
+    function fix(node){
+      if(node.nodeType===3){
+        const t=node.textContent.replace(re,(m,s,p)=>s+p+' ');
+        if(t!==node.textContent)node.textContent=t;
+      } else if(node.nodeType===1&&!/^(SCRIPT|STYLE|CODE|PRE|TEXTAREA|SVG)$/.test(node.tagName)){
+        node.childNodes.forEach(fix);
+      }
+    }
+    document.querySelectorAll('p,li,h2,h3,h4').forEach(fix);
   })();
 
   // ── MAGNETIC BUTTONS ──

@@ -121,6 +121,10 @@
     .case-nav-next-label{display:flex;flex-direction:column;gap:2px}
     .case-nav-next-label small{font-size:11px;font-weight:500;opacity:.65;text-transform:uppercase;letter-spacing:.6px}
     @media(max-width:560px){.case-nav-inner{justify-content:center;gap:12px}.case-nav-back,.case-nav-next{width:100%;justify-content:center}}
+      .case-screenshots{margin-top:0}
+    .case-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:22px}
+    .case-gallery img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.07);transition:transform .22s,box-shadow .22s;cursor:zoom-in}
+    .case-gallery img:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.14)}
   </style>
 </head>
 <body>
@@ -398,6 +402,20 @@
     <p>Важный нюанс, который прослеживается во всех кейсах: большинство конкурентов имеют слабо заполненные карточки. Это значит, что <strong>выйти в топ можно без больших вложений</strong> — за счёт качества упаковки.</p>
   </div>
 
+
+  <section class="case-section case-screenshots">
+    <div class="section-label">Скриншоты и отчёты</div>
+    <h2>Результаты — скриншоты отчётов</h2>
+    <div class="case-gallery">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/02.jpg" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/03.jpg" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/04.png" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/05.jpg" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/06.png" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/07.jpg" alt="Скриншот результата" loading="lazy">
+      <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/10-keisov-serm-karty/08.png" alt="Скриншот результата" loading="lazy">
+    </div>
+  </section>
 <nav class="case-nav" aria-label="Навигация по кейсам">
   <div class="case-nav-inner">
     <a class="case-nav-back" href="../index.html#cases">

@@ -77,6 +77,10 @@
     .case-nav-next-label{display:flex;flex-direction:column;gap:2px}
     .case-nav-next-label small{font-size:11px;font-weight:500;opacity:.65;text-transform:uppercase;letter-spacing:.6px}
     @media(max-width:560px){.case-nav-inner{justify-content:center;gap:12px}.case-nav-back,.case-nav-next{width:100%;justify-content:center}}
+      .case-screenshots{margin-top:0}
+    .case-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:22px}
+    .case-gallery img{width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.07);transition:transform .22s,box-shadow .22s;cursor:zoom-in}
+    .case-gallery img:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.14)}
   </style>
 </head>
 <body>
@@ -138,7 +142,7 @@
 <!-- BODY -->
 <div class="case-body-wrap">
   <div class="case-img-hero">
-    <img src="../case-images/08-car-wash.jpg" alt="Кейс автомойка СПБ — Яндекс и Google Карты">
+    <img src="https://danyadineev.github.io/vitrina-serm/assets/case-images/avtomoyka-spb-plus-traffic-calls/01.png" alt="Кейс автомойка СПБ — Яндекс и Google Карты">
   </div>
 
   <div class="case-section">

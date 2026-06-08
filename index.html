@@ -117,9 +117,10 @@
     /* ─── HERO ─── */
     .hero{
       position:relative;min-height:100vh;
-      display:flex;align-items:center;overflow:clip;
+      display:flex;align-items:center;
       background:var(--dark);color:#fff;
     }
+    .hero-blobs{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
     /* animated gradient blobs */
     .blob{
       position:absolute;border-radius:50%;
@@ -1354,9 +1355,11 @@
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
   <div class="wrap hero-grid">
 
     <div class="reveal">
@@ -2449,10 +2452,10 @@
       <div>
         <div class="footer-col-title">Услуги</div>
         <ul class="footer-links">
-          <li><a href="#price-setup">Перестройка карточки</a></li>
-          <li><a href="#tariffs">Тариф «База»</a></li>
-          <li><a href="#tariffs">Тариф «Стандарт»</a></li>
-          <li><a href="#tariffs">Тариф «Максимум»</a></li>
+          <li><a href="#price-setup" onclick="scrollCenter('price-setup');return false">Перестройка карточки</a></li>
+          <li><a href="#tariffs" onclick="scrollCenter('tariffs');return false">Тариф «База»</a></li>
+          <li><a href="#tariffs" onclick="scrollCenter('tariffs');return false">Тариф «Стандарт»</a></li>
+          <li><a href="#tariffs" onclick="scrollCenter('tariffs');return false">Тариф «Максимум»</a></li>
         </ul>
       </div>
 
@@ -2509,6 +2512,16 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
   }, { threshold: .09 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Scroll element to vertical center of viewport
+  function scrollCenter(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const elRect = el.getBoundingClientRect();
+    const elMid = window.scrollY + elRect.top + elRect.height / 2;
+    const targetY = elMid - window.innerHeight / 2;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  }
 
   // Show cases 3 at a time
   function showAllCases() {

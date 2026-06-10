@@ -946,7 +946,7 @@
       .proto-layout{grid-template-columns:1fr}
       .proto-visual{display:none}
       .price-grid-3{grid-template-columns:1fr;gap:0}
-      .price-card-3{grid-row:auto;grid-template-rows:auto;border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+      .price-card-3{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
       .price-card-3:last-child{border-bottom:none}
       .price-tariffs-wrap{padding:36px 16px 28px;border-radius:20px}
       .price-setup-card{grid-template-columns:1fr}
@@ -1009,8 +1009,8 @@
     .price-grid-3{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      grid-template-rows:repeat(5,auto);
       gap:0;margin-bottom:0;position:relative;z-index:1;
+      align-items:stretch;
     }
 
     /* plan color vars */
@@ -1018,15 +1018,12 @@
     .price-card-3.plan-std{--plan-color:#22c55e;--plan-rgb:34,197,94}
     .price-card-3.plan-max{--plan-color:#f59e0b;--plan-rgb:245,158,11}
 
-    /* Card — subgrid for cross-card alignment */
+    /* Card — flex column, each card independent */
     .price-card-3{
       position:relative;overflow:hidden;
-      display:grid;
-      grid-row:span 5;
-      grid-template-rows:subgrid;
+      display:flex;flex-direction:column;
       border-right:1px solid rgba(255,255,255,.07);
       transition:box-shadow .28s;
-      min-height:600px;
     }
     .price-card-3:last-child{border-right:none}
 
@@ -1072,8 +1069,9 @@
     .price-zone-feats{
       padding:0 28px;position:relative;z-index:1;
       display:flex;flex-direction:column;
+      flex:1;
     }
-    .price-zone-cta{padding:16px 28px 28px;position:relative;z-index:1}
+    .price-zone-cta{padding:16px 28px 28px;position:relative;z-index:1;margin-top:auto}
 
     /* badge */
     .price-badge{

@@ -1131,6 +1131,20 @@
       font-size:11px;font-weight:900;color:var(--plan-color);line-height:1;
     }
 
+    /* feats collapse */
+    .price-feats li.feat-hidden{display:none}
+    .price-feats li.feat-hidden.feat-visible{display:list-item}
+    .feat-toggle{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-top:10px;padding:5px 0;
+      font-size:12px;font-weight:600;color:var(--plan-color);
+      background:none;border:none;cursor:pointer;
+      opacity:.75;transition:opacity .18s;font-family:'Inter',sans-serif;
+    }
+    .feat-toggle:hover{opacity:1}
+    .feat-toggle svg{transition:transform .25s;flex:0 0 auto}
+    .feat-toggle.open svg{transform:rotate(180deg)}
+
     /* CTA button */
     .price-btn{
       display:block;width:100%;min-height:48px;
@@ -2175,7 +2189,7 @@
     <div class="section-head reveal" style="margin-bottom:40px">
       <div class="kicker">Бесплатные материалы</div>
       <h2>База знаний<br>по продвижению в картах</h2>
-      <p class="sub">Если вы готовы — запустим карточку за 7 дней и дадим первые заявки. Если пока не готовы — не бросаем: даём бесплатного менеджера и делимся базой знаний, которая поможет оформить карточку самостоятельно уже сегодня.</p>
+      <p class="sub">Не готовы платить — сделайте самостоятельно по нашему чек-листу</p>
     </div>
   </div>
   <div class="wrap">
@@ -2504,6 +2518,38 @@
       cancelAnimationFrame(rafId);
       card.style.transition = '';
       card.style.transform = '';
+    });
+  })();
+
+  // ── TARIFF FEATS COLLAPSE ──
+  (function(){
+    const SHOW = 3, STEP = 4;
+    document.querySelectorAll('.price-feats').forEach(ul => {
+      const items = Array.from(ul.querySelectorAll('li'));
+      if(items.length <= SHOW) return;
+      items.slice(SHOW).forEach(li => li.classList.add('feat-hidden'));
+      let shown = SHOW;
+      const btn = document.createElement('button');
+      btn.className = 'feat-toggle';
+      btn.innerHTML = `Ещё <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      ul.after(btn);
+      btn.addEventListener('click', () => {
+        const hidden = items.filter(li => li.classList.contains('feat-hidden') && !li.classList.contains('feat-visible'));
+        const toShow = hidden.slice(0, STEP);
+        toShow.forEach(li => li.classList.add('feat-visible'));
+        shown += toShow.length;
+        if(shown >= items.length){
+          btn.classList.add('open');
+          btn.innerHTML = `Скрыть <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+          btn.removeEventListener('click', arguments.callee);
+          btn.addEventListener('click', () => {
+            items.slice(SHOW).forEach(li => { li.classList.remove('feat-visible'); });
+            shown = SHOW;
+            btn.classList.remove('open');
+            btn.innerHTML = `Ещё <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+          }, {once:true});
+        }
+      });
     });
   })();
 
